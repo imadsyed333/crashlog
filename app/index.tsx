@@ -1,4 +1,6 @@
-import { Text, View } from "react-native";
+import { AddCollisionButton } from "@/components/collisions/AddCollisionButton";
+import { CollisionList } from "@/components/collisions/CollisionList";
+import { View } from "react-native";
 
 export default function Index() {
   return (
@@ -9,7 +11,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <CollisionList />
+      <AddCollisionButton />
     </View>
   );
 }

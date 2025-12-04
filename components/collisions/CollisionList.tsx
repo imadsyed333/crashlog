@@ -1,0 +1,22 @@
+import { useCollisionStore } from "@/store/collisionStore";
+import React from "react";
+import { FlatList } from "react-native";
+import { Text } from "react-native-paper";
+import { CollisionCard } from "./CollisionCard";
+
+export const CollisionList = () => {
+  const { collisions } = useCollisionStore((state) => state);
+  return (
+    <>
+      {collisions.length > 0 && (
+        <FlatList
+          data={collisions}
+          renderItem={({ item }) => <CollisionCard collision={item} />}
+        />
+      )}
+      {collisions.length === 0 && (
+        <Text variant="bodyMedium">Phew, no collisions yet!</Text>
+      )}
+    </>
+  );
+};

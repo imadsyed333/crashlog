@@ -1,11 +1,12 @@
 export interface Collision {
   id: string;
   date: Date;
-  location: Location;
+  location: string;
   description: string;
   vehicles: Vehicle[];
   media: Media[];
   witnesses: Person[];
+  officer: Officer | null;
 }
 
 export interface Vehicle {
@@ -38,4 +39,9 @@ export interface Media {
 export interface Location {
   lon: number;
   lat: number;
+}
+
+export interface Officer {
+  name: string;
+  badgeNumber: string;
 }

@@ -1,20 +1,39 @@
 import { Collision } from "@/types";
-import { create } from "zustand";
+import { deleteItemAsync, getItemAsync, setItemAsync } from "expo-secure-store";
+import { create, StateCreator } from "zustand";
+import {
+  createJSONStorage,
+  persist,
+  PersistOptions,
+  StateStorage,
+} from "zustand/middleware";
 
-interface CollisionState {
+interface CollisionStore {
   collisions: Collision[];
-  currentCollision: Collision | null;
   addCollision: (collision: Collision) => void;
-  deleteCollision: (id: string) => void;
 }
 
-export const useCollisionStore = create<CollisionState>((set) => ({
-  collisions: [],
-  currentCollision: null,
-  addCollision: (collision: Collision) =>
-    set((state) => ({ collisions: [...state.collisions, collision] })),
-  deleteCollision: (id: string) =>
-    set((state) => ({
-      collisions: state.collisions.filter((collision) => collision.id !== id),
-    })),
-}));
+const secureStorage: StateStorage = {
+  getItem: getItemAsync,
+  setItem: setItemAsync,
+  removeItem: deleteItemAsync,
+};
+
+type CollisionPersist = (
+  config: StateCreator<CollisionStore>,
+  options: PersistOptions<CollisionStore>
+) => StateCreator<CollisionStore>;
+
+export const useCollisionStore = create<CollisionStore, []>(
+  (persist as CollisionPersist)(
+    (set, get): CollisionStore => ({
+      collisions: [],
+      addCollision: (collision: Collision) =>
+        set({ collisions: [...get().collisions, collision] }),
+    }),
+    {
+      name: "collision-storage",
+      storage: createJSONStorage(() => secureStorage),
+    }
+  )
+);

@@ -7,12 +7,25 @@ type CollisionCardProps = {
 };
 
 export const CollisionCard = ({ collision }: CollisionCardProps) => {
-  const { id, location } = collision;
+  const { location, date } = collision;
+  const newDate = new Date(date);
   return (
-    <Card>
+    <Card
+      style={{
+        marginHorizontal: 10,
+        marginTop: 10,
+      }}
+      mode="outlined"
+    >
       <Card.Content>
-        <Text variant="titleMedium">Collision {id}</Text>
-        <Text variant="bodyMedium">At {location}</Text>
+        <Text variant="titleMedium">Collision at {location}</Text>
+        <Text variant="bodyMedium">
+          Occured on {newDate.toDateString()} at{" "}
+          {newDate.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </Text>
       </Card.Content>
     </Card>
   );

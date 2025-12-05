@@ -6,12 +6,17 @@ import { CollisionCard } from "./CollisionCard";
 
 export const CollisionList = () => {
   const { collisions } = useCollisionStore((state) => state);
+
   return (
     <>
       {collisions.length > 0 && (
         <FlatList
           data={collisions}
           renderItem={({ item }) => <CollisionCard collision={item} />}
+          style={{
+            display: "flex",
+            width: "100%",
+          }}
         />
       )}
       {collisions.length === 0 && (

@@ -10,6 +10,7 @@ export const AddCollisionButton = () => {
       icon={"plus"}
       style={styles.fab}
       onPress={() => router.navigate("/collisions/new")}
+      mode="flat"
     />
   );
 };
@@ -20,5 +21,6 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+    borderRadius: 100,
   },
 });

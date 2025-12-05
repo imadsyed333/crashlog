@@ -1,42 +1,33 @@
-import { Media, Officer, Person, Vehicle } from "@/types";
+import { Collision } from "@/types";
 import { nanoid } from "nanoid";
 import { create } from "zustand";
 
-interface CollisionFormStore {
-  id: string;
-  date: Date | null;
-  location: string;
-  description: string;
-  vehicles: Vehicle[];
-  media: Media[];
-  witnesses: Person[];
-  officer: Officer | null;
-  updateField: <K extends keyof CollisionFormStore>(
-    key: K,
-    value: CollisionFormStore[K]
-  ) => void;
+interface CollisionFormStore extends Collision {
+  updateField: <K extends keyof Collision>(key: K, value: Collision[K]) => void;
+  setForm: (collision: Collision) => void;
   resetForm: () => void;
 }
 
-export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
+const defaultCollision: Collision = {
   id: nanoid(),
-  date: null,
+  date: new Date(),
   location: "",
   description: "",
   vehicles: [],
   witnesses: [],
   media: [],
   officer: null,
+};
+
+export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
+  ...defaultCollision,
   updateField: (key, value) => set({ [key]: value }),
+  setForm: (collision) =>
+    set({
+      ...collision,
+    }),
   resetForm: () =>
     set({
-      id: nanoid(),
-      date: null,
-      location: "",
-      description: "",
-      vehicles: [],
-      witnesses: [],
-      media: [],
-      officer: null,
+      ...defaultCollision,
     }),
 }));

@@ -24,7 +24,7 @@ export interface Person {
   id: string;
   name: string;
   address: string;
-  phone: string;
+  phoneNumber: string;
 }
 
 export interface Driver extends Person {

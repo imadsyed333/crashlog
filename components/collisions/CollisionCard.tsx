@@ -1,4 +1,6 @@
+import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { Collision } from "@/types";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Card, Text } from "react-native-paper";
 
@@ -8,6 +10,8 @@ type CollisionCardProps = {
 
 export const CollisionCard = ({ collision }: CollisionCardProps) => {
   const { location, date } = collision;
+  const { setForm } = useCollisionFormStore();
+  const router = useRouter();
   const newDate = new Date(date);
   return (
     <Card
@@ -16,6 +20,10 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
         marginTop: 10,
       }}
       mode="outlined"
+      onPress={() => {
+        setForm(collision);
+        router.navigate("/collisions/new");
+      }}
     >
       <Card.Content>
         <Text variant="titleMedium">Collision at {location}</Text>

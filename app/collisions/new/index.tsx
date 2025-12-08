@@ -1,10 +1,13 @@
-import { useCollisionStore } from "@/store/collisionStore";
+import ErrorBox from "@/components/ErrorBox";
+import { useCollisionFormStore } from "@/store/collisionFormStore";
+import { styles } from "@/themes";
+import RNDateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import "react-native-get-random-values";
-import { Button, Text, TextInput } from "react-native-paper";
-import { v4 as uuidv4 } from "uuid";
+import { View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
 import z from "zod";
 
 const collisionSchema = z.object({
@@ -17,24 +20,11 @@ type FormErrors = {
   description?: String[];
 };
 
-type CollisionForm = {
-  location: string;
-  description: string;
-};
-
 const Index = () => {
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-
-  const [formData, setFormData] = useState<CollisionForm>({
-    location: "",
-    description: "",
-  });
-
-  const { addCollision } = useCollisionStore();
-  const router = useRouter();
-
+  const { location, description, date, updateCollisionField } =
+    useCollisionFormStore();
   const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const router = useRouter();
 
   const handlePress = () => {
     const parse = collisionSchema.safeParse({ location, description });
@@ -42,18 +32,12 @@ const Index = () => {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      addCollision({
-        id: uuidv4(),
-        date: new Date(),
-        location,
-        description,
-        vehicles: [],
-        media: [],
-        witnesses: [],
-        officer: null,
-      });
-      router.back();
+      router.navigate("/collisions/new/vehicleListScreen");
     }
+  };
+
+  const setDate = (event: DateTimePickerEvent, date: Date) => {
+    updateCollisionField("date", date);
   };
 
   return (
@@ -63,7 +47,7 @@ const Index = () => {
         label={"Location"}
         value={location}
         onChangeText={(text) => {
-          setLocation(text);
+          updateCollisionField("location", text);
           setFormErrors({
             ...formErrors,
             location: undefined,
@@ -72,13 +56,13 @@ const Index = () => {
         style={styles.input}
         mode="outlined"
       />
-      <Text style={styles.errorbox}>{formErrors.location?.at(0)}</Text>
+      <ErrorBox errors={formErrors.location} />
       <TextInput
         error={!!formErrors.description}
         label={"Description"}
         value={description}
         onChangeText={(text) => {
-          setDescription(text);
+          updateCollisionField("description", text);
           setFormErrors({
             ...formErrors,
             description: undefined,
@@ -87,28 +71,19 @@ const Index = () => {
         style={styles.input}
         mode="outlined"
       />
-      <Text style={styles.errorbox}>{formErrors.description?.at(0)}</Text>
+      <ErrorBox errors={formErrors.description} />
+      <RNDateTimePicker
+        value={new Date(date)}
+        onChange={(e, date) => setDate(e, date!)}
+        mode="datetime"
+        textColor="black"
+        style={styles.datetimepicker}
+      />
       <Button mode="contained" style={styles.button} onPress={handlePress}>
-        Add Collision
+        Next
       </Button>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    marginHorizontal: 10,
-    borderRadius: 10,
-    marginTop: 5,
-  },
-  button: {
-    margin: 10,
-    borderRadius: 5,
-  },
-  errorbox: {
-    color: "red",
-    marginHorizontal: 10,
-  },
-});
 
 export default Index;

@@ -29,7 +29,7 @@ export const useCollisionStore = create<CollisionStore, []>(
     (set, get): CollisionStore => ({
       collisions: [],
       addCollision: (collision: Collision) =>
-        set({ collisions: [...get().collisions, collision] }),
+        set({ collisions: [collision, ...get().collisions] }),
     }),
     {
       name: "collision-storage",

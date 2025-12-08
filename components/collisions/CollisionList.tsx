@@ -5,7 +5,7 @@ import { Text } from "react-native-paper";
 import { CollisionCard } from "./CollisionCard";
 
 export const CollisionList = () => {
-  const { collisions } = useCollisionStore((state) => state);
+  const { collisions } = useCollisionStore();
 
   return (
     <>

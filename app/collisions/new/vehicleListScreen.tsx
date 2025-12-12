@@ -38,7 +38,7 @@ const VehicleListScreen = () => {
         mode="contained"
         style={styles.button}
         onPress={() => {
-          router.back();
+          router.navigate("/collisions/new/witnessListScreen");
         }}
       >
         Next

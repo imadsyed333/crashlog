@@ -1,4 +1,3 @@
-import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/ErrorBox";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -7,7 +6,7 @@ import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import "react-native-get-random-values";
-import { Button, Portal, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import z from "zod";
 
@@ -45,11 +44,6 @@ const VehicleFormScreen = () => {
   const { addVehicle } = useCollisionFormStore();
 
   const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
-
-  const [visible, setVisible] = useState(false);
-
-  const showDriverDialog = () => setVisible(true);
-  const hideDriverDialog = () => setVisible(false);
 
   const handleSubmit = () => {
     const parse = vehicleSchema.safeParse({
@@ -169,16 +163,6 @@ const VehicleFormScreen = () => {
         mode="outlined"
       />
       <ErrorBox errors={formErrors.policyNumber} />
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => setVisible(true)}
-      >
-        Add Driver
-      </Button>
-      <Portal>
-        <DriverDialog visible={visible} onDismiss={hideDriverDialog} />
-      </Portal>
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>
         Save Vehicle
       </Button>

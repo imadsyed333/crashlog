@@ -22,7 +22,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
       mode="outlined"
       onPress={() => {
         setForm(collision);
-        router.navigate("/collisions/new");
+        router.navigate("/collisions/new/collisionDetailsFormScreen");
       }}
     >
       <Card.Content>

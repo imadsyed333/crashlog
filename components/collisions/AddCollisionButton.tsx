@@ -13,7 +13,7 @@ export const AddCollisionButton = () => {
       style={styles.fab}
       onPress={() => {
         resetForm();
-        router.navigate("/collisions/new");
+        router.navigate("/collisions/new/collisionDetailsFormScreen");
       }}
       mode="flat"
     />

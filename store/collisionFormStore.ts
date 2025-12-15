@@ -16,19 +16,21 @@ interface CollisionFormStore extends Collision {
   resetForm: () => void;
 }
 
-const defaultCollision: Collision = {
-  id: uuidv4(),
-  date: new Date(),
-  location: "",
-  description: "",
-  vehicles: [],
-  witnesses: [],
-  media: [],
-  officer: null,
+const newCollision = () => {
+  return {
+    id: "" + uuidv4(),
+    date: new Date(),
+    location: "",
+    description: "",
+    vehicles: [],
+    witnesses: [],
+    media: [],
+    officer: null,
+  };
 };
 
 export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
-  ...defaultCollision,
+  ...newCollision(),
   updateCollisionField: (key, value) => set({ [key]: value }),
   setForm: (collision) =>
     set({
@@ -52,6 +54,6 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
     })),
   resetForm: () =>
     set({
-      ...defaultCollision,
+      ...newCollision(),
     }),
 }));

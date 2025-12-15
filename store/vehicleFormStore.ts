@@ -1,5 +1,6 @@
 import { Vehicle } from "@/types";
 import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 
 interface VehicleFormStore extends Vehicle {
@@ -11,19 +12,21 @@ interface VehicleFormStore extends Vehicle {
   resetForm: () => void;
 }
 
-const defaultVehicle: Vehicle = {
-  id: "",
-  make: "",
-  model: "",
-  color: "",
-  licensePlate: "",
-  insuranceCompany: "",
-  policyNumber: "",
-  driver: null,
+const defaultVehicle = () => {
+  return {
+    id: "" + uuidv4(),
+    make: "",
+    model: "",
+    color: "",
+    licensePlate: "",
+    insuranceCompany: "",
+    policyNumber: "",
+    driver: null,
+  };
 };
 
 export const useVehicleFormStore = create<VehicleFormStore>((set) => ({
-  ...defaultVehicle,
+  ...defaultVehicle(),
   updateVehicleField: (key, value) => set({ [key]: value }),
   setForm: (vehicle) =>
     set({
@@ -31,6 +34,6 @@ export const useVehicleFormStore = create<VehicleFormStore>((set) => ({
     }),
   resetForm: () =>
     set({
-      ...defaultVehicle,
+      ...defaultVehicle(),
     }),
 }));

@@ -5,9 +5,7 @@ import { styles } from "@/themes";
 import { router } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
-import "react-native-get-random-values";
 import { Button, TextInput } from "react-native-paper";
-import { v4 as uuidv4 } from "uuid";
 import validator from "validator";
 import z from "zod";
 
@@ -27,7 +25,7 @@ type WitnessFormErrors = {
 };
 
 const witnessFormScreen = () => {
-  const { name, address, phoneNumber, updateWitnessField } =
+  const { id, name, address, phoneNumber, updateWitnessField } =
     useWitnessFormStore();
   const { addWitness } = useCollisionFormStore();
   const [formErrors, setFormErrors] = useState<WitnessFormErrors>({});
@@ -43,7 +41,7 @@ const witnessFormScreen = () => {
       setFormErrors(errors.fieldErrors);
     } else {
       addWitness({
-        id: uuidv4(),
+        id,
         name,
         address,
         phoneNumber,

@@ -1,3 +1,5 @@
+import DriverCard from "@/components/driver/DriverCard";
+import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/ErrorBox";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -5,9 +7,7 @@ import { styles } from "@/themes";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
-import "react-native-get-random-values";
-import { Button, TextInput } from "react-native-paper";
-import { v4 as uuidv4 } from "uuid";
+import { Button, Portal, TextInput } from "react-native-paper";
 import z from "zod";
 
 const vehicleSchema = z.object({
@@ -32,8 +32,10 @@ type VehicleFormErrors = {
 
 const VehicleFormScreen = () => {
   const {
+    id,
     make,
     model,
+    driver,
     color,
     licensePlate,
     insuranceCompany,
@@ -44,6 +46,8 @@ const VehicleFormScreen = () => {
   const { addVehicle } = useCollisionFormStore();
 
   const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
+
+  const [visible, setVisible] = useState(false);
 
   const handleSubmit = () => {
     const parse = vehicleSchema.safeParse({
@@ -65,8 +69,8 @@ const VehicleFormScreen = () => {
         licensePlate,
         insuranceCompany,
         policyNumber,
-        driver: null,
-        id: uuidv4(),
+        driver,
+        id,
       });
       router.back();
     }
@@ -163,6 +167,24 @@ const VehicleFormScreen = () => {
         mode="outlined"
       />
       <ErrorBox errors={formErrors.policyNumber} />
+      {driver && <DriverCard driver={driver} />}
+      {!driver && (
+        <>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={() => setVisible(true)}
+          >
+            Add Driver
+          </Button>
+          <Portal>
+            <DriverDialog
+              visible={visible}
+              onDismiss={() => setVisible(false)}
+            />
+          </Portal>
+        </>
+      )}
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>
         Save Vehicle
       </Button>

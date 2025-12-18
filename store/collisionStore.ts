@@ -11,6 +11,7 @@ import {
 interface CollisionStore {
   collisions: Collision[];
   addCollision: (collision: Collision) => void;
+  deleteCollision: (id: string) => void;
 }
 
 const secureStorage: StateStorage = {
@@ -30,6 +31,10 @@ export const useCollisionStore = create<CollisionStore, []>(
       collisions: [],
       addCollision: (collision: Collision) =>
         set({ collisions: [collision, ...get().collisions] }),
+      deleteCollision: (id: string) =>
+        set({
+          collisions: get().collisions.filter((c) => c.id !== id),
+        }),
     }),
     {
       name: "collision-storage",

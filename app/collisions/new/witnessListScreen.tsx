@@ -1,13 +1,14 @@
 import WitnessList from "@/components/witnesses/WitnessList";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
 import { styles } from "@/themes";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 
 const witnessListScreen = () => {
   const { resetForm } = useWitnessFormStore();
+  const router = useRouter();
   return (
     <View style={{ flex: 1 }}>
       <Button
@@ -29,7 +30,11 @@ const witnessListScreen = () => {
       >
         <WitnessList />
       </View>
-      <Button mode="contained" style={styles.button} onPress={() => {}}>
+      <Button
+        mode="contained"
+        style={styles.button}
+        onPress={() => router.navigate("/collisions/new/submitScreen")}
+      >
         Next
       </Button>
     </View>

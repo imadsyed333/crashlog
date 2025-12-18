@@ -5,7 +5,8 @@ import { Text } from "react-native-paper";
 import WitnessCard from "./WitnessCard";
 
 const WitnessList = () => {
-  const { witnesses } = useCollisionFormStore();
+  const { collision } = useCollisionFormStore();
+  const { witnesses } = collision;
   return (
     <>
       {witnesses.length > 0 && (

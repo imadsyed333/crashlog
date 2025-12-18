@@ -5,7 +5,8 @@ import { Text } from "react-native-paper";
 import VehicleCard from "./VehicleCard";
 
 const VehicleList = () => {
-  const { vehicles } = useCollisionFormStore();
+  const { collision } = useCollisionFormStore();
+  const { vehicles } = collision;
   return (
     <>
       {vehicles.length > 0 && (

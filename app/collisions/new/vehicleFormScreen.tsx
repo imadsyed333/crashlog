@@ -31,21 +31,19 @@ type VehicleFormErrors = {
 };
 
 const VehicleFormScreen = () => {
+  const { vehicle, updateVehicleField } = useVehicleFormStore();
   const {
-    id,
     make,
     model,
-    driver,
     color,
     licensePlate,
     insuranceCompany,
     policyNumber,
-    updateVehicleField,
-  } = useVehicleFormStore();
+    driver,
+  } = vehicle;
+  const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
 
   const { addVehicle } = useCollisionFormStore();
-
-  const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
 
   const [visible, setVisible] = useState(false);
 
@@ -62,16 +60,7 @@ const VehicleFormScreen = () => {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      addVehicle({
-        make,
-        model,
-        color,
-        licensePlate,
-        insuranceCompany,
-        policyNumber,
-        driver,
-        id,
-      });
+      addVehicle(vehicle);
       router.back();
     }
   };

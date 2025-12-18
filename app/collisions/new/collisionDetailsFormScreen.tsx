@@ -21,8 +21,9 @@ type FormErrors = {
 };
 
 const Index = () => {
-  const { location, description, date, updateCollisionField } =
-    useCollisionFormStore();
+  const { collision, updateCollisionField } = useCollisionFormStore();
+
+  const { location, description, date } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const router = useRouter();
 

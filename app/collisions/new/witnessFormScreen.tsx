@@ -25,10 +25,11 @@ type WitnessFormErrors = {
 };
 
 const witnessFormScreen = () => {
-  const { id, name, address, phoneNumber, updateWitnessField } =
-    useWitnessFormStore();
-  const { addWitness } = useCollisionFormStore();
+  const { witness, updateWitnessField } = useWitnessFormStore();
+  const { name, address, phoneNumber } = witness;
   const [formErrors, setFormErrors] = useState<WitnessFormErrors>({});
+
+  const { addWitness } = useCollisionFormStore();
 
   const handleSubmit = () => {
     const parse = witnessSchema.safeParse({
@@ -40,12 +41,7 @@ const witnessFormScreen = () => {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      addWitness({
-        id,
-        name,
-        address,
-        phoneNumber,
-      });
+      addWitness(witness);
       router.back();
     }
   };

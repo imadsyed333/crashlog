@@ -36,6 +36,12 @@ export default function RootLayout() {
               title: "New Witness",
             }}
           />
+          <Stack.Screen
+            name="collisions/new/submitScreen"
+            options={{
+              title: "Add Collision",
+            }}
+          />
         </Stack>
       </SafeAreaProvider>
     </PaperProvider>

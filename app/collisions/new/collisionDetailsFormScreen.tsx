@@ -10,7 +10,7 @@ import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import z from "zod";
 
-const collisionSchema = z.object({
+const collisionDetailsSchema = z.object({
   location: z.string().min(1, { error: "Location must not be empty" }),
   description: z.string().min(1, { error: "Description must not be empty" }),
 });
@@ -20,7 +20,7 @@ type FormErrors = {
   description?: String[];
 };
 
-const Index = () => {
+const collisionDetailsFormScreen = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
 
   const { location, description, date } = collision;
@@ -28,7 +28,7 @@ const Index = () => {
   const router = useRouter();
 
   const handlePress = () => {
-    const parse = collisionSchema.safeParse({ location, description });
+    const parse = collisionDetailsSchema.safeParse({ location, description });
     if (!parse.success) {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
@@ -87,4 +87,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default collisionDetailsFormScreen;

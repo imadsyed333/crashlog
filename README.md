@@ -1,3 +1,16 @@
-CrashLog is a cross-platform mobile app for self-reporting vehicle collisions, making it easier for drivers to log critical information. The goal is to increase the accuracy of self-reported data, driving more informed efforts to reduce vehicle collisions. 
+<h1>
+CrashLog
+</h1>
+A cross-platform mobile app to make it easier for drivers to log critical information after a vehicle collision.
 
-Under active development in React Native, targetting launch on the Google Play Store by the end of the year.
+The goal is to increase the accuracy of self-reported data, driving (pun intended) more informed efforts to reduce vehicle collisions.
+
+<h2>
+Technologies
+</h2>
+<ul>
+<li>`Expo`</li>
+<li>`React Native`</li>
+<li>`TypeScript`</li>
+<li>`Zustand</li>
+</ul>

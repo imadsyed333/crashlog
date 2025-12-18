@@ -3,7 +3,8 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 
-interface CollisionFormStore extends Collision {
+interface CollisionFormStore {
+  collison: Collision;
   updateCollisionField: <K extends keyof Collision>(
     key: K,
     value: Collision[K]
@@ -30,30 +31,52 @@ const newCollision = () => {
 };
 
 export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
-  ...newCollision(),
-  updateCollisionField: (key, value) => set({ [key]: value }),
+  collison: newCollision(),
+  updateCollisionField: (key, value) =>
+    set((state) => ({
+      collison: {
+        ...state.collison,
+        [key]: value,
+      },
+    })),
   setForm: (collision) =>
     set({
-      ...collision,
+      collison: collision,
     }),
   addVehicle: (vehicle) =>
     set((state) => ({
-      vehicles: [...state.vehicles, vehicle],
+      collison: {
+        ...state.collison,
+        vehicles: [...state.collison.vehicles, vehicle],
+      },
     })),
   updateVehicle: (id: string, vehicle: Vehicle) =>
     set((state) => ({
-      vehicles: state.vehicles.map((v) => (v.id === id ? vehicle : v)),
+      collison: {
+        ...state.collison,
+        vehicles: state.collison.vehicles.map((v) =>
+          v.id === id ? vehicle : v
+        ),
+      },
     })),
   addWitness: (witness) =>
     set((state) => ({
-      witnesses: [...state.witnesses, witness],
+      collison: {
+        ...state.collison,
+        witnesses: [...state.collison.witnesses, witness],
+      },
     })),
   updateWitness: (id: string, witness) =>
     set((state) => ({
-      witnesses: state.witnesses.map((w) => (w.id === id ? witness : w)),
+      collison: {
+        ...state.collison,
+        witnesses: state.collison.witnesses.map((w) =>
+          w.id === id ? witness : w
+        ),
+      },
     })),
   resetForm: () =>
     set({
-      ...newCollision(),
+      collison: newCollision(),
     }),
 }));

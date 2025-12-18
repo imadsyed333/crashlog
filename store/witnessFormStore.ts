@@ -4,7 +4,8 @@ import { Person } from "@/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-interface WitnessFormStore extends Person {
+interface WitnessFormStore {
+  witness: Person;
   updateWitnessField: <K extends keyof Person>(
     key: K,
     value: Person[K]
@@ -13,7 +14,7 @@ interface WitnessFormStore extends Person {
   resetForm: () => void;
 }
 
-const defaultWitness = () => {
+const newWitness = () => {
   return {
     id: "" + uuidv4(),
     name: "",
@@ -23,14 +24,20 @@ const defaultWitness = () => {
 };
 
 export const useWitnessFormStore = create<WitnessFormStore>((set) => ({
-  ...defaultWitness(),
-  updateWitnessField: (key, value) => set({ [key]: value }),
+  witness: newWitness(),
+  updateWitnessField: (key, value) =>
+    set((state) => ({
+      witness: {
+        ...state.witness,
+        [key]: value,
+      },
+    })),
   setForm: (witness) =>
     set({
-      ...witness,
+      witness: witness,
     }),
   resetForm: () =>
     set({
-      ...defaultWitness(),
+      witness: newWitness(),
     }),
 }));

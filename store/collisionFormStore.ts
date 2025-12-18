@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 
 interface CollisionFormStore {
-  collison: Collision;
+  collision: Collision;
   updateCollisionField: <K extends keyof Collision>(
     key: K,
     value: Collision[K]
@@ -31,52 +31,52 @@ const newCollision = () => {
 };
 
 export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
-  collison: newCollision(),
+  collision: newCollision(),
   updateCollisionField: (key, value) =>
     set((state) => ({
-      collison: {
-        ...state.collison,
+      collision: {
+        ...state.collision,
         [key]: value,
       },
     })),
   setForm: (collision) =>
     set({
-      collison: collision,
+      collision: collision,
     }),
   addVehicle: (vehicle) =>
     set((state) => ({
-      collison: {
-        ...state.collison,
-        vehicles: [...state.collison.vehicles, vehicle],
+      collision: {
+        ...state.collision,
+        vehicles: [...state.collision.vehicles, vehicle],
       },
     })),
   updateVehicle: (id: string, vehicle: Vehicle) =>
     set((state) => ({
-      collison: {
-        ...state.collison,
-        vehicles: state.collison.vehicles.map((v) =>
+      collision: {
+        ...state.collision,
+        vehicles: state.collision.vehicles.map((v) =>
           v.id === id ? vehicle : v
         ),
       },
     })),
   addWitness: (witness) =>
     set((state) => ({
-      collison: {
-        ...state.collison,
-        witnesses: [...state.collison.witnesses, witness],
+      collision: {
+        ...state.collision,
+        witnesses: [...state.collision.witnesses, witness],
       },
     })),
   updateWitness: (id: string, witness) =>
     set((state) => ({
-      collison: {
-        ...state.collison,
-        witnesses: state.collison.witnesses.map((w) =>
+      collision: {
+        ...state.collision,
+        witnesses: state.collision.witnesses.map((w) =>
           w.id === id ? witness : w
         ),
       },
     })),
   resetForm: () =>
     set({
-      collison: newCollision(),
+      collision: newCollision(),
     }),
 }));

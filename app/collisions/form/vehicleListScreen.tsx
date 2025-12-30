@@ -20,7 +20,7 @@ const VehicleListScreen = () => {
         style={styles.button}
         onPress={() => {
           resetForm();
-          router.navigate("/collisions/new/vehicleFormScreen");
+          router.navigate("/collisions/form/vehicleFormScreen");
         }}
       >
         Add Vehicle
@@ -38,7 +38,7 @@ const VehicleListScreen = () => {
         mode="contained"
         style={styles.button}
         onPress={() => {
-          router.navigate("/collisions/new/witnessListScreen");
+          router.navigate("/collisions/form/witnessListScreen");
         }}
       >
         Next

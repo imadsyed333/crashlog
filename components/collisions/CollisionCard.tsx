@@ -37,7 +37,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
         <Button
           onPress={() => {
             setForm(collision);
-            router.navigate("/collisions/new/collisionDetailsFormScreen");
+            router.navigate("/collisions/form/collisionDetailsFormScreen");
           }}
         >
           Edit

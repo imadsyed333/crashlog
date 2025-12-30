@@ -15,7 +15,7 @@ const witnessListScreen = () => {
         mode="contained"
         style={styles.button}
         onPress={() => {
-          router.navigate("/collisions/new/witnessFormScreen");
+          router.navigate("/collisions/form/witnessFormScreen");
           resetForm();
         }}
       >
@@ -33,7 +33,7 @@ const witnessListScreen = () => {
       <Button
         mode="contained"
         style={styles.button}
-        onPress={() => router.navigate("/collisions/new/submitScreen")}
+        onPress={() => router.navigate("/collisions/form/submitScreen")}
       >
         Next
       </Button>

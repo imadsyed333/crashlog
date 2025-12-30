@@ -7,37 +7,37 @@ export default function RootLayout() {
     <PaperProvider>
       <SafeAreaProvider>
         <Stack>
-          <Stack.Screen name="index" options={{ title: "My Collisions" }} />
+          <Stack.Screen name="index" options={{ title: "My Collisions", gestureEnabled: false, headerBackVisible: false }} />
           <Stack.Screen
-            name="collisions/new/collisionDetailsFormScreen"
+            name="collisions/form/collisionDetailsFormScreen"
             options={{ title: "Description" }}
           />
           <Stack.Screen
-            name="collisions/new/vehicleListScreen"
+            name="collisions/form/vehicleListScreen"
             options={{
               title: "Vehicles",
             }}
           />
           <Stack.Screen
-            name="collisions/new/vehicleFormScreen"
+            name="collisions/form/vehicleFormScreen"
             options={{
               title: "New Vehicle",
             }}
           />
           <Stack.Screen
-            name="collisions/new/witnessListScreen"
+            name="collisions/form/witnessListScreen"
             options={{
               title: "Witnesses",
             }}
           />
           <Stack.Screen
-            name="collisions/new/witnessFormScreen"
+            name="collisions/form/witnessFormScreen"
             options={{
               title: "New Witness",
             }}
           />
           <Stack.Screen
-            name="collisions/new/submitScreen"
+            name="collisions/form/submitScreen"
             options={{
               title: "Add Collision",
             }}

@@ -33,7 +33,7 @@ const collisionDetailsFormScreen = () => {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      router.navigate("/collisions/new/vehicleListScreen");
+      router.navigate("/collisions/form/vehicleListScreen");
     }
   };
 

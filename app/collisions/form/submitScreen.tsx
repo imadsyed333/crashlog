@@ -1,5 +1,7 @@
+import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
+import { styles } from "@/themes";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
@@ -15,12 +17,12 @@ const submitScreen = () => {
   };
   return (
     <View>
-      <Text variant="bodyLarge">Ready to add this collision?</Text>
-      <Button mode="contained" onPress={handleSubmit}>
+      <Text variant="bodyLarge" style={styles.text}>Review your collision information</Text>
+      <CollisionInfoView/>
+      <Button mode="contained" onPress={handleSubmit} style={styles.button}>
         Add collision
       </Button>
     </View>
   );
 };
-
 export default submitScreen;

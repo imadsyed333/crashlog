@@ -7,7 +7,7 @@ type VehicleCardProps = {
 };
 
 const VehicleCard = ({ vehicle }: VehicleCardProps) => {
-  const { make, model, color, licensePlate } = vehicle;
+  const { make, model, color, licensePlate, insuranceCompany, policyNumber } = vehicle;
   return (
     <Card
       style={{
@@ -20,7 +20,9 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
         <Text variant="titleMedium">
           {color} {make} {model}
         </Text>
-        <Text variant="bodyMedium">{licensePlate}</Text>
+        <Text variant="bodyMedium">License Plate: {licensePlate}</Text>
+        <Text variant="bodyMedium">Insurance company: {insuranceCompany}</Text>
+        <Text variant="bodyMedium">Policy number: {policyNumber}</Text>
       </Card.Content>
     </Card>
   );

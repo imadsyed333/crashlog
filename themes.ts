@@ -25,4 +25,8 @@ export const styles = StyleSheet.create({
     color: "red",
     marginHorizontal: 10,
   },
+  text: {
+    color: "black",
+    padding: 2,
+  }
 });

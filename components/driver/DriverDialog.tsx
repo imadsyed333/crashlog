@@ -1,6 +1,9 @@
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
+import { styles } from "@/themes";
 import React from "react";
-import { Button, Dialog, TextInput } from "react-native-paper";
+import { View } from "react-native";
+import Modal from "react-native-modal";
+import { Button, Text, TextInput } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import z from "zod";
 import ErrorBox from "../ErrorBox";
@@ -49,43 +52,89 @@ const DriverDialog = ({ visible, onDismiss }: DriverDialogProps) => {
     }
   };
   return (
-    <Dialog visible={visible} onDismiss={onDismiss}>
-      <Dialog.Title>Driver Information</Dialog.Title>
-      <Dialog.Content>
-        <TextInput
-          label="Name"
-          value={driver.name}
-          onChangeText={(text) => setDriver({ ...driver, name: text })}
-          error={!!formErrors.name}
-        />
-        <ErrorBox errors={formErrors.name} />
-        <TextInput
-          label="Address"
-          value={driver.address}
-          onChangeText={(text) => setDriver({ ...driver, address: text })}
-          error={!!formErrors.address}
-        />
-        <ErrorBox errors={formErrors.address} />
-        <TextInput
-          label="Phone Number"
-          value={driver.phoneNumber}
-          onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
-          error={!!formErrors.phoneNumber}
-        />
-        <ErrorBox errors={formErrors.phoneNumber} />
-        <TextInput
-          label="Driver License"
-          value={driver.driverLicense}
-          onChangeText={(text) => setDriver({ ...driver, driverLicense: text })}
-          error={!!formErrors.driverLicense}
-        />
-        <ErrorBox errors={formErrors.driverLicense} />
-        <Dialog.Actions>
-          <Button onPress={onDismiss}>Cancel</Button>
-          <Button onPress={handleSubmit}>Save</Button>
-        </Dialog.Actions>
-      </Dialog.Content>
-    </Dialog>
+    <Modal isVisible={visible} onBackdropPress={onDismiss} avoidKeyboard={true}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+        }}
+      >
+        <View
+          style={{
+            paddingTop: 10,
+            backgroundColor: "white",
+            borderRadius: 10,
+          }}
+        >
+          <Text
+            variant="titleLarge"
+            style={{
+              marginLeft: 10,
+              paddingTop: 5,
+            }}
+          >
+            Driver Information
+          </Text>
+          <TextInput
+            label="Name"
+            value={driver.name}
+            onChangeText={(text) => setDriver({ ...driver, name: text })}
+            error={!!formErrors.name}
+            style={styles.input}
+            mode="outlined"
+          />
+          <ErrorBox errors={formErrors.name} />
+          <TextInput
+            label="Address"
+            value={driver.address}
+            onChangeText={(text) => setDriver({ ...driver, address: text })}
+            error={!!formErrors.address}
+            style={styles.input}
+            mode="outlined"
+          />
+          <ErrorBox errors={formErrors.address} />
+          <TextInput
+            label="Phone Number"
+            value={driver.phoneNumber}
+            onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
+            error={!!formErrors.phoneNumber}
+            style={styles.input}
+            mode="outlined"
+          />
+          <ErrorBox errors={formErrors.phoneNumber} />
+          <TextInput
+            label="Driver License"
+            value={driver.driverLicense}
+            onChangeText={(text) =>
+              setDriver({ ...driver, driverLicense: text })
+            }
+            error={!!formErrors.driverLicense}
+            style={styles.input}
+            mode="outlined"
+          />
+          <ErrorBox errors={formErrors.driverLicense} />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              paddingRight: 10,
+              marginVertical: 10,
+            }}
+          >
+            <Button
+              onPress={onDismiss}
+              mode="outlined"
+              style={{ marginRight: 5 }}
+            >
+              Cancel
+            </Button>
+            <Button onPress={handleSubmit} mode="contained">
+              Save
+            </Button>
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 

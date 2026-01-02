@@ -1,13 +1,21 @@
+import { theme } from "@/themes";
 import { Stack } from "expo-router";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <SafeAreaProvider>
         <Stack>
-          <Stack.Screen name="index" options={{ title: "My Collisions", gestureEnabled: false, headerBackVisible: false }} />
+          <Stack.Screen
+            name="index"
+            options={{
+              title: "My Collisions",
+              gestureEnabled: false,
+              headerBackVisible: false,
+            }}
+          />
           <Stack.Screen
             name="collisions/form/collisionDetailsFormScreen"
             options={{ title: "Description" }}
@@ -28,12 +36,6 @@ export default function RootLayout() {
             name="collisions/form/witnessListScreen"
             options={{
               title: "Witnesses",
-            }}
-          />
-          <Stack.Screen
-            name="collisions/form/witnessFormScreen"
-            options={{
-              title: "New Witness",
             }}
           />
           <Stack.Screen

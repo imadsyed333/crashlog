@@ -5,14 +5,17 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const VehicleListScreen = () => {
+  const insets = useSafeAreaInsets();
   const { resetForm } = useVehicleFormStore();
   const router = useRouter();
   return (
     <View
       style={{
         flex: 1,
+        paddingBottom: insets.bottom,
       }}
     >
       <Button

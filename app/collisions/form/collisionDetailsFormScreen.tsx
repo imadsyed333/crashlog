@@ -8,6 +8,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import z from "zod";
 
 const collisionDetailsSchema = z.object({
@@ -21,6 +22,8 @@ type FormErrors = {
 };
 
 const collisionDetailsFormScreen = () => {
+  const insets = useSafeAreaInsets()
+
   const { collision, updateCollisionField } = useCollisionFormStore();
 
   const { location, description, date } = collision;
@@ -42,7 +45,13 @@ const collisionDetailsFormScreen = () => {
   };
 
   return (
-    <View>
+    <View style={{
+      flex: 1,
+      paddingBottom: insets.bottom
+    }}>
+      <View style={{
+        flex: 1,
+      }}>
       <TextInput
         error={!!formErrors.location}
         label={"Location"}
@@ -80,6 +89,7 @@ const collisionDetailsFormScreen = () => {
         textColor="black"
         style={styles.datetimepicker}
       />
+      </View>
       <Button mode="contained" style={styles.button} onPress={handlePress}>
         Next
       </Button>

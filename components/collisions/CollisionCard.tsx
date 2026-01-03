@@ -11,7 +11,7 @@ type CollisionCardProps = {
 
 export const CollisionCard = ({ collision }: CollisionCardProps) => {
   const { location, date } = collision;
-  const { setForm } = useCollisionFormStore();
+  const { setForm, setEdit } = useCollisionFormStore();
   const { deleteCollision } = useCollisionStore();
   const router = useRouter();
   const newDate = new Date(date);
@@ -38,6 +38,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
           onPress={() => {
             setForm(collision);
             router.navigate("/collisions/form/collisionDetailsFormScreen");
+            setEdit(true);
           }}
         >
           Edit

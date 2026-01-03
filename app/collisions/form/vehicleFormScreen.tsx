@@ -34,7 +34,8 @@ type VehicleFormErrors = {
 const VehicleFormScreen = () => {
   const insets = useSafeAreaInsets();
 
-  const { vehicle, updateVehicleField } = useVehicleFormStore();
+  const { vehicle, updateVehicleField, isEdit } = useVehicleFormStore();
+  const { updateVehicle } = useCollisionFormStore();
   const {
     make,
     model,
@@ -45,10 +46,8 @@ const VehicleFormScreen = () => {
     driver,
   } = vehicle;
   const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
-
+  const { setDialogVisible } = useVehicleFormStore();
   const { addVehicle } = useCollisionFormStore();
-
-  const [visible, setVisible] = useState(false);
 
   const handleSubmit = () => {
     const parse = vehicleSchema.safeParse({
@@ -63,7 +62,11 @@ const VehicleFormScreen = () => {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      addVehicle(vehicle);
+      if (isEdit) {
+        updateVehicle(vehicle);
+      } else {
+        addVehicle(vehicle);
+      }
       router.back();
     }
   };
@@ -176,16 +179,14 @@ const VehicleFormScreen = () => {
             <Button
               mode="contained"
               style={styles.button}
-              onPress={() => setVisible(true)}
+              onPress={() => setDialogVisible(true)}
             >
               Add Driver
             </Button>
-            <DriverDialog
-              visible={visible}
-              onDismiss={() => setVisible(false)}
-            />
           </>
         )}
+        <DriverDialog
+        />
       </View>
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>
         Save Vehicle

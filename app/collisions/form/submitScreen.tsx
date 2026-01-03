@@ -5,25 +5,28 @@ import { useCollisionStore } from "@/store/collisionStore";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const submitScreen = () => {
-  const { collision } = useCollisionFormStore();
-  const { addCollision } = useCollisionStore();
+  const { collision, isEdit } = useCollisionFormStore();
+  const { addCollision, updateCollision } = useCollisionStore();
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const handleSubmit = () => {
-    addCollision(collision);
+    if (isEdit) {
+      updateCollision(collision);
+    } else {
+      addCollision(collision);
+    }
     router.replace("/");
   };
   return (
-    <View>
-      <Text variant="bodyLarge" style={styles.text}>
-        Review your collision information
-      </Text>
-      <CollisionInfoView />
-      <Button mode="contained" onPress={handleSubmit} style={styles.button}>
-        Add collision
-      </Button>
+    <View style={{ flex: 1, paddingBottom: insets.bottom, justifyContent: "space-between" }}>
+        <CollisionInfoView />
+        <Button mode="contained" onPress={handleSubmit} style={styles.button}>
+         {isEdit ? "Update Collision" : "Add Collision"}
+        </Button>
     </View>
   );
 };

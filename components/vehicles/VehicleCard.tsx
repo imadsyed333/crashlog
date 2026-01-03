@@ -1,6 +1,9 @@
 import { Vehicle } from "@/lib/types";
+import { useCollisionFormStore } from "@/store/collisionFormStore";
+import { useVehicleFormStore } from "@/store/vehicleFormStore";
+import { router } from "expo-router";
 import React from "react";
-import { Card, Text } from "react-native-paper";
+import { Button, Card, Text } from "react-native-paper";
 import DriverCard from "../driver/DriverCard";
 
 type VehicleCardProps = {
@@ -17,6 +20,8 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
     policyNumber,
     driver,
   } = vehicle;
+  const { setForm, setEdit } = useVehicleFormStore();
+  const { deleteVehicle } = useCollisionFormStore();
   return (
     <Card
       style={{
@@ -34,6 +39,20 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
         <Text variant="bodyMedium">Policy number: {policyNumber}</Text>
         {driver && <DriverCard driver={driver} />}
       </Card.Content>
+        <Card.Actions>
+          <Button onPress={() => {
+            setForm(vehicle);
+            router.navigate("/collisions/form/vehicleFormScreen");
+            setEdit(true);
+          }}>
+            Edit
+          </Button>
+          <Button onPress={() => {
+            deleteVehicle(vehicle.id);
+          }}>
+            Delete
+          </Button>
+        </Card.Actions>
     </Card>
   );
 };

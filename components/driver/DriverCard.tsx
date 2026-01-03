@@ -1,12 +1,14 @@
 import { Driver } from "@/lib/types";
+import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React from "react";
-import { Card, Text } from "react-native-paper";
+import { Button, Card, Text } from "react-native-paper";
 
 type DriverCardProps = {
   driver: Driver;
 };
 const DriverCard = ({ driver }: DriverCardProps) => {
   const { name, driverLicense, phoneNumber, address } = driver;
+  const { setDialogVisible } = useVehicleFormStore();
   return (
     <Card
       style={{
@@ -21,6 +23,13 @@ const DriverCard = ({ driver }: DriverCardProps) => {
         <Text variant="bodyMedium">{phoneNumber}</Text>
         <Text variant="bodyMedium">{address}</Text>
       </Card.Content>
+      <Card.Actions>
+        <Button onPress={() => {
+          setDialogVisible(true);
+        }}>
+          Edit
+        </Button>
+      </Card.Actions>
     </Card>
   );
 };

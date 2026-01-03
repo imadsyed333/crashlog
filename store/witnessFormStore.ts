@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from "uuid";
 interface WitnessFormStore {
   witness: Person;
   isEdit: boolean;
+  isDialogVisible: boolean;
+  setDialogVisible: (value: boolean) => void;
   updateWitnessField: <K extends keyof Person>(
     key: K,
     value: Person[K]
@@ -28,6 +30,11 @@ const newWitness = () => {
 export const useWitnessFormStore = create<WitnessFormStore>((set) => ({
   witness: newWitness(),
   isEdit: false,
+  isDialogVisible: false,
+  setDialogVisible: (value) =>
+    set({
+      isDialogVisible: value,
+    }),
   setEdit: (value) =>
     set({
       isEdit: value,

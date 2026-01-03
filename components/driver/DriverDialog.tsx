@@ -8,11 +8,6 @@ import { v4 as uuidv4 } from "uuid";
 import z from "zod";
 import ErrorBox from "../ErrorBox";
 
-type DriverDialogProps = {
-  visible: boolean;
-  onDismiss: () => void;
-};
-
 const driverSchema = z.object({
   name: z.string().min(1, { error: "Name must not be empty" }),
   address: z.string().min(1, { error: "Address must not be empty" }),
@@ -29,13 +24,14 @@ type DriverFormErrors = {
   driverLicense?: String[];
 };
 
-const DriverDialog = ({ visible, onDismiss }: DriverDialogProps) => {
+const DriverDialog = () => {
+  const { isDialogVisible, setDialogVisible, vehicle } = useVehicleFormStore();
   const [formErrors, setFormErrors] = React.useState<DriverFormErrors>({});
   const [driver, setDriver] = React.useState({
-    name: "",
-    address: "",
-    phoneNumber: "",
-    driverLicense: "",
+    name: vehicle.driver?.name || "",
+    address: vehicle.driver?.address || "",
+    phoneNumber: vehicle.driver?.phoneNumber || "",
+    driverLicense: vehicle.driver?.driverLicense || "",
   });
 
   const { updateVehicleField } = useVehicleFormStore();
@@ -48,11 +44,11 @@ const DriverDialog = ({ visible, onDismiss }: DriverDialogProps) => {
       setFormErrors(errors.fieldErrors);
     } else {
       updateVehicleField("driver", { id: uuidv4(), ...driver });
-      onDismiss();
+      setDialogVisible(false);
     }
   };
   return (
-    <Modal isVisible={visible} onBackdropPress={onDismiss} avoidKeyboard={true}>
+    <Modal isVisible={isDialogVisible} onBackdropPress={() => setDialogVisible(false)} avoidKeyboard={true}>
       <View
         style={{
           flex: 1,
@@ -122,7 +118,7 @@ const DriverDialog = ({ visible, onDismiss }: DriverDialogProps) => {
             }}
           >
             <Button
-              onPress={onDismiss}
+              onPress={() => setDialogVisible(false)}
               mode="outlined"
               style={{ marginRight: 5 }}
             >

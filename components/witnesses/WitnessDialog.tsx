@@ -1,7 +1,6 @@
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
-import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
@@ -9,11 +8,6 @@ import { Button, Text, TextInput } from "react-native-paper";
 import validator from "validator";
 import z from "zod";
 import ErrorBox from "../ErrorBox";
-
-type WitnessDialogProps = {
-  visible: boolean;
-  onDismiss: () => void;
-};
 
 const witnessSchema = z.object({
   name: z.string().min(1, { error: "Name must not be empty" }),
@@ -30,12 +24,12 @@ type WitnessFormErrors = {
   phoneNumber?: String[];
 };
 
-const WitnessDialog = ({ visible, onDismiss }: WitnessDialogProps) => {
-  const { witness, updateWitnessField } = useWitnessFormStore();
+const WitnessDialog = () => {
+  const { witness, updateWitnessField, isEdit, isDialogVisible, setDialogVisible} = useWitnessFormStore();
   const { name, address, phoneNumber } = witness;
   const [formErrors, setFormErrors] = useState<WitnessFormErrors>({});
 
-  const { addWitness } = useCollisionFormStore();
+  const { addWitness, updateWitness } = useCollisionFormStore();
 
   const handleSubmit = () => {
     const parse = witnessSchema.safeParse({
@@ -47,12 +41,16 @@ const WitnessDialog = ({ visible, onDismiss }: WitnessDialogProps) => {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      addWitness(witness);
-      router.back();
+      if (isEdit) {
+        updateWitness(witness);
+      } else {
+        addWitness(witness);
+      }
+      setDialogVisible(false);
     }
   };
   return (
-    <Modal isVisible={visible} onBackdropPress={onDismiss} avoidKeyboard={true}>
+    <Modal isVisible={isDialogVisible} onBackdropPress={() => setDialogVisible(false)} avoidKeyboard={true}>
       <View
         style={{
           flex: 1,
@@ -130,7 +128,7 @@ const WitnessDialog = ({ visible, onDismiss }: WitnessDialogProps) => {
             }}
           >
             <Button
-              onPress={onDismiss}
+              onPress={() => setDialogVisible(false)}
               mode="outlined"
               style={{ marginRight: 5 }}
             >

@@ -6,6 +6,8 @@ import { create } from "zustand";
 interface VehicleFormStore {
   vehicle: Vehicle;
   isEdit: boolean;
+  isDialogVisible: boolean;
+  setDialogVisible: (value: boolean) => void;
   setEdit: (value: boolean) => void;
   updateVehicleField: <K extends keyof Vehicle>(
     key: K,
@@ -31,6 +33,11 @@ const newVehicle = () => {
 export const useVehicleFormStore = create<VehicleFormStore>((set) => ({
   vehicle: newVehicle(),
   isEdit: false,
+  isDialogVisible: false,
+  setDialogVisible: (value) =>
+    set({
+      isDialogVisible: value,
+    }),
   updateVehicleField: (key, value) =>
     set((state) => ({
       vehicle: {

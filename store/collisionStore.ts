@@ -1,4 +1,4 @@
-import { Collision } from "@/types";
+import { Collision } from "@/lib/types";
 import { deleteItemAsync, getItemAsync, setItemAsync } from "expo-secure-store";
 import { create, StateCreator } from "zustand";
 import {
@@ -12,6 +12,7 @@ interface CollisionStore {
   collisions: Collision[];
   addCollision: (collision: Collision) => void;
   deleteCollision: (id: string) => void;
+  updateCollision: (collision: Collision) => void;
 }
 
 const secureStorage: StateStorage = {
@@ -34,6 +35,12 @@ export const useCollisionStore = create<CollisionStore, []>(
       deleteCollision: (id: string) =>
         set({
           collisions: get().collisions.filter((c) => c.id !== id),
+        }),
+      updateCollision: (collision: Collision) =>
+        set({
+          collisions: get().collisions.map((c) =>
+            c.id === collision.id ? collision : c
+          ),
         }),
     }),
     {

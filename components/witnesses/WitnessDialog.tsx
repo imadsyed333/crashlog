@@ -1,6 +1,6 @@
+import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
-import { styles } from "@/themes";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
@@ -76,7 +76,7 @@ const WitnessDialog = ({ visible, onDismiss }: WitnessDialogProps) => {
             Witness Information
           </Text>
           <TextInput
-            label="Name"
+            label="Full Name"
             value={name}
             style={styles.input}
             onChangeText={(text) => {

@@ -1,4 +1,4 @@
-import { Driver } from "@/types";
+import { Driver } from "@/lib/types";
 import React from "react";
 import { Card, Text } from "react-native-paper";
 

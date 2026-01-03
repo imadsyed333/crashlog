@@ -1,6 +1,6 @@
+import { Collision } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
-import { Collision } from "@/types";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Button, Card, Text } from "react-native-paper";

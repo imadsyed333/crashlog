@@ -1,6 +1,6 @@
 import VehicleList from "@/components/vehicles/VehicleList";
+import { styles } from "@/lib/themes";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import { styles } from "@/themes";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";

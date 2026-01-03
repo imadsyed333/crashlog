@@ -1,4 +1,4 @@
-import { styles } from "@/themes";
+import { styles } from "@/lib/themes";
 import React from "react";
 import { Text } from "react-native-paper";
 

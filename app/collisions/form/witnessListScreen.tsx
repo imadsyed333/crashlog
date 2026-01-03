@@ -1,7 +1,7 @@
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import WitnessList from "@/components/witnesses/WitnessList";
+import { styles } from "@/lib/themes";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
-import { styles } from "@/themes";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";

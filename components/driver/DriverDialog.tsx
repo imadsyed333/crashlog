@@ -1,5 +1,5 @@
+import { styles } from "@/lib/themes";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import { styles } from "@/themes";
 import React from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";

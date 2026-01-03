@@ -1,6 +1,6 @@
 import ErrorBox from "@/components/ErrorBox";
+import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { styles } from "@/themes";
 import RNDateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
@@ -22,7 +22,7 @@ type FormErrors = {
 };
 
 const collisionDetailsFormScreen = () => {
-  const insets = useSafeAreaInsets()
+  const insets = useSafeAreaInsets();
 
   const { collision, updateCollisionField } = useCollisionFormStore();
 
@@ -45,50 +45,54 @@ const collisionDetailsFormScreen = () => {
   };
 
   return (
-    <View style={{
-      flex: 1,
-      paddingBottom: insets.bottom
-    }}>
-      <View style={{
+    <View
+      style={{
         flex: 1,
-      }}>
-      <TextInput
-        error={!!formErrors.location}
-        label={"Location"}
-        value={location}
-        onChangeText={(text) => {
-          updateCollisionField("location", text);
-          setFormErrors({
-            ...formErrors,
-            location: undefined,
-          });
+        paddingBottom: insets.bottom,
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
         }}
-        style={styles.input}
-        mode="outlined"
-      />
-      <ErrorBox errors={formErrors.location} />
-      <TextInput
-        error={!!formErrors.description}
-        label={"Description"}
-        value={description}
-        onChangeText={(text) => {
-          updateCollisionField("description", text);
-          setFormErrors({
-            ...formErrors,
-            description: undefined,
-          });
-        }}
-        style={styles.input}
-        mode="outlined"
-      />
-      <ErrorBox errors={formErrors.description} />
-      <RNDateTimePicker
-        value={new Date(date)}
-        onChange={(e, date) => setDate(e, date!)}
-        mode="datetime"
-        textColor="black"
-        style={styles.datetimepicker}
-      />
+      >
+        <TextInput
+          error={!!formErrors.location}
+          label={"Location"}
+          value={location}
+          onChangeText={(text) => {
+            updateCollisionField("location", text);
+            setFormErrors({
+              ...formErrors,
+              location: undefined,
+            });
+          }}
+          style={styles.input}
+          mode="outlined"
+        />
+        <ErrorBox errors={formErrors.location} />
+        <TextInput
+          error={!!formErrors.description}
+          label={"Description"}
+          value={description}
+          onChangeText={(text) => {
+            updateCollisionField("description", text);
+            setFormErrors({
+              ...formErrors,
+              description: undefined,
+            });
+          }}
+          style={styles.input}
+          mode="outlined"
+        />
+        <ErrorBox errors={formErrors.description} />
+        <RNDateTimePicker
+          value={new Date(date)}
+          onChange={(e, date) => setDate(e, date!)}
+          mode="datetime"
+          textColor="black"
+          style={styles.datetimepicker}
+        />
       </View>
       <Button mode="contained" style={styles.button} onPress={handlePress}>
         Next

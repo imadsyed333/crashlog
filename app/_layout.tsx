@@ -1,4 +1,4 @@
-import { theme } from "@/themes";
+import { theme } from "@/lib/themes";
 import { Stack } from "expo-router";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";

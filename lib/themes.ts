@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
-    borderRadius: 5,
   },
   datetimepicker: {
     marginTop: 5,
@@ -29,9 +28,8 @@ export const styles = StyleSheet.create({
   text: {
     color: "black",
     padding: 2,
-  }
+  },
 });
-
 
 export const theme = {
   ...DefaultTheme,
@@ -72,11 +70,10 @@ export const theme = {
       level2: "rgb(233, 239, 249)",
       level3: "rgb(225, 235, 246)",
       level4: "rgb(223, 233, 245)",
-      level5: "rgb(218, 230, 244)"
+      level5: "rgb(218, 230, 244)",
     },
     surfaceDisabled: "rgba(26, 28, 30, 0.12)",
     onSurfaceDisabled: "rgba(26, 28, 30, 0.38)",
-    backdrop: "rgba(45, 49, 56, 0.4)"
-
-  }
-}
+    backdrop: "rgba(45, 49, 56, 0.4)",
+  },
+};

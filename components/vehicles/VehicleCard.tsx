@@ -1,13 +1,22 @@
-import { Vehicle } from "@/types";
+import { Vehicle } from "@/lib/types";
 import React from "react";
 import { Card, Text } from "react-native-paper";
+import DriverCard from "../driver/DriverCard";
 
 type VehicleCardProps = {
   vehicle: Vehicle;
 };
 
 const VehicleCard = ({ vehicle }: VehicleCardProps) => {
-  const { make, model, color, licensePlate, insuranceCompany, policyNumber } = vehicle;
+  const {
+    make,
+    model,
+    color,
+    licensePlate,
+    insuranceCompany,
+    policyNumber,
+    driver,
+  } = vehicle;
   return (
     <Card
       style={{
@@ -23,6 +32,7 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
         <Text variant="bodyMedium">License Plate: {licensePlate}</Text>
         <Text variant="bodyMedium">Insurance company: {insuranceCompany}</Text>
         <Text variant="bodyMedium">Policy number: {policyNumber}</Text>
+        {driver && <DriverCard driver={driver} />}
       </Card.Content>
     </Card>
   );

@@ -1,9 +1,9 @@
 import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/ErrorBox";
+import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import { styles } from "@/themes";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";

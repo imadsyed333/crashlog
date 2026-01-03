@@ -1,4 +1,4 @@
-import { Person } from "@/types";
+import { Person } from "@/lib/types";
 import React from "react";
 import { Card, Text } from "react-native-paper";
 

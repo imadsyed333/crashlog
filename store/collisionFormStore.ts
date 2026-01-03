@@ -1,10 +1,12 @@
-import { Collision, Person, Vehicle } from "@/types";
+import { Collision, Person, Vehicle } from "@/lib/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 
 interface CollisionFormStore {
   collision: Collision;
+  isEdit: boolean;
+  setEdit: (value: boolean) => void;
   updateCollisionField: <K extends keyof Collision>(
     key: K,
     value: Collision[K]
@@ -32,6 +34,11 @@ const newCollision = () => {
 
 export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
   collision: newCollision(),
+  isEdit: false,
+  setEdit: (value) =>
+    set({
+      isEdit: value,
+    }),
   updateCollisionField: (key, value) =>
     set((state) => ({
       collision: {

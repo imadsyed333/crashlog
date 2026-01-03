@@ -1,10 +1,12 @@
-import { Vehicle } from "@/types";
+import { Vehicle } from "@/lib/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 
 interface VehicleFormStore {
   vehicle: Vehicle;
+  isEdit: boolean;
+  setEdit: (value: boolean) => void;
   updateVehicleField: <K extends keyof Vehicle>(
     key: K,
     value: Vehicle[K]
@@ -28,6 +30,7 @@ const newVehicle = () => {
 
 export const useVehicleFormStore = create<VehicleFormStore>((set) => ({
   vehicle: newVehicle(),
+  isEdit: false,
   updateVehicleField: (key, value) =>
     set((state) => ({
       vehicle: {
@@ -38,6 +41,10 @@ export const useVehicleFormStore = create<VehicleFormStore>((set) => ({
   setForm: (vehicle) =>
     set({
       vehicle: vehicle,
+    }),
+  setEdit: (value) =>
+    set({
+      isEdit: value,
     }),
   resetForm: () =>
     set({

@@ -13,9 +13,11 @@ interface CollisionFormStore {
   ) => void;
   setForm: (collision: Collision) => void;
   addVehicle: (vehicle: Vehicle) => void;
-  updateVehicle: (id: string, vehicle: Vehicle) => void;
+  updateVehicle: (vehicle: Vehicle) => void;
+  deleteVehicle: (id: string) => void;
   addWitness: (witness: Person) => void;
-  updateWitness: (id: string, witness: Person) => void;
+  updateWitness: (witness: Person) => void;
+  deleteWitness: (id: string) => void;
   resetForm: () => void;
 }
 
@@ -57,12 +59,19 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
         vehicles: [...state.collision.vehicles, vehicle],
       },
     })),
-  updateVehicle: (id: string, vehicle: Vehicle) =>
+  deleteVehicle: (id: string) =>
+    set((state) => ({
+      collision: {
+        ...state.collision,
+        vehicles: state.collision.vehicles.filter((v) => v.id !== id),
+      },
+    })),
+  updateVehicle: (vehicle: Vehicle) =>
     set((state) => ({
       collision: {
         ...state.collision,
         vehicles: state.collision.vehicles.map((v) =>
-          v.id === id ? vehicle : v
+          v.id === vehicle.id ? vehicle : v
         ),
       },
     })),
@@ -73,13 +82,20 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
         witnesses: [...state.collision.witnesses, witness],
       },
     })),
-  updateWitness: (id: string, witness) =>
+  updateWitness: (witness: Person) =>
     set((state) => ({
       collision: {
         ...state.collision,
         witnesses: state.collision.witnesses.map((w) =>
-          w.id === id ? witness : w
+          w.id === witness.id ? witness : w
         ),
+      },
+    })),
+  deleteWitness: (id: string) =>
+    set((state) => ({
+      collision: {
+        ...state.collision,
+        witnesses: state.collision.witnesses.filter((w) => w.id !== id),
       },
     })),
   resetForm: () =>

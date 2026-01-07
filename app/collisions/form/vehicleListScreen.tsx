@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const VehicleListScreen = () => {
   const insets = useSafeAreaInsets();
-  const { resetForm } = useVehicleFormStore();
+  const { resetForm, setEdit } = useVehicleFormStore();
   const router = useRouter();
   return (
     <View
@@ -23,6 +23,7 @@ const VehicleListScreen = () => {
         style={styles.button}
         onPress={() => {
           resetForm();
+          setEdit(false)
           router.navigate("/collisions/form/vehicleFormScreen");
         }}
       >

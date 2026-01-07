@@ -10,7 +10,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const witnessListScreen = () => {
   const insets = useSafeAreaInsets();
-  const { resetForm, setDialogVisible } = useWitnessFormStore();
+  const { resetForm, setDialogVisible, setEdit } = useWitnessFormStore();
   const router = useRouter();
 
   return (
@@ -20,6 +20,7 @@ const witnessListScreen = () => {
         style={styles.button}
         onPress={() => {
           resetForm();
+          setEdit(false)
           setDialogVisible(true);
         }}
       >

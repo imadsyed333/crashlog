@@ -9,10 +9,11 @@ The goal is to increase the accuracy of self-reported data, driving (pun intende
 Technologies
 </h2>
 <ul>
-<li>Expo</li>
-<li>React Native</li>
-<li>TypeScript</li>
-<li>Zustand</li>
+<li><b>Expo</b> - For easy development and deployment to app stores.</li>
+<li><b>React Native</b> - Similar to base React. And I like React.</li>
+<li><b>TypeScript</b> - For type safety, allows for OOP like objects and interfaces. Handy for non-primitive data types like collisions.</li>
+<li><b>Zustand</b> - A nice and simple alternative to Context API and Redux. The backbone of Crashlog's form logic.</li>
+<li><b>Zod</b> - For formidable form validation.</li>
 </ul>
 
 <h2>Features</h2>

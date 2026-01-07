@@ -39,7 +39,7 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
         <Text variant="bodyMedium">Policy number: {policyNumber}</Text>
         {driver && <DriverCard driver={driver} />}
       </Card.Content>
-        <Card.Actions>
+        <Card.Actions style={{ marginHorizontal: 10 }}>
           <Button onPress={() => {
             setForm(vehicle);
             router.navigate("/collisions/form/vehicleFormScreen");

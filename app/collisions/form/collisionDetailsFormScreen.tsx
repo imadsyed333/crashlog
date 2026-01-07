@@ -74,6 +74,7 @@ const collisionDetailsFormScreen = () => {
         <TextInput
           error={!!formErrors.description}
           label={"Description"}
+          multiline={true}
           value={description}
           onChangeText={(text) => {
             updateCollisionField("description", text);
@@ -82,7 +83,9 @@ const collisionDetailsFormScreen = () => {
               description: undefined,
             });
           }}
-          style={styles.input}
+          style={{...styles.input,
+            minHeight: 100,
+          }}
           mode="outlined"
         />
         <ErrorBox errors={formErrors.description} />

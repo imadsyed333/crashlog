@@ -76,6 +76,7 @@ const VehicleFormScreen = () => {
         flex: 1,
         paddingBottom: insets.bottom,
         justifyContent: "space-between",
+        paddingHorizontal: 10,
       }}
     >
       <View
@@ -173,7 +174,7 @@ const VehicleFormScreen = () => {
           mode="outlined"
         />
         <ErrorBox errors={formErrors.policyNumber} />
-        {driver && <DriverCard driver={driver} />}
+        {driver && <DriverCard driver={driver} showActions={true} />}
         {!driver && (
           <>
             <Button

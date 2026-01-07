@@ -3,7 +3,7 @@ import { DefaultTheme } from "react-native-paper";
 
 export const styles = StyleSheet.create({
   input: {
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     borderRadius: 10,
     marginTop: 5,
   },

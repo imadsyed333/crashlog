@@ -60,6 +60,7 @@ const DriverDialog = () => {
             paddingTop: 10,
             backgroundColor: "white",
             borderRadius: 10,
+            paddingHorizontal: 10,
           }}
         >
           <Text
@@ -113,7 +114,6 @@ const DriverDialog = () => {
             style={{
               flexDirection: "row",
               justifyContent: "flex-end",
-              paddingRight: 10,
               marginVertical: 10,
             }}
           >

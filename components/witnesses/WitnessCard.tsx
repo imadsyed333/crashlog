@@ -1,8 +1,9 @@
+import { styles } from "@/lib/themes";
 import { Person } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
 import React from "react";
-import { Button, Card, Text } from "react-native-paper";
+import { Button, Card, Divider, Text } from "react-native-paper";
 
 type WitnessCardProps = {
   witness: Person;
@@ -14,11 +15,18 @@ const WitnessCard = ({ witness }: WitnessCardProps) => {
   return (
     <Card style={{ marginHorizontal: 10, marginTop: 10 }} mode="outlined">
       <Card.Content>
-        <Text variant="titleMedium">{name}</Text>
-        <Text variant="bodyMedium" dataDetectorType={"phoneNumber"}>
-          Phone Number: {phoneNumber}
+        <Text variant="titleLarge">Witness Details</Text>
+        <Divider bold style={{marginVertical: 10}}/>
+        <Text variant="bodyLarge">
+          <Text style={styles.boldText}>Full Name: </Text>
+          {name}</Text>
+        <Text variant="bodyLarge" dataDetectorType={"phoneNumber"}>
+        <Text style={styles.boldText}>Phone Number: </Text>
+          {phoneNumber}
         </Text>
-        <Text variant="bodyMedium">Address: {address}</Text>
+        <Text variant="bodyLarge">
+        <Text style={styles.boldText}>Address: </Text>
+          {address}</Text>
       </Card.Content>
       <Card.Actions>
         <Button onPress={() => {

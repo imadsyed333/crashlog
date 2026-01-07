@@ -1,3 +1,4 @@
+import { styles } from "@/lib/themes";
 import { Driver } from "@/lib/types";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React from "react";
@@ -18,10 +19,18 @@ const DriverCard = ({ driver, showActions = false }: DriverCardProps) => {
       mode="outlined"
     >
       <Card.Content style={{ marginBottom: showActions ? 0 : 20 }}>
-        <Text variant="titleMedium">Full Name: {name}</Text>
-        <Text variant="bodyMedium">Driver License: {driverLicense}</Text>
-        <Text variant="bodyMedium">Phone Number: {phoneNumber}</Text>
-        <Text variant="bodyMedium">Address: {address}</Text>
+        <Text variant="bodyMedium">
+          <Text style={styles.boldText}>Full Name: </Text>
+          {name}</Text>
+        <Text variant="bodyMedium">
+        <Text style={styles.boldText}>Driver License: </Text>
+         {driverLicense}</Text>
+        <Text variant="bodyMedium">
+        <Text style={styles.boldText}>Phone Number: </Text>
+          {phoneNumber}</Text>
+        <Text variant="bodyMedium">
+        <Text style={styles.boldText}>Address: </Text>
+         {address}</Text>
       </Card.Content>
       {showActions && (
         <Card.Actions>

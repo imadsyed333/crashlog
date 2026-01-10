@@ -1,17 +1,21 @@
 import { styles } from "@/lib/themes";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
+import validator from "validator";
 import z from "zod";
 import ErrorBox from "../ErrorBox";
 
 const driverSchema = z.object({
   name: z.string().min(1, { error: "Name must not be empty" }),
   address: z.string().min(1, { error: "Address must not be empty" }),
-  phoneNumber: z.string().min(1, { error: "Phone number must not be empty" }),
+  phoneNumber: z
+    .string()
+    .min(1, { error: "Phone number must not be empty" })
+    .refine(validator.isMobilePhone, { error: "Not a valid phone number" }),
   driverLicense: z
     .string()
     .min(1, { error: "Driver license must not be empty" }),
@@ -26,8 +30,8 @@ type DriverFormErrors = {
 
 const DriverDialog = () => {
   const { isDialogVisible, setDialogVisible, vehicle } = useVehicleFormStore();
-  const [formErrors, setFormErrors] = React.useState<DriverFormErrors>({});
-  const [driver, setDriver] = React.useState({
+  const [formErrors, setFormErrors] = useState<DriverFormErrors>({});
+  const [driver, setDriver] = useState({
     name: vehicle.driver?.name || "",
     address: vehicle.driver?.address || "",
     phoneNumber: vehicle.driver?.phoneNumber || "",
@@ -48,7 +52,11 @@ const DriverDialog = () => {
     }
   };
   return (
-    <Modal isVisible={isDialogVisible} onBackdropPress={() => setDialogVisible(false)} avoidKeyboard={true}>
+    <Modal
+      isVisible={isDialogVisible}
+      onBackdropPress={() => setDialogVisible(false)}
+      avoidKeyboard={true}
+    >
       <View
         style={{
           flex: 1,

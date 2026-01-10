@@ -4,7 +4,7 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useRouter } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -22,11 +22,19 @@ const submitScreen = () => {
     router.replace("/");
   };
   return (
-    <View style={{ flex: 1, paddingBottom: insets.bottom, justifyContent: "space-between" }}>
+    <View
+      style={{
+        flex: 1,
+        paddingBottom: insets.bottom,
+        justifyContent: "space-between",
+      }}
+    >
+      <ScrollView>
         <CollisionInfoView />
-        <Button mode="contained" onPress={handleSubmit} style={styles.button}>
-         {isEdit ? "Update Collision" : "Add Collision"}
-        </Button>
+      </ScrollView>
+      <Button mode="contained" onPress={handleSubmit} style={styles.button}>
+        {isEdit ? "Update Collision" : "Add Collision"}
+      </Button>
     </View>
   );
 };

@@ -41,7 +41,7 @@ export default function RootLayout() {
           <Stack.Screen
             name="collisions/form/submitScreen"
             options={{
-              title: "Add Collision",
+              title: "Review",
             }}
           />
         </Stack>

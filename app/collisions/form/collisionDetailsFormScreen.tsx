@@ -1,4 +1,4 @@
-import ErrorBox from "@/components/ErrorBox";
+import ErrorBox from "@/components/misc/ErrorBox";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import RNDateTimePicker, {
@@ -84,9 +84,7 @@ const collisionDetailsFormScreen = () => {
               description: undefined,
             });
           }}
-          style={{...styles.input,
-            minHeight: 100,
-          }}
+          style={{ ...styles.input, minHeight: 100 }}
           mode="outlined"
         />
         <ErrorBox errors={formErrors.description} />

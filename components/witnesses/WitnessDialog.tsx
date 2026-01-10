@@ -7,7 +7,7 @@ import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
 import validator from "validator";
 import z from "zod";
-import ErrorBox from "../ErrorBox";
+import ErrorBox from "../misc/ErrorBox";
 
 const witnessSchema = z.object({
   name: z.string().min(1, { error: "Name must not be empty" }),
@@ -25,7 +25,13 @@ type WitnessFormErrors = {
 };
 
 const WitnessDialog = () => {
-  const { witness, updateWitnessField, isEdit, isDialogVisible, setDialogVisible} = useWitnessFormStore();
+  const {
+    witness,
+    updateWitnessField,
+    isEdit,
+    isDialogVisible,
+    setDialogVisible,
+  } = useWitnessFormStore();
   const { name, address, phoneNumber } = witness;
   const [formErrors, setFormErrors] = useState<WitnessFormErrors>({});
 
@@ -50,7 +56,11 @@ const WitnessDialog = () => {
     }
   };
   return (
-    <Modal isVisible={isDialogVisible} onBackdropPress={() => setDialogVisible(false)} avoidKeyboard={true}>
+    <Modal
+      isVisible={isDialogVisible}
+      onBackdropPress={() => setDialogVisible(false)}
+      avoidKeyboard={true}
+    >
       <View
         style={{
           flex: 1,

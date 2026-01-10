@@ -7,7 +7,7 @@ import { Button, Text, TextInput } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import validator from "validator";
 import z from "zod";
-import ErrorBox from "../ErrorBox";
+import ErrorBox from "../misc/ErrorBox";
 
 const driverSchema = z.object({
   name: z.string().min(1, { error: "Name must not be empty" }),

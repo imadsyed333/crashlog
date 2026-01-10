@@ -1,6 +1,6 @@
 import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
-import ErrorBox from "@/components/ErrorBox";
+import ErrorBox from "@/components/misc/ErrorBox";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -186,8 +186,7 @@ const VehicleFormScreen = () => {
             </Button>
           </>
         )}
-        <DriverDialog
-        />
+        <DriverDialog />
       </View>
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>
         Save Vehicle

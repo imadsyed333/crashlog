@@ -13,14 +13,14 @@ const CollisionInfoView = () => {
       <List.Accordion title="Details">
         <Text>Hello</Text>
       </List.Accordion>
-      <List.Accordion title="Vehicle Information">
+      <List.Accordion title="Vehicles">
         {vehicles.map((vehicle) => (
-          <VehicleCard vehicle={vehicle} key={vehicle.id} />
+          <VehicleCard vehicle={vehicle} key={vehicle.id} showActions={false} />
         ))}
       </List.Accordion>
-      <List.Accordion title="Witness Information">
+      <List.Accordion title="Witnesses">
         {witnesses.map((witness) => (
-          <WitnessCard witness={witness} key={witness.id} />
+          <WitnessCard witness={witness} key={witness.id} showActions={false} />
         ))}
       </List.Accordion>
     </View>

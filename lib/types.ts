@@ -36,11 +36,6 @@ export interface Media {
   mediaUrl: string;
 }
 
-export interface Location {
-  lon: number;
-  lat: number;
-}
-
 export interface Officer {
   name: string;
   badgeNumber: string;

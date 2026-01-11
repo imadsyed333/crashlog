@@ -56,5 +56,6 @@ export const useVehicleFormStore = create<VehicleFormStore>((set) => ({
   resetForm: () =>
     set({
       vehicle: newVehicle(),
+      isEdit: false,
     }),
 }));

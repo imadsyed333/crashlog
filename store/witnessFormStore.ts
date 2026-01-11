@@ -53,5 +53,6 @@ export const useWitnessFormStore = create<WitnessFormStore>((set) => ({
   resetForm: () =>
     set({
       witness: newWitness(),
+      isEdit: false,
     }),
 }));

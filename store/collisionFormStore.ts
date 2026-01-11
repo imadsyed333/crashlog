@@ -101,5 +101,6 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
   resetForm: () =>
     set({
       collision: newCollision(),
+      isEdit: false,
     }),
 }));

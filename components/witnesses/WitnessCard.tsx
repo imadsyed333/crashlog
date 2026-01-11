@@ -7,41 +7,50 @@ import { Button, Card, Divider, Text } from "react-native-paper";
 
 type WitnessCardProps = {
   witness: Person;
+  showActions?: boolean;
 };
-const WitnessCard = ({ witness }: WitnessCardProps) => {
+const WitnessCard = ({ witness, showActions = true }: WitnessCardProps) => {
   const { name, phoneNumber, address } = witness;
   const { setForm, setEdit, setDialogVisible } = useWitnessFormStore();
   const { deleteWitness } = useCollisionFormStore();
   return (
     <Card style={{ marginHorizontal: 10, marginTop: 10 }} mode="outlined">
-      <Card.Content>
-        <Text variant="titleLarge">Witness Details</Text>
-        <Divider bold style={{marginVertical: 10}}/>
+      <Card.Content style={{ paddingBottom: 20 }}>
+        <Text variant="titleLarge">Witness Information</Text>
+        <Divider bold style={{ marginVertical: 10 }} />
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Full Name: </Text>
-          {name}</Text>
+          {name}
+        </Text>
         <Text variant="bodyLarge" dataDetectorType={"phoneNumber"}>
-        <Text style={styles.boldText}>Phone Number: </Text>
+          <Text style={styles.boldText}>Phone Number: </Text>
           {phoneNumber}
         </Text>
         <Text variant="bodyLarge">
-        <Text style={styles.boldText}>Address: </Text>
-          {address}</Text>
+          <Text style={styles.boldText}>Address: </Text>
+          {address}
+        </Text>
       </Card.Content>
-      <Card.Actions>
-        <Button onPress={() => {
-          setForm(witness);
-          setDialogVisible(true);
-          setEdit(true);
-        }}>
-          Edit
-        </Button>
-        <Button onPress={() => {
-          deleteWitness(witness.id);
-        }}>
-          Delete
-        </Button>
-      </Card.Actions>
+      {showActions && (
+        <Card.Actions>
+          <Button
+            onPress={() => {
+              setForm(witness);
+              setDialogVisible(true);
+              setEdit(true);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            onPress={() => {
+              deleteWitness(witness.id);
+            }}
+          >
+            Delete
+          </Button>
+        </Card.Actions>
+      )}
     </Card>
   );
 };

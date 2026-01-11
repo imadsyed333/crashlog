@@ -9,9 +9,10 @@ import DriverCard from "../driver/DriverCard";
 
 type VehicleCardProps = {
   vehicle: Vehicle;
+  showActions?: boolean;
 };
 
-const VehicleCard = ({ vehicle }: VehicleCardProps) => {
+const VehicleCard = ({ vehicle, showActions = true }: VehicleCardProps) => {
   const {
     make,
     model,
@@ -31,47 +32,56 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
       }}
       mode="outlined"
     >
-      <Card.Content>
-        <Text variant="titleLarge">
-          Vehicle Details
-        </Text>
-        <Divider bold style={{marginVertical: 10}}/>
+      <Card.Content style={{ paddingBottom: 20 }}>
+        <Text variant="titleLarge">Vehicle Information</Text>
+        <Divider bold style={{ marginVertical: 10 }} />
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Car: </Text>
           {color} {make} {model}
         </Text>
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>License Plate: </Text>
-           {licensePlate}</Text>
+          {licensePlate}
+        </Text>
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Insurance Company: </Text>
-        {insuranceCompany}</Text>
+          {insuranceCompany}
+        </Text>
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Policy Number: </Text>
-          {policyNumber}</Text>
+          {policyNumber}
+        </Text>
 
         {driver && (
           <>
-          <Text variant="titleLarge" style={{marginTop: 10}}>Driver Details</Text>
-          <Divider bold style={{ marginVertical: 10}}/>
-          <DriverCard driver={driver}/>
+            <Text variant="titleLarge" style={{ marginTop: 10 }}>
+              Driver Information
+            </Text>
+            <Divider bold style={{ marginVertical: 10 }} />
+            <DriverCard driver={driver} />
           </>
         )}
       </Card.Content>
+      {showActions && (
         <Card.Actions style={{ marginHorizontal: 10 }}>
-          <Button onPress={() => {
-            setForm(vehicle);
-            router.navigate("/collisions/form/vehicleFormScreen");
-            setEdit(true);
-          }}>
+          <Button
+            onPress={() => {
+              setForm(vehicle);
+              router.navigate("/collisions/form/vehicleFormScreen");
+              setEdit(true);
+            }}
+          >
             Edit
           </Button>
-          <Button onPress={() => {
-            deleteVehicle(vehicle.id);
-          }}>
+          <Button
+            onPress={() => {
+              deleteVehicle(vehicle.id);
+            }}
+          >
             Delete
           </Button>
         </Card.Actions>
+      )}
     </Card>
   );
 };

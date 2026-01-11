@@ -1,3 +1,4 @@
+import CustomFAB from "@/components/misc/CustomFAB";
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import WitnessList from "@/components/witnesses/WitnessList";
 import { styles } from "@/lib/themes";
@@ -13,19 +14,14 @@ const witnessListScreen = () => {
   const { resetForm, setDialogVisible, setEdit } = useWitnessFormStore();
   const router = useRouter();
 
+  const handleFABPress = () => {
+    resetForm();
+    setEdit(false);
+    setDialogVisible(true);
+  };
+
   return (
     <View style={{ flex: 1, paddingBottom: insets.bottom }}>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => {
-          resetForm();
-          setEdit(false)
-          setDialogVisible(true);
-        }}
-      >
-        Add Witness
-      </Button>
       <View
         style={{
           flex: 1,
@@ -34,6 +30,7 @@ const witnessListScreen = () => {
         }}
       >
         <WitnessList />
+        <CustomFAB handlePress={handleFABPress} />
       </View>
       <Button
         mode="contained"

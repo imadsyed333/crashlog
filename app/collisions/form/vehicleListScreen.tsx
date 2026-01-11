@@ -1,3 +1,4 @@
+import CustomFAB from "@/components/misc/CustomFAB";
 import VehicleList from "@/components/vehicles/VehicleList";
 import { styles } from "@/lib/themes";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -11,6 +12,12 @@ const VehicleListScreen = () => {
   const insets = useSafeAreaInsets();
   const { resetForm, setEdit } = useVehicleFormStore();
   const router = useRouter();
+
+  const handleFABPress = () => {
+    resetForm();
+    setEdit(false);
+    router.navigate("/collisions/form/vehicleFormScreen");
+  };
   return (
     <View
       style={{
@@ -18,17 +25,6 @@ const VehicleListScreen = () => {
         paddingBottom: insets.bottom,
       }}
     >
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => {
-          resetForm();
-          setEdit(false)
-          router.navigate("/collisions/form/vehicleFormScreen");
-        }}
-      >
-        Add Vehicle
-      </Button>
       <View
         style={{
           flex: 1,
@@ -37,6 +33,7 @@ const VehicleListScreen = () => {
         }}
       >
         <VehicleList />
+        <CustomFAB handlePress={handleFABPress} />
       </View>
       <Button
         mode="contained"

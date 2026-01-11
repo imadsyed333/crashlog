@@ -83,51 +83,57 @@ const WitnessDialog = () => {
           >
             Witness Information
           </Text>
-          <TextInput
-            label="Full Name"
-            value={name}
-            style={styles.input}
-            onChangeText={(text) => {
-              updateWitnessField("name", text);
-              setFormErrors({
-                ...formErrors,
-                name: undefined,
-              });
+          <View
+            style={{
+              paddingHorizontal: 10,
             }}
-            mode="outlined"
-            error={!!formErrors.name}
-          />
-          <ErrorBox errors={formErrors.name} />
-          <TextInput
-            label="Address"
-            value={address}
-            style={styles.input}
-            onChangeText={(text) => {
-              updateWitnessField("address", text);
-              setFormErrors({
-                ...formErrors,
-                address: undefined,
-              });
-            }}
-            mode="outlined"
-            error={!!formErrors.address}
-          />
-          <ErrorBox errors={formErrors.address} />
-          <TextInput
-            label="Phone Number"
-            value={phoneNumber}
-            style={styles.input}
-            onChangeText={(text) => {
-              updateWitnessField("phoneNumber", text);
-              setFormErrors({
-                ...formErrors,
-                phoneNumber: undefined,
-              });
-            }}
-            mode="outlined"
-            error={!!formErrors.phoneNumber}
-          />
-          <ErrorBox errors={formErrors.phoneNumber} />
+          >
+            <TextInput
+              label="Full Name"
+              value={name}
+              style={styles.input}
+              onChangeText={(text) => {
+                updateWitnessField("name", text);
+                setFormErrors({
+                  ...formErrors,
+                  name: undefined,
+                });
+              }}
+              mode="outlined"
+              error={!!formErrors.name}
+            />
+            <ErrorBox errors={formErrors.name} />
+            <TextInput
+              label="Address"
+              value={address}
+              style={styles.input}
+              onChangeText={(text) => {
+                updateWitnessField("address", text);
+                setFormErrors({
+                  ...formErrors,
+                  address: undefined,
+                });
+              }}
+              mode="outlined"
+              error={!!formErrors.address}
+            />
+            <ErrorBox errors={formErrors.address} />
+            <TextInput
+              label="Phone Number"
+              value={phoneNumber}
+              style={styles.input}
+              onChangeText={(text) => {
+                updateWitnessField("phoneNumber", text);
+                setFormErrors({
+                  ...formErrors,
+                  phoneNumber: undefined,
+                });
+              }}
+              mode="outlined"
+              error={!!formErrors.phoneNumber}
+            />
+            <ErrorBox errors={formErrors.phoneNumber} />
+          </View>
 
           <View
             style={{

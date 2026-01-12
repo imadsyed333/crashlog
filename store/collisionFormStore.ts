@@ -18,6 +18,8 @@ interface CollisionFormStore {
   addWitness: (witness: Person) => void;
   updateWitness: (witness: Person) => void;
   deleteWitness: (id: string) => void;
+  addMedia: (uri: string) => void;
+  deleteMedia: (id: string) => void;
   resetForm: () => void;
 }
 
@@ -96,6 +98,26 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
       collision: {
         ...state.collision,
         witnesses: state.collision.witnesses.filter((w) => w.id !== id),
+      },
+    })),
+  addMedia: (uri: string) =>
+    set((state) => ({
+      collision: {
+        ...state.collision,
+        media: [
+          ...state.collision.media,
+          {
+            id: "" + uuidv4(),
+            uri,
+          },
+        ],
+      },
+    })),
+  deleteMedia: (id: string) =>
+    set((state) => ({
+      collision: {
+        ...state.collision,
+        media: state.collision.media.filter((m) => m.id !== id),
       },
     })),
   resetForm: () =>

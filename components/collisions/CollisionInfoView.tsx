@@ -2,6 +2,7 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import React from "react";
 import { View } from "react-native";
 import { Divider, Text } from "react-native-paper";
+import MediaList from "../media/MediaList";
 import VehicleCard from "../vehicles/VehicleCard";
 import WitnessCard from "../witnesses/WitnessCard";
 import CollisionDetailsCard from "./CollisionDetailsCard";
@@ -18,6 +19,7 @@ const CollisionInfoView = () => {
         </Text>
         <Divider bold style={{ marginHorizontal: 10 }} />
         <CollisionDetailsCard />
+        <MediaList />
       </View>
 
       <View>

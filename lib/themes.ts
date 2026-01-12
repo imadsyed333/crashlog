@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   },
   datetimepicker: {
     marginTop: 5,
-    marginHorizontal: 2,
   },
   fab: {
     position: "absolute",
@@ -27,6 +26,10 @@ export const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "bold",
+  },
+  image: {
+    width: 200,
+    height: 200,
   },
 });
 

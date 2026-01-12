@@ -7,16 +7,21 @@ import { Button, Card, Divider, Text } from "react-native-paper";
 
 type WitnessCardProps = {
   witness: Person;
+  index: number;
   showActions?: boolean;
 };
-const WitnessCard = ({ witness, showActions = true }: WitnessCardProps) => {
+const WitnessCard = ({
+  witness,
+  index,
+  showActions = true,
+}: WitnessCardProps) => {
   const { name, phoneNumber, address } = witness;
   const { setForm, setEdit, setDialogVisible } = useWitnessFormStore();
   const { deleteWitness } = useCollisionFormStore();
   return (
     <Card style={{ marginHorizontal: 10, marginTop: 10 }} mode="outlined">
       <Card.Content style={{ paddingBottom: 20 }}>
-        <Text variant="titleLarge">Witness Information</Text>
+        <Text variant="titleLarge">Witness {index + 1}</Text>
         <Divider bold style={{ marginVertical: 10 }} />
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Full Name: </Text>

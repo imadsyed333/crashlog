@@ -9,10 +9,15 @@ import DriverCard from "../driver/DriverCard";
 
 type VehicleCardProps = {
   vehicle: Vehicle;
+  index: number;
   showActions?: boolean;
 };
 
-const VehicleCard = ({ vehicle, showActions = true }: VehicleCardProps) => {
+const VehicleCard = ({
+  vehicle,
+  index,
+  showActions = true,
+}: VehicleCardProps) => {
   const {
     make,
     model,
@@ -33,7 +38,7 @@ const VehicleCard = ({ vehicle, showActions = true }: VehicleCardProps) => {
       mode="outlined"
     >
       <Card.Content style={{ paddingBottom: 20 }}>
-        <Text variant="titleLarge">Vehicle Information</Text>
+        <Text variant="titleLarge">Vehicle {index + 1}</Text>
         <Divider bold style={{ marginVertical: 10 }} />
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Car: </Text>
@@ -55,7 +60,7 @@ const VehicleCard = ({ vehicle, showActions = true }: VehicleCardProps) => {
         {driver && (
           <>
             <Text variant="titleLarge" style={{ marginTop: 10 }}>
-              Driver Information
+              Driver
             </Text>
             <Divider bold style={{ marginVertical: 10 }} />
             <DriverCard driver={driver} />

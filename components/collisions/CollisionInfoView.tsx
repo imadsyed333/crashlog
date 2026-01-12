@@ -1,7 +1,7 @@
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import React from "react";
 import { View } from "react-native";
-import { List } from "react-native-paper";
+import { Divider, Text } from "react-native-paper";
 import VehicleCard from "../vehicles/VehicleCard";
 import WitnessCard from "../witnesses/WitnessCard";
 import CollisionDetailsCard from "./CollisionDetailsCard";
@@ -12,19 +12,46 @@ const CollisionInfoView = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <List.Accordion title="Details">
+      <View>
+        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+          Details
+        </Text>
+        <Divider bold style={{ marginHorizontal: 10 }} />
         <CollisionDetailsCard />
-      </List.Accordion>
-      <List.Accordion title="Vehicles">
-        {vehicles.map((vehicle) => (
-          <VehicleCard vehicle={vehicle} key={vehicle.id} showActions={false} />
-        ))}
-      </List.Accordion>
-      <List.Accordion title="Witnesses">
-        {witnesses.map((witness) => (
-          <WitnessCard witness={witness} key={witness.id} showActions={false} />
-        ))}
-      </List.Accordion>
+      </View>
+
+      <View>
+        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+          Vehicles
+        </Text>
+        <Divider bold style={{ marginHorizontal: 10 }} />
+        <View>
+          {vehicles.map((vehicle, index) => (
+            <VehicleCard
+              vehicle={vehicle}
+              key={vehicle.id}
+              showActions={false}
+              index={index}
+            />
+          ))}
+        </View>
+      </View>
+      <View>
+        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+          Witnesses
+        </Text>
+        <Divider bold style={{ marginHorizontal: 10 }} />
+        <View>
+          {witnesses.map((witness, index) => (
+            <WitnessCard
+              witness={witness}
+              key={witness.id}
+              showActions={false}
+              index={index}
+            />
+          ))}
+        </View>
+      </View>
     </View>
   );
 };

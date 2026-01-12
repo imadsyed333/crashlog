@@ -1,3 +1,4 @@
+import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
@@ -95,6 +96,7 @@ const collisionDetailsFormScreen = () => {
           textColor="black"
           style={styles.datetimepicker}
         />
+        <MediaView />
       </View>
       <Button mode="contained" style={styles.button} onPress={handlePress}>
         Next

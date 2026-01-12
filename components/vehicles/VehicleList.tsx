@@ -12,7 +12,9 @@ const VehicleList = () => {
       {vehicles.length > 0 && (
         <FlatList
           data={vehicles}
-          renderItem={({ item }) => <VehicleCard vehicle={item} />}
+          renderItem={({ item, index }) => (
+            <VehicleCard vehicle={item} index={index} />
+          )}
           style={{
             display: "flex",
             width: "100%",

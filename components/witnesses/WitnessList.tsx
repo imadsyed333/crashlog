@@ -12,7 +12,9 @@ const WitnessList = () => {
       {witnesses.length > 0 && (
         <FlatList
           data={witnesses}
-          renderItem={({ item }) => <WitnessCard witness={item} />}
+          renderItem={({ item, index }) => (
+            <WitnessCard witness={item} index={index} />
+          )}
           style={{
             display: "flex",
             width: "100%",

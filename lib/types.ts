@@ -33,7 +33,7 @@ export interface Driver extends Person {
 
 export interface Media {
   id: string;
-  mediaUrl: string;
+  uri: string;
 }
 
 export interface Officer {

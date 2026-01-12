@@ -9,7 +9,10 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos and videos of collision events."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -44,6 +47,14 @@
         {
           "configureAndroidBackup": true,
           "faceIDPermission": "Allow CrashLog to access your Face ID biometric data."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos."
         }
       ]
     ],

@@ -105,11 +105,11 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
       collision: {
         ...state.collision,
         media: [
-          ...state.collision.media,
           {
             id: "" + uuidv4(),
             uri,
           },
+          ...state.collision.media,
         ],
       },
     })),

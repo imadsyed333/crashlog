@@ -1,14 +1,14 @@
-import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import React from "react";
-import { Image, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
+import MediaCard from "./MediaCard";
 
 const MediaList = () => {
   const { collision } = useCollisionFormStore();
   return (
     <ScrollView horizontal>
       {collision.media.map((item) => (
-        <Image source={{ uri: item.uri }} style={styles.image} key={item.id} />
+        <MediaCard key={item.id} media={item} />
       ))}
     </ScrollView>
   );

@@ -19,9 +19,16 @@ const CollisionInfoView = () => {
         </Text>
         <Divider bold style={{ marginHorizontal: 10 }} />
         <CollisionDetailsCard />
-        <MediaList />
       </View>
-
+      <View>
+        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+          Media
+        </Text>
+        <Divider bold style={{ marginHorizontal: 10 }} />
+        <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+          <MediaList />
+        </View>
+      </View>
       <View>
         <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
           Vehicles

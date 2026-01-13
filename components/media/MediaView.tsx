@@ -1,11 +1,9 @@
-import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Alert, View } from "react-native";
 import { Button } from "react-native-paper";
 import MediaList from "./MediaList";
-
 const MediaView = () => {
   const { addMedia } = useCollisionFormStore();
 
@@ -29,11 +27,55 @@ const MediaView = () => {
     }
   };
 
+  const useMediaLibrary = async () => {
+    const mediaPermission =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!mediaPermission.granted) {
+      Alert.alert(
+        "Permission required",
+        "Permission to access the media library is required."
+      );
+      return;
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+    });
+
+    if (!result.canceled) {
+      addMedia(result.assets[0].uri);
+    }
+  };
+
   return (
     <View>
-      <Button mode="contained" style={styles.button} onPress={useCamera}>
-        Take picture
-      </Button>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: 10,
+        }}
+      >
+        <Button
+          mode="contained"
+          onPress={useCamera}
+          icon={"camera"}
+          style={{ flex: 1, marginRight: 10 }}
+        >
+          Camera
+        </Button>
+        <Button
+          mode="contained"
+          onPress={useMediaLibrary}
+          style={{ flex: 1 }}
+          icon={"image-multiple"}
+        >
+          Add from library
+        </Button>
+      </View>
       <MediaList />
     </View>
   );

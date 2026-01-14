@@ -36,6 +36,13 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
       <Card.Actions>
         <Button
           onPress={() => {
+            router.navigate(`/collisions/${collision.id}`);
+          }}
+        >
+          View
+        </Button>
+        <Button
+          onPress={() => {
             setForm(collision);
             router.navigate("/collisions/form/collisionDetailsFormScreen");
             setEdit(true);

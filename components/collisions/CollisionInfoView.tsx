@@ -1,24 +1,27 @@
-import { useCollisionFormStore } from "@/store/collisionFormStore";
+import { Collision } from "@/lib/types";
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Divider, Text } from "react-native-paper";
 import MediaList from "../media/MediaList";
 import VehicleCard from "../vehicles/VehicleCard";
 import WitnessCard from "../witnesses/WitnessCard";
 import CollisionDetailsCard from "./CollisionDetailsCard";
 
-const CollisionInfoView = () => {
-  const { collision } = useCollisionFormStore();
-  const { vehicles, witnesses } = collision;
+type CollisionInfoViewProps = {
+  collision: Collision;
+};
+
+const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
+  const { vehicles, witnesses, media } = collision;
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <View>
         <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
           Details
         </Text>
         <Divider bold style={{ marginHorizontal: 10 }} />
-        <CollisionDetailsCard />
+        <CollisionDetailsCard collision={collision} />
       </View>
       <View>
         <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
@@ -26,7 +29,7 @@ const CollisionInfoView = () => {
         </Text>
         <Divider bold style={{ marginHorizontal: 10 }} />
         <View style={{ marginHorizontal: 10, marginTop: 10 }}>
-          <MediaList />
+          <MediaList media={media} />
         </View>
       </View>
       <View>
@@ -61,7 +64,7 @@ const CollisionInfoView = () => {
           ))}
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -1,10 +1,13 @@
 import { styles } from "@/lib/themes";
-import { useCollisionFormStore } from "@/store/collisionFormStore";
+import { Collision } from "@/lib/types";
 import React from "react";
 import { Card, Text } from "react-native-paper";
 
-const CollisionDetailsCard = () => {
-  const { collision } = useCollisionFormStore();
+type CollisionDetailsCardProps = {
+  collision: Collision;
+};
+
+const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
   const { location, description, date } = collision;
 
   const newDate = new Date(date);

@@ -30,7 +30,7 @@ const submitScreen = () => {
       }}
     >
       <ScrollView>
-        <CollisionInfoView />
+        <CollisionInfoView collision={collision} />
       </ScrollView>
       <Button mode="contained" onPress={handleSubmit} style={styles.button}>
         {isEdit ? "Update Collision" : "Add Collision"}

@@ -5,7 +5,8 @@ import { Alert, View } from "react-native";
 import { Button } from "react-native-paper";
 import MediaList from "./MediaList";
 const MediaView = () => {
-  const { addMedia } = useCollisionFormStore();
+  const { addMedia, collision } = useCollisionFormStore();
+  const { media } = collision;
 
   const useCamera = async () => {
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
@@ -76,7 +77,7 @@ const MediaView = () => {
           Add from library
         </Button>
       </View>
-      <MediaList />
+      <MediaList showActions={true} media={media} />
     </View>
   );
 };

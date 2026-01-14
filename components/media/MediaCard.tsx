@@ -7,25 +7,28 @@ import { IconButton, MD3Colors } from "react-native-paper";
 
 type MediaCardProps = {
   media: Media;
+  showActions: boolean;
 };
 
-const MediaCard = ({ media }: MediaCardProps) => {
+const MediaCard = ({ media, showActions }: MediaCardProps) => {
   const { deleteMedia } = useCollisionFormStore();
   return (
     <View>
       <Image source={{ uri: media.uri }} style={styles.image} />
-      <IconButton
-        icon={"delete"}
-        onPress={() => deleteMedia(media.id)}
-        mode="contained"
-        iconColor={MD3Colors.error50}
-        style={{
-          position: "absolute",
-          bottom: 0,
-          right: 10,
-        }}
-        size={20}
-      />
+      {showActions && (
+        <IconButton
+          icon={"delete"}
+          onPress={() => deleteMedia(media.id)}
+          mode="contained"
+          iconColor={MD3Colors.error50}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: 10,
+          }}
+          size={20}
+        />
+      )}
     </View>
   );
 };

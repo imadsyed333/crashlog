@@ -1,14 +1,18 @@
-import { useCollisionFormStore } from "@/store/collisionFormStore";
+import { Media } from "@/lib/types";
 import React from "react";
 import { ScrollView } from "react-native";
 import MediaCard from "./MediaCard";
 
-const MediaList = () => {
-  const { collision } = useCollisionFormStore();
+type MediaListProps = {
+  media: Media[];
+  showActions?: boolean;
+};
+
+const MediaList = ({ media, showActions = false }: MediaListProps) => {
   return (
     <ScrollView horizontal>
-      {collision.media.map((item) => (
-        <MediaCard key={item.id} media={item} />
+      {media.map((item) => (
+        <MediaCard key={item.id} media={item} showActions={showActions} />
       ))}
     </ScrollView>
   );

@@ -17,6 +17,12 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="collisions/[collisionId]"
+            options={{
+              title: "View Collision",
+            }}
+          />
+          <Stack.Screen
             name="collisions/form/collisionDetailsFormScreen"
             options={{ title: "Description" }}
           />

@@ -3,8 +3,11 @@ import CustomFAB from "@/components/misc/CustomFAB";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
+  const insets = useSafeAreaInsets();
+
   const { resetForm } = useCollisionFormStore();
   const router = useRouter();
 
@@ -18,6 +21,7 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        paddingBottom: insets.bottom,
       }}
     >
       <CollisionList />

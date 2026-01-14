@@ -10,6 +10,7 @@ import {
 
 interface CollisionStore {
   collisions: Collision[];
+  getCollision: (id: string) => Collision | null;
   addCollision: (collision: Collision) => void;
   deleteCollision: (id: string) => void;
   updateCollision: (collision: Collision) => void;
@@ -30,6 +31,8 @@ export const useCollisionStore = create<CollisionStore, []>(
   (persist as CollisionPersist)(
     (set, get): CollisionStore => ({
       collisions: [],
+      getCollision: (id: string) =>
+        get().collisions.find((c) => c.id === id) || null,
       addCollision: (collision: Collision) =>
         set({ collisions: [collision, ...get().collisions] }),
       deleteCollision: (id: string) =>

@@ -3,7 +3,7 @@ import { Media } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import React from "react";
 import { Image, View } from "react-native";
-import { IconButton, MD3Colors } from "react-native-paper";
+import { IconButton, useTheme } from "react-native-paper";
 
 type MediaCardProps = {
   media: Media;
@@ -12,6 +12,8 @@ type MediaCardProps = {
 
 const MediaCard = ({ media, showActions }: MediaCardProps) => {
   const { deleteMedia } = useCollisionFormStore();
+
+  const theme = useTheme();
   return (
     <View>
       <Image source={{ uri: media.uri }} style={styles.image} />
@@ -20,7 +22,7 @@ const MediaCard = ({ media, showActions }: MediaCardProps) => {
           icon={"delete"}
           onPress={() => deleteMedia(media.id)}
           mode="contained"
-          iconColor={MD3Colors.error50}
+          iconColor={theme.colors.error}
           style={{
             position: "absolute",
             bottom: 0,

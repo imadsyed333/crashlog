@@ -37,6 +37,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
         <Button
           onPress={() => {
             router.navigate(`/collisions/${collision.id}`);
+            setEdit(false);
           }}
         >
           View

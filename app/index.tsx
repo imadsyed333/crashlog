@@ -25,7 +25,7 @@ export default function Index() {
       }}
     >
       <CollisionList />
-      <CustomFAB handlePress={handleFABPress} />
+      <CustomFAB handlePress={handleFABPress} icon="plus" />
     </View>
   );
 }

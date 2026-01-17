@@ -33,7 +33,7 @@ const VehicleListScreen = () => {
         }}
       >
         <VehicleList />
-        <CustomFAB handlePress={handleFABPress} />
+        <CustomFAB handlePress={handleFABPress} icon="plus" />
       </View>
       <Button
         mode="contained"

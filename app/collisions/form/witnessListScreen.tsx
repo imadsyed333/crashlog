@@ -30,7 +30,7 @@ const witnessListScreen = () => {
         }}
       >
         <WitnessList />
-        <CustomFAB handlePress={handleFABPress} />
+        <CustomFAB handlePress={handleFABPress} icon="plus" />
       </View>
       <Button
         mode="contained"

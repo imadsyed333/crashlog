@@ -4,11 +4,19 @@ import { FAB } from "react-native-paper";
 
 type CustomFABProps = {
   handlePress: () => void;
+  icon: string;
+  label?: string;
 };
 
-const CustomFAB = ({ handlePress }: CustomFABProps) => {
+const CustomFAB = ({ handlePress, icon, label }: CustomFABProps) => {
   return (
-    <FAB icon={"plus"} style={styles.fab} onPress={handlePress} mode="flat" />
+    <FAB
+      icon={icon}
+      style={styles.fab}
+      onPress={handlePress}
+      mode="flat"
+      label={label}
+    />
   );
 };
 

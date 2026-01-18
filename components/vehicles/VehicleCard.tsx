@@ -1,10 +1,10 @@
 import { styles } from "@/lib/themes";
 import { Vehicle } from "@/lib/types";
-import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
 import React from "react";
-import { Button, Card, Divider, Text } from "react-native-paper";
+import { View } from "react-native";
+import { Card, Divider, IconButton, Text } from "react-native-paper";
 import DriverCard from "../driver/DriverCard";
 
 type VehicleCardProps = {
@@ -28,18 +28,35 @@ const VehicleCard = ({
     driver,
   } = vehicle;
   const { setForm, setEdit } = useVehicleFormStore();
-  const { deleteVehicle } = useCollisionFormStore();
   return (
     <Card
       style={{
-        marginHorizontal: 10,
-        marginTop: 10,
+        marginBottom: 10,
       }}
       mode="outlined"
     >
       <Card.Content style={{ paddingBottom: 20 }}>
-        <Text variant="titleLarge">Vehicle {index + 1}</Text>
-        <Divider bold style={{ marginVertical: 10 }} />
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text variant="titleLarge">Vehicle {index + 1}</Text>
+          {showActions && (
+            <IconButton
+              icon={"pencil"}
+              onPress={() => {
+                setForm(vehicle);
+                router.navigate("/collisions/form/vehicleFormScreen");
+                setEdit(true);
+              }}
+            />
+          )}
+        </View>
+        <Divider bold style={{ marginBottom: 10 }} />
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Car: </Text>
           {color} {make} {model}
@@ -67,26 +84,6 @@ const VehicleCard = ({
           </>
         )}
       </Card.Content>
-      {showActions && (
-        <Card.Actions style={{ marginHorizontal: 10 }}>
-          <Button
-            onPress={() => {
-              setForm(vehicle);
-              router.navigate("/collisions/form/vehicleFormScreen");
-              setEdit(true);
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            onPress={() => {
-              deleteVehicle(vehicle.id);
-            }}
-          >
-            Delete
-          </Button>
-        </Card.Actions>
-      )}
     </Card>
   );
 };

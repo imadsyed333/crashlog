@@ -1,9 +1,9 @@
 import { styles } from "@/lib/themes";
 import { Person } from "@/lib/types";
-import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
 import React from "react";
-import { Button, Card, Divider, Text } from "react-native-paper";
+import { View } from "react-native";
+import { Card, Divider, IconButton, Text } from "react-native-paper";
 
 type WitnessCardProps = {
   witness: Person;
@@ -17,12 +17,31 @@ const WitnessCard = ({
 }: WitnessCardProps) => {
   const { name, phoneNumber, address } = witness;
   const { setForm, setEdit, setDialogVisible } = useWitnessFormStore();
-  const { deleteWitness } = useCollisionFormStore();
   return (
-    <Card style={{ marginHorizontal: 10, marginTop: 10 }} mode="outlined">
+    <Card style={{ marginBottom: 10 }} mode="outlined">
       <Card.Content style={{ paddingBottom: 20 }}>
-        <Text variant="titleLarge">Witness {index + 1}</Text>
-        <Divider bold style={{ marginVertical: 10 }} />
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text variant="titleLarge">Witness {index + 1}</Text>
+          {showActions && (
+            <IconButton
+              icon={"pencil"}
+              onPress={() => {
+                setForm(witness);
+                setDialogVisible(true);
+                setEdit(true);
+              }}
+              size={20}
+            />
+          )}
+        </View>
+        <Divider bold style={{ marginBottom: 10 }} />
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Full Name: </Text>
           {name}
@@ -36,26 +55,6 @@ const WitnessCard = ({
           {address}
         </Text>
       </Card.Content>
-      {showActions && (
-        <Card.Actions>
-          <Button
-            onPress={() => {
-              setForm(witness);
-              setDialogVisible(true);
-              setEdit(true);
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            onPress={() => {
-              deleteWitness(witness.id);
-            }}
-          >
-            Delete
-          </Button>
-        </Card.Actions>
-      )}
     </Card>
   );
 };

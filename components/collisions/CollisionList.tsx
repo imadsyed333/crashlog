@@ -42,15 +42,6 @@ export const CollisionList = () => {
           }}
           rightOpenValue={-75}
         />
-
-        // <FlatList
-        //   data={collisions}
-        //   renderItem={({ item }) => <CollisionCard collision={item} />}
-        //   style={{
-        //     display: "flex",
-        //     width: "100%",
-        //   }}
-        // />
       )}
       {collisions.length === 0 && (
         <Text variant="bodyMedium">Phew, no collisions yet!</Text>

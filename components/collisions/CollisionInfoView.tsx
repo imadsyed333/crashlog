@@ -37,7 +37,11 @@ const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
           Vehicles
         </Text>
         <Divider bold style={{ marginHorizontal: 10 }} />
-        <View>
+        <View
+          style={{
+            marginHorizontal: 10,
+          }}
+        >
           {vehicles.map((vehicle, index) => (
             <VehicleCard
               vehicle={vehicle}
@@ -53,7 +57,11 @@ const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
           Witnesses
         </Text>
         <Divider bold style={{ marginHorizontal: 10 }} />
-        <View>
+        <View
+          style={{
+            marginHorizontal: 10,
+          }}
+        >
           {witnesses.map((witness, index) => (
             <WitnessCard
               witness={witness}

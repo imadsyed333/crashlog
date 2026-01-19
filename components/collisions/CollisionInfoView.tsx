@@ -36,7 +36,7 @@ const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
         <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
           Vehicles
         </Text>
-        <Divider bold style={{ marginHorizontal: 10 }} />
+        <Divider bold style={{ marginHorizontal: 10, marginBottom: 10 }} />
         <View
           style={{
             marginHorizontal: 10,
@@ -56,7 +56,7 @@ const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
         <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
           Witnesses
         </Text>
-        <Divider bold style={{ marginHorizontal: 10 }} />
+        <Divider bold style={{ marginHorizontal: 10, marginBottom: 10 }} />
         <View
           style={{
             marginHorizontal: 10,

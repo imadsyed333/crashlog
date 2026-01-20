@@ -98,7 +98,15 @@ const collisionDetailsFormScreen = () => {
         />
         <MediaView />
       </View>
-      <Button mode="contained" style={styles.button} onPress={handlePress}>
+      <Button
+        mode="contained"
+        style={styles.button}
+        onPress={handlePress}
+        icon={"arrow-right"}
+        contentStyle={{
+          flexDirection: "row-reverse",
+        }}
+      >
         Next
       </Button>
     </View>

@@ -34,7 +34,6 @@ const viewCollisionScreen = () => {
     <View
       style={{
         flex: 1,
-        paddingBottom: insets.bottom,
       }}
     >
       {collision && <CollisionInfoView collision={collision} />}

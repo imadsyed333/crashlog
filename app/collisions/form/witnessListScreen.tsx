@@ -1,12 +1,11 @@
 import CustomFAB from "@/components/misc/CustomFAB";
+import NextButton from "@/components/misc/NextButton";
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import WitnessList from "@/components/witnesses/WitnessList";
-import { styles } from "@/lib/themes";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Button } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const witnessListScreen = () => {
@@ -30,15 +29,13 @@ const witnessListScreen = () => {
         }}
       >
         <WitnessList />
-        <CustomFAB handlePress={handleFABPress} icon="plus" />
+        <CustomFAB
+          handlePress={handleFABPress}
+          icon="plus"
+          label="Add Witness"
+        />
       </View>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => router.navigate("/collisions/form/submitScreen")}
-      >
-        Next
-      </Button>
+      <NextButton href={"/collisions/form/submitScreen"} />
       <WitnessDialog />
     </View>
   );

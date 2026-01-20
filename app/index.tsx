@@ -21,11 +21,14 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        paddingBottom: insets.bottom,
       }}
     >
       <CollisionList />
-      <CustomFAB handlePress={handleFABPress} icon="plus" />
+      <CustomFAB
+        handlePress={handleFABPress}
+        icon="plus"
+        label="Add Collision"
+      />
     </View>
   );
 }

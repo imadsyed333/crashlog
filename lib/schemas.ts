@@ -1,7 +1,7 @@
 import validator from "validator";
 import z from "zod";
 
-export const collisionDetailsSchema = z.object({
+export const detailsSchema = z.object({
   location: z.string().min(1, { error: "Location must not be empty" }),
   description: z.string().min(1, { error: "Description must not be empty" }),
 });

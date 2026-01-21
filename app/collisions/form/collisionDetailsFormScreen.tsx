@@ -1,6 +1,6 @@
 import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
-import { collisionDetailsSchema } from "@/lib/schemas";
+import { detailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import RNDateTimePicker, {
@@ -28,7 +28,7 @@ const collisionDetailsFormScreen = () => {
   const router = useRouter();
 
   const handlePress = () => {
-    const parse = collisionDetailsSchema.safeParse({ location, description });
+    const parse = detailsSchema.safeParse({ location, description });
     if (!parse.success) {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);

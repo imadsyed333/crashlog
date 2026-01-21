@@ -1,8 +1,8 @@
 import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/misc/ErrorBox";
-import { vehicleSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
+import { validateVehicle } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
@@ -10,7 +10,6 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, Card, Divider, Text, TextInput } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import z from "zod";
 
 type VehicleFormErrors = {
   make?: String[];
@@ -40,17 +39,9 @@ const VehicleFormScreen = () => {
   const { addVehicle } = useCollisionFormStore();
 
   const handleSubmit = () => {
-    const parse = vehicleSchema.safeParse({
-      make,
-      model,
-      color,
-      licensePlate,
-      insuranceCompany,
-      policyNumber,
-    });
-    if (!parse.success) {
-      const errors = z.flattenError(parse.error);
-      setFormErrors(errors.fieldErrors);
+    const parseErrors = validateVehicle(vehicle);
+    if (Object.keys(parseErrors).length !== 0) {
+      setFormErrors(parseErrors);
     } else {
       if (isEdit) {
         updateVehicle(vehicle);

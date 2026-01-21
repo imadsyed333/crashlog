@@ -14,7 +14,7 @@ const MediaView = () => {
     if (!cameraPermission.granted) {
       Alert.alert(
         "Permission required",
-        "Permission to access camera is required."
+        "Permission to access camera is required.",
       );
       return;
     }
@@ -35,7 +35,7 @@ const MediaView = () => {
     if (!mediaPermission.granted) {
       Alert.alert(
         "Permission required",
-        "Permission to access the media library is required."
+        "Permission to access the media library is required.",
       );
       return;
     }
@@ -74,7 +74,7 @@ const MediaView = () => {
           style={{ flex: 1 }}
           icon={"image-multiple"}
         >
-          Add from library
+          Photo Library
         </Button>
       </View>
       <MediaList showActions={true} media={media} />

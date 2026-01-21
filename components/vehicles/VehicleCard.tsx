@@ -74,15 +74,16 @@ const VehicleCard = ({
           {policyNumber}
         </Text>
 
+        <Text variant="titleMedium" style={{ marginTop: 10 }}>
+          Driver
+        </Text>
+        <Divider bold style={{ marginBottom: 10 }} />
         {driver && (
           <>
-            <Text variant="titleLarge" style={{ marginTop: 10 }}>
-              Driver
-            </Text>
-            <Divider bold style={{ marginVertical: 10 }} />
             <DriverCard driver={driver} />
           </>
         )}
+        {!driver && <Text variant="bodyLarge">No information</Text>}
       </Card.Content>
     </Card>
   );

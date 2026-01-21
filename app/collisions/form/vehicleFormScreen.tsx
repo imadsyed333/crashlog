@@ -7,7 +7,7 @@ import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, Card, Divider, Text, TextInput } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import z from "zod";
 
@@ -174,18 +174,34 @@ const VehicleFormScreen = () => {
           mode="outlined"
         />
         <ErrorBox errors={formErrors.policyNumber} />
-        {driver && <DriverCard driver={driver} showActions={true} />}
-        {!driver && (
-          <>
-            <Button
-              mode="contained"
-              style={styles.button}
-              onPress={() => setDialogVisible(true)}
-            >
-              Add Driver
-            </Button>
-          </>
-        )}
+        <Card
+          mode="outlined"
+          style={{
+            marginTop: 10,
+          }}
+        >
+          <Card.Content>
+            <Text variant="titleLarge">Driver</Text>
+            <Divider
+              bold
+              style={{
+                marginBottom: 10,
+              }}
+            />
+            {driver && <DriverCard driver={driver} showActions={true} />}
+            {!driver && (
+              <>
+                <Button
+                  mode="contained"
+                  style={styles.button}
+                  onPress={() => setDialogVisible(true)}
+                >
+                  Add Driver
+                </Button>
+              </>
+            )}
+          </Card.Content>
+        </Card>
         <DriverDialog />
       </View>
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>

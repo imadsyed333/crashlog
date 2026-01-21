@@ -1,6 +1,7 @@
 import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/misc/ErrorBox";
+import { vehicleSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -10,17 +11,6 @@ import { View } from "react-native";
 import { Button, Card, Divider, Text, TextInput } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import z from "zod";
-
-const vehicleSchema = z.object({
-  make: z.string().min(1, { error: "Make must not be empty" }),
-  model: z.string().min(1, { error: "Model must not be empty" }),
-  color: z.string().min(1, { error: "Color must not be empty" }),
-  licensePlate: z.string().min(1, { error: "License plate must not be empty" }),
-  insuranceCompany: z
-    .string()
-    .min(1, { error: "Insurance company must not be empty" }),
-  policyNumber: z.string().min(1, "Policy number must not be empty"),
-});
 
 type VehicleFormErrors = {
   make?: String[];

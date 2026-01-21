@@ -1,5 +1,6 @@
 import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
+import { collisionDetailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import RNDateTimePicker, {
@@ -11,11 +12,6 @@ import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import z from "zod";
-
-const collisionDetailsSchema = z.object({
-  location: z.string().min(1, { error: "Location must not be empty" }),
-  description: z.string().min(1, { error: "Description must not be empty" }),
-});
 
 type FormErrors = {
   location?: String[];

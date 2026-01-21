@@ -1,3 +1,4 @@
+import { personSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
@@ -5,18 +6,8 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
-import validator from "validator";
 import z from "zod";
 import ErrorBox from "../misc/ErrorBox";
-
-const witnessSchema = z.object({
-  name: z.string().min(1, { error: "Name must not be empty" }),
-  address: z.string().min(1, { error: "Address must not be empty" }),
-  phoneNumber: z
-    .string()
-    .min(1, { error: "Phone number must not be empty" })
-    .refine(validator.isMobilePhone, { error: "Not a valid phone number" }),
-});
 
 type WitnessFormErrors = {
   name?: String[];
@@ -38,7 +29,7 @@ const WitnessDialog = () => {
   const { addWitness, updateWitness } = useCollisionFormStore();
 
   const handleSubmit = () => {
-    const parse = witnessSchema.safeParse({
+    const parse = personSchema.safeParse({
       name,
       address,
       phoneNumber,

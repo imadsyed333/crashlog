@@ -1,3 +1,4 @@
+import { driverSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React, { useState } from "react";
@@ -5,21 +6,8 @@ import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
-import validator from "validator";
 import z from "zod";
 import ErrorBox from "../misc/ErrorBox";
-
-const driverSchema = z.object({
-  name: z.string().min(1, { error: "Name must not be empty" }),
-  address: z.string().min(1, { error: "Address must not be empty" }),
-  phoneNumber: z
-    .string()
-    .min(1, { error: "Phone number must not be empty" })
-    .refine(validator.isMobilePhone, { error: "Not a valid phone number" }),
-  driverLicense: z
-    .string()
-    .min(1, { error: "Driver license must not be empty" }),
-});
 
 type DriverFormErrors = {
   name?: String[];

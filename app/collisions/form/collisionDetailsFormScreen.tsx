@@ -1,11 +1,9 @@
+import CustomDTPicker from "@/components/datetime/CustomDTPicker";
 import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
 import { detailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import RNDateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
@@ -35,10 +33,6 @@ const collisionDetailsFormScreen = () => {
     } else {
       router.navigate("/collisions/form/vehicleListScreen");
     }
-  };
-
-  const setDate = (event: DateTimePickerEvent, date: Date) => {
-    updateCollisionField("date", date);
   };
 
   return (
@@ -85,14 +79,8 @@ const collisionDetailsFormScreen = () => {
           mode="outlined"
         />
         <ErrorBox errors={formErrors.description} />
-        <RNDateTimePicker
-          value={new Date(date)}
-          onChange={(e, date) => setDate(e, date!)}
-          mode="datetime"
-          textColor="black"
-          style={styles.datetimepicker}
-        />
         <MediaView />
+        <CustomDTPicker />
       </View>
       <Button
         mode="contained"

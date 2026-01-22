@@ -25,7 +25,7 @@ const submitScreen = () => {
     <View
       style={{
         flex: 1,
-        paddingBottom: insets.bottom,
+        marginBottom: insets.bottom,
         justifyContent: "space-between",
       }}
     >

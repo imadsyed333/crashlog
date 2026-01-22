@@ -21,6 +21,7 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        marginBottom: insets.bottom,
       }}
     >
       <CollisionList />

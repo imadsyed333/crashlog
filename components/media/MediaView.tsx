@@ -2,7 +2,7 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Alert, View } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
 import MediaList from "./MediaList";
 const MediaView = () => {
   const { addMedia, collision } = useCollisionFormStore();
@@ -50,35 +50,37 @@ const MediaView = () => {
   };
 
   return (
-    <View>
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          margin: 10,
-        }}
-      >
-        <Button
-          mode="contained"
-          onPress={useCamera}
-          icon={"camera"}
-          style={{ flex: 1, marginRight: 10 }}
+    <Card mode="outlined">
+      <Card.Content>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 10,
+          }}
         >
-          Camera
-        </Button>
-        <Button
-          mode="contained"
-          onPress={useMediaLibrary}
-          style={{ flex: 1 }}
-          icon={"image-multiple"}
-        >
-          Photo Library
-        </Button>
-      </View>
-      <MediaList showActions={true} media={media} />
-    </View>
+          <Button
+            mode="contained"
+            onPress={useCamera}
+            icon={"camera"}
+            style={{ flex: 1, marginRight: 10 }}
+          >
+            Camera
+          </Button>
+          <Button
+            mode="contained"
+            onPress={useMediaLibrary}
+            style={{ flex: 1 }}
+            icon={"image-multiple"}
+          >
+            Photo Library
+          </Button>
+        </View>
+        <MediaList showActions={true} media={media} />
+      </Card.Content>
+    </Card>
   );
 };
 

@@ -28,12 +28,15 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
           {description}
         </Text>
         <Text variant="bodyLarge">
-          <Text style={styles.boldText}>Datetime: </Text>
+          <Text style={styles.boldText}>Date: </Text>
+          {newDate.toDateString()}
+        </Text>
+        <Text variant="bodyLarge">
+          <Text style={styles.boldText}>Time: </Text>
           {newDate.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
-          })}{" "}
-          on {newDate.toDateString()}
+          })}
         </Text>
       </Card.Content>
     </Card>

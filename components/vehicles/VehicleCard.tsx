@@ -5,7 +5,7 @@ import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { Card, Divider, IconButton, Text } from "react-native-paper";
-import DriverCard from "../driver/DriverCard";
+import DriverContent from "../driver/DriverContent";
 
 type VehicleCardProps = {
   vehicle: Vehicle;
@@ -80,7 +80,7 @@ const VehicleCard = ({
         <Divider bold style={{ marginBottom: 10 }} />
         {driver && (
           <>
-            <DriverCard driver={driver} />
+            <DriverContent driver={driver} />
           </>
         )}
         {!driver && <Text variant="bodyLarge">No information</Text>}

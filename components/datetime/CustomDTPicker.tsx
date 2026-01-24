@@ -5,7 +5,7 @@ import RNDateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { Platform, View } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button, Card, Text } from "react-native-paper";
 
 const CustomDTPicker = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
@@ -46,24 +46,56 @@ const CustomDTPicker = () => {
     };
 
     return (
-      <View>
-        <Button onPress={showTimePicker}>Pick Time</Button>
-        <Button onPress={showDatePicker}>Pick Date</Button>
-        <Text>
-          {newDate.toLocaleDateString([], {
-            weekday: "short",
-            year: "numeric",
-            month: "short",
-            day: "2-digit",
-          })}
-        </Text>
-        <Text>
-          {newDate.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </Text>
-      </View>
+      <Card mode="outlined">
+        <Card.Content>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Text>
+              {newDate.toLocaleDateString([], {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "2-digit",
+              })}
+            </Text>
+            <Text>
+              {newDate.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </Text>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              onPress={showDatePicker}
+              mode="contained"
+              style={styles.button}
+            >
+              Pick Date
+            </Button>
+            <Button
+              onPress={showTimePicker}
+              mode="contained"
+              style={styles.button}
+            >
+              Pick Time
+            </Button>
+          </View>
+        </Card.Content>
+      </Card>
     );
   }
 };

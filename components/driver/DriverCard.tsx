@@ -24,7 +24,7 @@ const DriverCard = ({ driver, showActions = false }: DriverCardProps) => {
           }}
         >
           <Text variant="titleLarge">Driver</Text>
-          {showActions && (
+          {showActions && driver && (
             <IconButton
               icon={"pencil"}
               onPress={() => {

@@ -8,7 +8,7 @@ import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Button, Card, Divider, Text, TextInput } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type VehicleFormErrors = {
@@ -35,7 +35,6 @@ const VehicleFormScreen = () => {
     driver,
   } = vehicle;
   const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
-  const { setDialogVisible } = useVehicleFormStore();
   const { addVehicle } = useCollisionFormStore();
 
   const handleSubmit = () => {
@@ -155,34 +154,13 @@ const VehicleFormScreen = () => {
           mode="outlined"
         />
         <ErrorBox errors={formErrors.policyNumber} />
-        <Card
-          mode="outlined"
+        <View
           style={{
             marginTop: 10,
           }}
         >
-          <Card.Content>
-            <Text variant="titleLarge">Driver</Text>
-            <Divider
-              bold
-              style={{
-                marginBottom: 10,
-              }}
-            />
-            {driver && <DriverCard driver={driver} showActions={true} />}
-            {!driver && (
-              <>
-                <Button
-                  mode="contained"
-                  style={styles.button}
-                  onPress={() => setDialogVisible(true)}
-                >
-                  Add Driver
-                </Button>
-              </>
-            )}
-          </Card.Content>
-        </Card>
+          <DriverCard driver={driver} showActions />
+        </View>
         <DriverDialog />
       </View>
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>

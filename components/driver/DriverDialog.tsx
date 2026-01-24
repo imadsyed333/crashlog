@@ -78,24 +78,6 @@ const DriverDialog = () => {
           />
           <ErrorBox errors={formErrors.name} />
           <TextInput
-            label="Address"
-            value={driver.address}
-            onChangeText={(text) => setDriver({ ...driver, address: text })}
-            error={!!formErrors.address}
-            style={styles.input}
-            mode="outlined"
-          />
-          <ErrorBox errors={formErrors.address} />
-          <TextInput
-            label="Phone Number"
-            value={driver.phoneNumber}
-            onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
-            error={!!formErrors.phoneNumber}
-            style={styles.input}
-            mode="outlined"
-          />
-          <ErrorBox errors={formErrors.phoneNumber} />
-          <TextInput
             label="Driver License"
             value={driver.driverLicense}
             onChangeText={(text) =>
@@ -106,6 +88,24 @@ const DriverDialog = () => {
             mode="outlined"
           />
           <ErrorBox errors={formErrors.driverLicense} />
+          <TextInput
+            label="Phone Number"
+            value={driver.phoneNumber}
+            onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
+            error={!!formErrors.phoneNumber}
+            style={styles.input}
+            mode="outlined"
+          />
+          <ErrorBox errors={formErrors.phoneNumber} />
+          <TextInput
+            label="Address"
+            value={driver.address}
+            onChangeText={(text) => setDriver({ ...driver, address: text })}
+            error={!!formErrors.address}
+            style={styles.input}
+            mode="outlined"
+          />
+          <ErrorBox errors={formErrors.address} />
           <View
             style={{
               flexDirection: "row",

@@ -3,34 +3,52 @@ import { Driver } from "@/lib/types";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { Button, Card, Divider, IconButton, Text } from "react-native-paper";
+import DriverContent from "./DriverContent";
 
 type DriverCardProps = {
-  driver: Driver;
+  driver: Driver | null;
   showActions?: boolean;
 };
 const DriverCard = ({ driver, showActions = false }: DriverCardProps) => {
-  const { name, driverLicense, phoneNumber, address } = driver;
   const { setDialogVisible } = useVehicleFormStore();
   return (
-    <View>
-      <Text variant="bodyMedium">
-        <Text style={styles.boldText}>Full Name: </Text>
-        {name}
-      </Text>
-      <Text variant="bodyMedium">
-        <Text style={styles.boldText}>Driver License: </Text>
-        {driverLicense}
-      </Text>
-      <Text variant="bodyMedium">
-        <Text style={styles.boldText}>Phone Number: </Text>
-        {phoneNumber}
-      </Text>
-      <Text variant="bodyMedium">
-        <Text style={styles.boldText}>Address: </Text>
-        {address}
-      </Text>
-    </View>
+    <Card mode="outlined">
+      <Card.Content>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text variant="titleLarge">Driver</Text>
+          {showActions && (
+            <IconButton
+              icon={"pencil"}
+              onPress={() => {
+                setDialogVisible(true);
+              }}
+            />
+          )}
+        </View>
+        <Divider bold style={{ marginBottom: 10 }} />
+        {driver ? (
+          <DriverContent driver={driver} />
+        ) : (
+          <>
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={() => setDialogVisible(true)}
+            >
+              Add Driver
+            </Button>
+          </>
+        )}
+      </Card.Content>
+    </Card>
   );
 };
 

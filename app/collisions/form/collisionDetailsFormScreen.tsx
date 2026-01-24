@@ -79,8 +79,20 @@ const collisionDetailsFormScreen = () => {
           mode="outlined"
         />
         <ErrorBox errors={formErrors.description} />
-        <MediaView />
-        <CustomDTPicker />
+        <View
+          style={{
+            marginTop: 10,
+          }}
+        >
+          <MediaView />
+        </View>
+        <View
+          style={{
+            marginTop: 10,
+          }}
+        >
+          <CustomDTPicker />
+        </View>
       </View>
       <Button
         mode="contained"

@@ -55,11 +55,18 @@ const CustomDTPicker = () => {
     </Card>
   ) : (
     <Card mode="outlined">
-      <Card.Content>
+      <Card.Content
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
             justifyContent: "space-around",
             alignItems: "center",
           }}
@@ -72,21 +79,6 @@ const CustomDTPicker = () => {
               day: "2-digit",
             })}
           </Text>
-          <Text>
-            {newDate.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </Text>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
           <Button
             onPress={showDatePicker}
             mode="contained"
@@ -94,6 +86,21 @@ const CustomDTPicker = () => {
           >
             Pick Date
           </Button>
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>
+            {newDate.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </Text>
           <Button
             onPress={showTimePicker}
             mode="contained"

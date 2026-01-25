@@ -27,7 +27,5 @@ export const personSchema = z.object({
 });
 
 export const driverSchema = personSchema.extend({
-  driverLicense: z
-    .string()
-    .min(1, { error: "Driver license must not be empty" }),
+  license: z.string().min(1, { error: "Driver license must not be empty" }),
 });

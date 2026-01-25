@@ -9,7 +9,7 @@ type DriverContentProps = {
 };
 
 const DriverContent = ({ driver }: DriverContentProps) => {
-  const { name, driverLicense, phoneNumber, address } = driver;
+  const { name, license, phoneNumber, address } = driver;
   return (
     <View>
       <Text variant="bodyMedium">
@@ -18,7 +18,7 @@ const DriverContent = ({ driver }: DriverContentProps) => {
       </Text>
       <Text variant="bodyMedium">
         <Text style={styles.boldText}>Driver License: </Text>
-        {driverLicense}
+        {license}
       </Text>
       <Text variant="bodyMedium">
         <Text style={styles.boldText}>Phone Number: </Text>

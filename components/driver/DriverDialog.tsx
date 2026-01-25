@@ -1,11 +1,11 @@
 import { driverSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
+import { Driver } from "@/lib/types";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
-import { v4 as uuidv4 } from "uuid";
 import z from "zod";
 import ErrorBox from "../misc/ErrorBox";
 
@@ -13,29 +13,30 @@ type DriverFormErrors = {
   name?: String[];
   address?: String[];
   phoneNumber?: String[];
-  driverLicense?: String[];
+  license?: String[];
 };
 
 const DriverDialog = () => {
   const { isDialogVisible, setDialogVisible, vehicle } = useVehicleFormStore();
   const [formErrors, setFormErrors] = useState<DriverFormErrors>({});
-  const [driver, setDriver] = useState({
-    name: vehicle.driver?.name || "",
-    address: vehicle.driver?.address || "",
-    phoneNumber: vehicle.driver?.phoneNumber || "",
-    driverLicense: vehicle.driver?.driverLicense || "",
-  });
+
+  const [driver, setDriver] = useState<Driver>(
+    vehicle.driver || {
+      name: "",
+      phoneNumber: "",
+      address: "",
+      license: "",
+    },
+  );
 
   const { updateVehicleField } = useVehicleFormStore();
   const handleSubmit = () => {
-    const parse = driverSchema.safeParse({
-      ...driver,
-    });
+    const parse = driverSchema.safeParse(driver);
     if (!parse.success) {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      updateVehicleField("driver", { id: uuidv4(), ...driver });
+      updateVehicleField("driver", driver);
       setDialogVisible(false);
     }
   };
@@ -79,15 +80,13 @@ const DriverDialog = () => {
           <ErrorBox errors={formErrors.name} />
           <TextInput
             label="Driver License"
-            value={driver.driverLicense}
-            onChangeText={(text) =>
-              setDriver({ ...driver, driverLicense: text })
-            }
-            error={!!formErrors.driverLicense}
+            value={driver.license}
+            onChangeText={(text) => setDriver({ ...driver, license: text })}
+            error={!!formErrors.license}
             style={styles.input}
             mode="outlined"
           />
-          <ErrorBox errors={formErrors.driverLicense} />
+          <ErrorBox errors={formErrors.license} />
           <TextInput
             label="Phone Number"
             value={driver.phoneNumber}

@@ -38,12 +38,16 @@ const DriverDialog = () => {
     } else {
       updateVehicleField("driver", driver);
       setDialogVisible(false);
+      setFormErrors({});
     }
   };
   return (
     <Modal
       isVisible={isDialogVisible}
-      onBackdropPress={() => setDialogVisible(false)}
+      onBackdropPress={() => {
+        setDialogVisible(false);
+        setFormErrors({});
+      }}
       avoidKeyboard={true}
     >
       <View
@@ -89,11 +93,11 @@ const DriverDialog = () => {
           <ErrorBox errors={formErrors.license} />
           <TextInput
             label="Phone Number"
-            value={driver.phoneNumber}
-            onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
             error={!!formErrors.phoneNumber}
-            style={styles.input}
+            value={driver.phoneNumber}
             mode="outlined"
+            style={styles.input}
+            onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
           />
           <ErrorBox errors={formErrors.phoneNumber} />
           <TextInput

@@ -1,6 +1,6 @@
 import z from "zod";
 import { driverSchema, personSchema, vehicleSchema } from "./schemas";
-import { Driver, Person, Vehicle } from "./types";
+import { Driver, Vehicle, Witness } from "./types";
 
 export const validateVehicle = (vehicle: Vehicle) => {
   const parse = vehicleSchema.safeParse(vehicle);
@@ -22,7 +22,7 @@ export const validateDriver = (driver: Driver) => {
   }
 };
 
-export const validateWitness = (witness: Person) => {
+export const validateWitness = (witness: Witness) => {
   const parse = personSchema.safeParse(witness);
   if (!parse.success) {
     const errors = z.flattenError(parse.error);

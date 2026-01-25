@@ -1,20 +1,20 @@
 import { create } from "zustand";
 
-import { Person } from "@/lib/types";
+import { Witness } from "@/lib/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 interface WitnessFormStore {
-  witness: Person;
+  witness: Witness;
   isEdit: boolean;
   isDialogVisible: boolean;
   setDialogVisible: (value: boolean) => void;
-  updateWitnessField: <K extends keyof Person>(
+  updateWitnessField: <K extends keyof Witness>(
     key: K,
-    value: Person[K]
+    value: Witness[K],
   ) => void;
   setEdit: (value: boolean) => void;
-  setForm: (witness: Person) => void;
+  setForm: (witness: Witness) => void;
   resetForm: () => void;
 }
 

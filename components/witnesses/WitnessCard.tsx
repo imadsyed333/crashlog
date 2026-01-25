@@ -1,12 +1,12 @@
 import { styles } from "@/lib/themes";
-import { Person } from "@/lib/types";
+import { Witness } from "@/lib/types";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
 import React from "react";
 import { View } from "react-native";
 import { Card, Divider, IconButton, Text } from "react-native-paper";
 
 type WitnessCardProps = {
-  witness: Person;
+  witness: Witness;
   index: number;
   showActions?: boolean;
 };

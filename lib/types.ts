@@ -5,7 +5,7 @@ export interface Collision {
   description: string;
   vehicles: Vehicle[];
   media: Media[];
-  witnesses: Person[];
+  witnesses: Witness[];
   officer: Officer | null;
 }
 
@@ -21,14 +21,17 @@ export interface Vehicle {
 }
 
 export interface Person {
-  id: string;
   name: string;
   address: string;
   phoneNumber: string;
 }
 
 export interface Driver extends Person {
-  driverLicense: string;
+  license: string;
+}
+
+export interface Witness extends Person {
+  id: string;
 }
 
 export interface Media {

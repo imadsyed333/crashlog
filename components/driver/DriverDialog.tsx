@@ -7,6 +7,7 @@ import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
 import z from "zod";
+import CustomMaskedInput from "../misc/CustomMaskedInput";
 import ErrorBox from "../misc/ErrorBox";
 
 type DriverFormErrors = {
@@ -29,12 +30,13 @@ const DriverDialog = () => {
     },
   );
 
+  const { updateVehicleField } = useVehicleFormStore();
+
   const onClose = () => {
     setDialogVisible(false);
     setFormErrors({});
   };
 
-  const { updateVehicleField } = useVehicleFormStore();
   const handleSubmit = () => {
     const parse = driverSchema.safeParse(driver);
     if (!parse.success) {
@@ -45,6 +47,7 @@ const DriverDialog = () => {
       onClose();
     }
   };
+
   return (
     <Modal
       isVisible={isDialogVisible}
@@ -85,22 +88,22 @@ const DriverDialog = () => {
             mode="outlined"
           />
           <ErrorBox errors={formErrors.name} />
-          <TextInput
+
+          <CustomMaskedInput
             label="Driver License"
             value={driver.license}
             onChangeText={(text) => setDriver({ ...driver, license: text })}
             error={!!formErrors.license}
-            style={styles.input}
-            mode="outlined"
+            mask="A9999-99999-99999"
           />
           <ErrorBox errors={formErrors.license} />
-          <TextInput
+          <CustomMaskedInput
             label="Phone Number"
             error={!!formErrors.phoneNumber}
             value={driver.phoneNumber}
-            mode="outlined"
-            style={styles.input}
             onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
+            mask="(999) 999-9999"
+            keyboardType="phone-pad"
           />
           <ErrorBox errors={formErrors.phoneNumber} />
           <TextInput

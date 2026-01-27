@@ -7,6 +7,7 @@ import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button, Text, TextInput } from "react-native-paper";
 import z from "zod";
+import CustomMaskedInput from "../misc/CustomMaskedInput";
 import ErrorBox from "../misc/ErrorBox";
 
 type WitnessFormErrors = {
@@ -99,10 +100,9 @@ const WitnessDialog = () => {
               error={!!formErrors.name}
             />
             <ErrorBox errors={formErrors.name} />
-            <TextInput
+            <CustomMaskedInput
               label="Phone Number"
               value={phoneNumber}
-              style={styles.input}
               onChangeText={(text) => {
                 updateWitnessField("phoneNumber", text);
                 setFormErrors({
@@ -110,8 +110,9 @@ const WitnessDialog = () => {
                   phoneNumber: undefined,
                 });
               }}
-              mode="outlined"
               error={!!formErrors.phoneNumber}
+              mask="(999) 999-9999"
+              keyboardType="phone-pad"
             />
             <ErrorBox errors={formErrors.phoneNumber} />
             <TextInput

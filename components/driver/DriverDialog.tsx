@@ -29,6 +29,11 @@ const DriverDialog = () => {
     },
   );
 
+  const onClose = () => {
+    setDialogVisible(false);
+    setFormErrors({});
+  };
+
   const { updateVehicleField } = useVehicleFormStore();
   const handleSubmit = () => {
     const parse = driverSchema.safeParse(driver);
@@ -37,16 +42,14 @@ const DriverDialog = () => {
       setFormErrors(errors.fieldErrors);
     } else {
       updateVehicleField("driver", driver);
-      setDialogVisible(false);
-      setFormErrors({});
+      onClose();
     }
   };
   return (
     <Modal
       isVisible={isDialogVisible}
       onBackdropPress={() => {
-        setDialogVisible(false);
-        setFormErrors({});
+        onClose();
       }}
       avoidKeyboard={true}
     >
@@ -117,7 +120,7 @@ const DriverDialog = () => {
             }}
           >
             <Button
-              onPress={() => setDialogVisible(false)}
+              onPress={onClose}
               mode="outlined"
               style={{ marginRight: 5 }}
             >

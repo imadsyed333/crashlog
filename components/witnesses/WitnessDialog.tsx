@@ -28,6 +28,11 @@ const WitnessDialog = () => {
 
   const { addWitness, updateWitness } = useCollisionFormStore();
 
+  const onClose = () => {
+    setDialogVisible(false);
+    setFormErrors({});
+  };
+
   const handleSubmit = () => {
     const parse = personSchema.safeParse({
       name,
@@ -43,13 +48,13 @@ const WitnessDialog = () => {
       } else {
         addWitness(witness);
       }
-      setDialogVisible(false);
+      onClose();
     }
   };
   return (
     <Modal
       isVisible={isDialogVisible}
-      onBackdropPress={() => setDialogVisible(false)}
+      onBackdropPress={onClose}
       avoidKeyboard={true}
     >
       <View
@@ -135,7 +140,7 @@ const WitnessDialog = () => {
             }}
           >
             <Button
-              onPress={() => setDialogVisible(false)}
+              onPress={onClose}
               mode="outlined"
               style={{ marginRight: 5 }}
             >

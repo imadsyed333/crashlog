@@ -1,10 +1,10 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
-import CustomFAB from "@/components/misc/CustomFAB";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
+import { Button } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type SearchParamType = {
@@ -21,7 +21,7 @@ const viewCollisionScreen = () => {
 
   const router = useRouter();
 
-  const handleFABPress = () => {
+  const handlePress = () => {
     if (collision) {
       router.navigate("/collisions/form/collisionDetailsFormScreen");
       setForm(collision);
@@ -40,14 +40,14 @@ const viewCollisionScreen = () => {
       <Stack.Screen
         options={{
           title: collision ? "View Collision" : "Collision Not Found",
+          headerRight: () => (
+            <Button textColor="white" icon={"pencil"} onPress={handlePress}>
+              Edit
+            </Button>
+          ),
         }}
       />
       {collision && <CollisionInfoView collision={collision} />}
-      <CustomFAB
-        icon="pencil"
-        handlePress={handleFABPress}
-        label="Edit Collision"
-      />
     </View>
   );
 };

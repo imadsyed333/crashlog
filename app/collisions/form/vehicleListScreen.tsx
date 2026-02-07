@@ -1,10 +1,10 @@
-import CustomFAB from "@/components/misc/CustomFAB";
 import NextButton from "@/components/misc/NextButton";
 import VehicleList from "@/components/vehicles/VehicleList";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
+import { Button } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const VehicleListScreen = () => {
@@ -12,7 +12,7 @@ const VehicleListScreen = () => {
   const { resetForm, setEdit } = useVehicleFormStore();
   const router = useRouter();
 
-  const handleFABPress = () => {
+  const handlePress = () => {
     resetForm();
     setEdit(false);
     router.navigate("/collisions/form/vehicleFormScreen");
@@ -27,6 +27,11 @@ const VehicleListScreen = () => {
       <Stack.Screen
         options={{
           title: "Vehicles",
+          headerRight: () => (
+            <Button icon={"plus"} textColor="white" onPress={handlePress}>
+              Add Vehicle
+            </Button>
+          ),
         }}
       />
       <View
@@ -37,11 +42,6 @@ const VehicleListScreen = () => {
         }}
       >
         <VehicleList />
-        <CustomFAB
-          handlePress={handleFABPress}
-          icon="plus"
-          label="Add Vehicle"
-        />
       </View>
       <NextButton href={"/collisions/form/witnessListScreen"} />
     </View>

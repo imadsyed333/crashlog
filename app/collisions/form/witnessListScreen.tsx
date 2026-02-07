@@ -1,4 +1,3 @@
-import CustomFAB from "@/components/misc/CustomFAB";
 import NextButton from "@/components/misc/NextButton";
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import WitnessList from "@/components/witnesses/WitnessList";
@@ -6,13 +5,14 @@ import { useWitnessFormStore } from "@/store/witnessFormStore";
 import { Stack } from "expo-router";
 import React from "react";
 import { View } from "react-native";
+import { Button } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const witnessListScreen = () => {
   const insets = useSafeAreaInsets();
   const { resetForm, setDialogVisible, setEdit } = useWitnessFormStore();
 
-  const handleFABPress = () => {
+  const handlePress = () => {
     resetForm();
     setEdit(false);
     setDialogVisible(true);
@@ -23,6 +23,11 @@ const witnessListScreen = () => {
       <Stack.Screen
         options={{
           title: "Witnesses",
+          headerRight: () => (
+            <Button icon={"plus"} textColor="white" onPress={handlePress}>
+              Add Witness
+            </Button>
+          ),
         }}
       />
       <View
@@ -33,11 +38,6 @@ const witnessListScreen = () => {
         }}
       >
         <WitnessList />
-        <CustomFAB
-          handlePress={handleFABPress}
-          icon="plus"
-          label="Add Witness"
-        />
       </View>
       <NextButton href={"/collisions/form/submitScreen"} />
       <WitnessDialog />

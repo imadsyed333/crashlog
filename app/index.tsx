@@ -1,8 +1,8 @@
 import { CollisionList } from "@/components/collisions/CollisionList";
-import CustomFAB from "@/components/misc/CustomFAB";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { Stack, useRouter } from "expo-router";
 import { View } from "react-native";
+import { Button } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -11,7 +11,7 @@ export default function Index() {
   const { resetForm } = useCollisionFormStore();
   const router = useRouter();
 
-  const handleFABPress = () => {
+  const handlePress = () => {
     resetForm();
     router.navigate("/collisions/form/collisionDetailsFormScreen");
   };
@@ -29,14 +29,14 @@ export default function Index() {
           title: "My Collisions",
           gestureEnabled: false,
           headerBackVisible: false,
+          headerRight: () => (
+            <Button icon={"plus"} textColor="white" onPress={handlePress}>
+              Add Collision
+            </Button>
+          ),
         }}
       />
       <CollisionList />
-      <CustomFAB
-        handlePress={handleFABPress}
-        icon="plus"
-        label="Add Collision"
-      />
     </View>
   );
 }

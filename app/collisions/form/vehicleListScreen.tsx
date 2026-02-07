@@ -2,7 +2,7 @@ import CustomFAB from "@/components/misc/CustomFAB";
 import NextButton from "@/components/misc/NextButton";
 import VehicleList from "@/components/vehicles/VehicleList";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -24,6 +24,11 @@ const VehicleListScreen = () => {
         paddingBottom: insets.bottom,
       }}
     >
+      <Stack.Screen
+        options={{
+          title: "Vehicles",
+        }}
+      />
       <View
         style={{
           flex: 1,

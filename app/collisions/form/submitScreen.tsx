@@ -2,7 +2,7 @@ import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button } from "react-native-paper";
@@ -29,6 +29,9 @@ const submitScreen = () => {
         justifyContent: "space-between",
       }}
     >
+      <Stack.Screen
+        options={{ title: isEdit ? "Update Collision" : "Submit Collision" }}
+      />
       <ScrollView>
         <CollisionInfoView collision={collision} />
       </ScrollView>

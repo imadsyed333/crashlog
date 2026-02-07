@@ -3,7 +3,7 @@ import NextButton from "@/components/misc/NextButton";
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import WitnessList from "@/components/witnesses/WitnessList";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
-import { useRouter } from "expo-router";
+import { Stack } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,7 +11,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const witnessListScreen = () => {
   const insets = useSafeAreaInsets();
   const { resetForm, setDialogVisible, setEdit } = useWitnessFormStore();
-  const router = useRouter();
 
   const handleFABPress = () => {
     resetForm();
@@ -21,6 +20,11 @@ const witnessListScreen = () => {
 
   return (
     <View style={{ flex: 1, paddingBottom: insets.bottom }}>
+      <Stack.Screen
+        options={{
+          title: "Witnesses",
+        }}
+      />
       <View
         style={{
           flex: 1,

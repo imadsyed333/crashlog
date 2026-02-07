@@ -4,7 +4,7 @@ import ErrorBox from "@/components/misc/ErrorBox";
 import { detailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
@@ -42,6 +42,11 @@ const collisionDetailsFormScreen = () => {
         paddingBottom: insets.bottom,
       }}
     >
+      <Stack.Screen
+        options={{
+          title: "Collision Details",
+        }}
+      />
       <View
         style={{
           flex: 1,

@@ -2,7 +2,7 @@ import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import CustomFAB from "@/components/misc/CustomFAB";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -37,6 +37,11 @@ const viewCollisionScreen = () => {
         marginBottom: insets.bottom,
       }}
     >
+      <Stack.Screen
+        options={{
+          title: collision ? "View Collision" : "Collision Not Found",
+        }}
+      />
       {collision && <CollisionInfoView collision={collision} />}
       <CustomFAB
         icon="pencil"

@@ -1,7 +1,7 @@
 import { CollisionList } from "@/components/collisions/CollisionList";
 import CustomFAB from "@/components/misc/CustomFAB";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -24,6 +24,13 @@ export default function Index() {
         marginBottom: insets.bottom,
       }}
     >
+      <Stack.Screen
+        options={{
+          title: "My Collisions",
+          gestureEnabled: false,
+          headerBackVisible: false,
+        }}
+      />
       <CollisionList />
       <CustomFAB
         handlePress={handleFABPress}

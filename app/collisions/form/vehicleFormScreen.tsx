@@ -5,7 +5,7 @@ import { styles } from "@/lib/themes";
 import { validateVehicle } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import { router } from "expo-router";
+import { router, Stack } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
@@ -59,6 +59,11 @@ const VehicleFormScreen = () => {
         paddingHorizontal: 10,
       }}
     >
+      <Stack.Screen
+        options={{
+          title: isEdit ? "Edit Vehicle" : "Add Vehicle",
+        }}
+      />
       <View
         style={{
           flex: 1,

@@ -21,7 +21,7 @@ const collisionDetailsFormScreen = () => {
 
   const { collision, updateCollisionField } = useCollisionFormStore();
 
-  const { location, description, date } = collision;
+  const { location, description } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const router = useRouter();
 
@@ -44,7 +44,7 @@ const collisionDetailsFormScreen = () => {
     >
       <Stack.Screen
         options={{
-          title: "Collision Details",
+          title: "Details",
         }}
       />
       <View

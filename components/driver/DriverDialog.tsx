@@ -35,6 +35,14 @@ const DriverDialog = () => {
   const onClose = () => {
     setDialogVisible(false);
     setFormErrors({});
+    setDriver(
+      vehicle.driver || {
+        name: "",
+        phoneNumber: "",
+        address: "",
+        license: "",
+      },
+    );
   };
 
   const handleSubmit = () => {

@@ -23,7 +23,7 @@ const viewCollisionScreen = () => {
 
   const handlePress = () => {
     if (collision) {
-      router.navigate("/collisions/form/collisionDetailsFormScreen");
+      router.navigate("/collisions/form/detailsFormScreen");
       setForm(collision);
       setEdit(true);
     } else {

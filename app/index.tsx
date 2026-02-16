@@ -13,7 +13,7 @@ export default function Index() {
 
   const handlePress = () => {
     resetForm();
-    router.navigate("/collisions/form/collisionDetailsFormScreen");
+    router.navigate("/collisions/form/detailsFormScreen");
   };
   return (
     <View

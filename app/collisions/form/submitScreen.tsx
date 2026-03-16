@@ -1,4 +1,5 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
+import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
@@ -33,11 +34,12 @@ const submitScreen = () => {
         options={{ title: isEdit ? "Update Collision" : "Submit Collision" }}
       />
       <ScrollView>
-        <CollisionInfoView collision={collision} />
+        <CollisionInfoView collision={collision} showActions />
       </ScrollView>
       <Button mode="contained" onPress={handleSubmit} style={styles.button}>
         {isEdit ? "Update Collision" : "Add Collision"}
       </Button>
+      <WitnessDialog />
     </View>
   );
 };

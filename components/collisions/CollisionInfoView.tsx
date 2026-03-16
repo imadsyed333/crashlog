@@ -1,7 +1,8 @@
 import { Collision } from "@/lib/types";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Divider, Text } from "react-native-paper";
+import { Divider, IconButton, Text } from "react-native-paper";
 import MediaList from "../media/MediaList";
 import VehicleCard from "../vehicles/VehicleCard";
 import WitnessCard from "../witnesses/WitnessCard";
@@ -9,17 +10,44 @@ import CollisionDetailsCard from "./CollisionDetailsCard";
 
 type CollisionInfoViewProps = {
   collision: Collision;
+  showActions?: boolean;
 };
 
-const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
+const CollisionInfoView = ({
+  collision,
+  showActions = false,
+}: CollisionInfoViewProps) => {
   const { vehicles, witnesses, media } = collision;
+
+  const router = useRouter();
+
+  const handleEditDetails = () => {
+    router.navigate({
+      pathname: "/collisions/form/detailsFormScreen",
+      params: {
+        mode: "edit",
+      },
+    });
+  };
 
   return (
     <ScrollView style={{ flex: 1 }}>
       <View>
-        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
-          Details
-        </Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+            Details
+          </Text>
+          {showActions && (
+            <IconButton icon="pencil" onPress={handleEditDetails} />
+          )}
+        </View>
         <Divider bold style={{ marginHorizontal: 10 }} />
         <CollisionDetailsCard collision={collision} />
       </View>
@@ -46,7 +74,7 @@ const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
             <VehicleCard
               vehicle={vehicle}
               key={vehicle.id}
-              showActions={false}
+              showActions={showActions}
               index={index}
             />
           ))}
@@ -66,7 +94,7 @@ const CollisionInfoView = ({ collision }: CollisionInfoViewProps) => {
             <WitnessCard
               witness={witness}
               key={witness.id}
-              showActions={false}
+              showActions={showActions}
               index={index}
             />
           ))}

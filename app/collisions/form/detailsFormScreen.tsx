@@ -4,7 +4,7 @@ import ErrorBox from "@/components/misc/ErrorBox";
 import { detailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { Stack, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
@@ -25,13 +25,19 @@ const collisionDetailsFormScreen = () => {
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const router = useRouter();
 
+  const { mode } = useLocalSearchParams<{ mode?: string }>();
+
   const handlePress = () => {
     const parse = detailsSchema.safeParse({ location, description });
     if (!parse.success) {
       const errors = z.flattenError(parse.error);
       setFormErrors(errors.fieldErrors);
     } else {
-      router.navigate("/collisions/form/vehicleListScreen");
+      if (mode === "edit") {
+        router.back();
+      } else {
+        router.navigate("/collisions/form/vehicleListScreen");
+      }
     }
   };
 
@@ -103,12 +109,12 @@ const collisionDetailsFormScreen = () => {
         mode="contained"
         style={styles.button}
         onPress={handlePress}
-        icon={"arrow-right"}
+        icon={mode === "edit" ? "content-save" : "arrow-right"}
         contentStyle={{
-          flexDirection: "row-reverse",
+          flexDirection: mode === "edit" ? "row" : "row-reverse",
         }}
       >
-        Next
+        {mode === "edit" ? "Save Changes" : "Next"}
       </Button>
     </View>
   );

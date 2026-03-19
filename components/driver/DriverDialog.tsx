@@ -5,7 +5,7 @@ import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 import CustomMaskedInput from "../misc/CustomMaskedInput";
 import ErrorBox from "../misc/ErrorBox";
@@ -29,6 +29,8 @@ const DriverDialog = () => {
       license: "",
     },
   );
+
+  const theme = useTheme();
 
   const { updateVehicleField } = useVehicleFormStore();
 
@@ -75,6 +77,7 @@ const DriverDialog = () => {
             paddingTop: 10,
             borderRadius: 10,
             paddingHorizontal: 10,
+            backgroundColor: theme.colors.background,
           }}
         >
           <Text

@@ -2,7 +2,7 @@ import { Collision } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Button, Card, Text } from "react-native-paper";
+import { Card, Text } from "react-native-paper";
 
 type CollisionCardProps = {
   collision: Collision;
@@ -13,8 +13,14 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
   const { setForm } = useCollisionFormStore();
   const router = useRouter();
   const newDate = new Date(date);
+
+  const handlePress = () => {
+    router.navigate(`/collisions/${collision.id}`);
+    setForm(collision);
+  };
+
   return (
-    <Card mode="outlined">
+    <Card mode="contained" onPress={handlePress}>
       <Card.Content>
         <Text variant="titleMedium">Collision at {location}</Text>
         <Text variant="bodyMedium">
@@ -25,16 +31,6 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
           })}
         </Text>
       </Card.Content>
-      <Card.Actions>
-        <Button
-          onPress={() => {
-            router.navigate(`/collisions/${collision.id}`);
-            setForm(collision);
-          }}
-        >
-          View
-        </Button>
-      </Card.Actions>
     </Card>
   );
 };

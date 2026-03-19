@@ -1,19 +1,16 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
+import ScreenContainer from "@/components/misc/ScreenContainer";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { View } from "react-native";
 import { Button } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type SearchParamType = {
   collisionId: string;
 };
 
 const viewCollisionScreen = () => {
-  const insets = useSafeAreaInsets();
-
   const { collisionId } = useLocalSearchParams<SearchParamType>();
   const { getCollision } = useCollisionStore();
   const { setForm, setEdit } = useCollisionFormStore();
@@ -31,24 +28,21 @@ const viewCollisionScreen = () => {
     }
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        marginBottom: insets.bottom,
-      }}
+    <ScreenContainer
+      title={collision ? "View Collision" : "Collision Not Found"}
     >
-      <Stack.Screen
-        options={{
-          title: collision ? "View Collision" : "Collision Not Found",
-          headerRight: () => (
-            <Button textColor="white" icon={"pencil"} onPress={handlePress}>
-              Edit
-            </Button>
-          ),
-        }}
-      />
       {collision && <CollisionInfoView collision={collision} />}
-    </View>
+      {collision && (
+        <Button
+          mode="contained"
+          style={{ marginTop: 20 }}
+          onPress={handlePress}
+          icon={"pencil"}
+        >
+          Edit
+        </Button>
+      )}
+    </ScreenContainer>
   );
 };
 

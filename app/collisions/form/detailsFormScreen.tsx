@@ -1,14 +1,14 @@
 import CustomDTPicker from "@/components/datetime/CustomDTPicker";
 import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
+import ScreenContainer from "@/components/misc/ScreenContainer";
 import { detailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import z from "zod";
 
 type FormErrors = {
@@ -17,8 +17,6 @@ type FormErrors = {
 };
 
 const collisionDetailsFormScreen = () => {
-  const insets = useSafeAreaInsets();
-
   const { collision, updateCollisionField } = useCollisionFormStore();
 
   const { location, description } = collision;
@@ -42,17 +40,7 @@ const collisionDetailsFormScreen = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingBottom: insets.bottom,
-      }}
-    >
-      <Stack.Screen
-        options={{
-          title: "Details",
-        }}
-      />
+    <ScreenContainer title="Details" backButton>
       <View
         style={{
           flex: 1,
@@ -71,7 +59,7 @@ const collisionDetailsFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.location} />
         <TextInput
@@ -87,7 +75,7 @@ const collisionDetailsFormScreen = () => {
             });
           }}
           style={{ ...styles.input, minHeight: 100 }}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.description} />
         <View
@@ -116,7 +104,7 @@ const collisionDetailsFormScreen = () => {
       >
         {mode === "edit" ? "Save Changes" : "Next"}
       </Button>
-    </View>
+    </ScreenContainer>
   );
 };
 

@@ -1,13 +1,10 @@
 import { CollisionList } from "@/components/collisions/CollisionList";
+import CustomFAB from "@/components/misc/CustomFAB";
+import ScreenContainer from "@/components/misc/ScreenContainer";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { Stack, useRouter } from "expo-router";
-import { View } from "react-native";
-import { Button } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 
 export default function Index() {
-  const insets = useSafeAreaInsets();
-
   const { resetForm } = useCollisionFormStore();
   const router = useRouter();
 
@@ -16,27 +13,13 @@ export default function Index() {
     router.navigate("/collisions/form/detailsFormScreen");
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginBottom: insets.bottom,
-      }}
+    <ScreenContainer
+      gestureEnabled={false}
+      title="My Collisions"
+      backButton={false}
     >
-      <Stack.Screen
-        options={{
-          title: "My Collisions",
-          gestureEnabled: false,
-          headerBackVisible: false,
-          headerRight: () => (
-            <Button icon={"plus"} textColor="white" onPress={handlePress}>
-              Add Collision
-            </Button>
-          ),
-        }}
-      />
       <CollisionList />
-    </View>
+      <CustomFAB icon="plus" label="Add Collision" handlePress={handlePress} />
+    </ScreenContainer>
   );
 }

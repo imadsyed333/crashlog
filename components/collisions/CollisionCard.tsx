@@ -20,7 +20,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
   };
 
   return (
-    <Card mode="contained" onPress={handlePress}>
+    <Card mode="contained" onPress={handlePress} style={{ marginBottom: 10 }}>
       <Card.Content>
         <Text variant="titleMedium">Collision at {location}</Text>
         <Text variant="bodyMedium">

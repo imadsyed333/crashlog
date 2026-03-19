@@ -73,7 +73,6 @@ const DriverDialog = () => {
         <View
           style={{
             paddingTop: 10,
-            backgroundColor: "white",
             borderRadius: 10,
             paddingHorizontal: 10,
           }}
@@ -93,7 +92,7 @@ const DriverDialog = () => {
             onChangeText={(text) => setDriver({ ...driver, name: text })}
             error={!!formErrors.name}
             style={styles.input}
-            mode="outlined"
+            mode="flat"
           />
           <ErrorBox errors={formErrors.name} />
 
@@ -120,7 +119,7 @@ const DriverDialog = () => {
             onChangeText={(text) => setDriver({ ...driver, address: text })}
             error={!!formErrors.address}
             style={styles.input}
-            mode="outlined"
+            mode="flat"
           />
           <ErrorBox errors={formErrors.address} />
           <View
@@ -132,7 +131,7 @@ const DriverDialog = () => {
           >
             <Button
               onPress={onClose}
-              mode="outlined"
+              mode="contained"
               style={{ marginRight: 5 }}
             >
               Cancel

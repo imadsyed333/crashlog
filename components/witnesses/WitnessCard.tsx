@@ -18,7 +18,7 @@ const WitnessCard = ({
   const { name, phoneNumber, address } = witness;
   const { setForm, setEdit, setDialogVisible } = useWitnessFormStore();
   return (
-    <Card style={{ marginBottom: 10 }} mode="outlined">
+    <Card style={{ marginBottom: 10 }} mode="contained">
       <Card.Content style={{ paddingBottom: 20 }}>
         <View
           style={{

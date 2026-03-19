@@ -35,7 +35,7 @@ const CustomDTPicker = () => {
   };
 
   return Platform.OS === "ios" ? (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content
         style={{
           display: "flex",
@@ -47,14 +47,12 @@ const CustomDTPicker = () => {
           value={new Date(date)}
           onChange={(e, date) => setDate(e, date!)}
           mode="datetime"
-          textColor="black"
           style={styles.datetimepicker}
-          themeVariant="light"
         />
       </Card.Content>
     </Card>
   ) : (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content
         style={{
           display: "flex",

@@ -13,7 +13,7 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
   const newDate = new Date(date);
   return (
     <Card
-      mode="outlined"
+      mode="contained"
       style={{
         margin: 10,
       }}

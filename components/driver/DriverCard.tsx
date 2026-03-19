@@ -13,7 +13,7 @@ type DriverCardProps = {
 const DriverCard = ({ driver, showActions = false }: DriverCardProps) => {
   const { setDialogVisible } = useVehicleFormStore();
   return (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content>
         <View
           style={{
@@ -33,7 +33,11 @@ const DriverCard = ({ driver, showActions = false }: DriverCardProps) => {
             />
           )}
         </View>
-        <Divider bold style={{ marginBottom: 10 }} />
+        <Divider
+          bold
+          style={{ marginBottom: 10 }}
+          theme={{ colors: { primary: "white" } }}
+        />
         {driver ? (
           <DriverContent driver={driver} />
         ) : (

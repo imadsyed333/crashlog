@@ -33,7 +33,7 @@ const VehicleCard = ({
       style={{
         marginBottom: 10,
       }}
-      mode="outlined"
+      mode="contained"
     >
       <Card.Content style={{ paddingBottom: 20 }}>
         <View

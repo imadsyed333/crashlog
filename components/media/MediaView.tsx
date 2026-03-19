@@ -50,7 +50,7 @@ const MediaView = () => {
   };
 
   return (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content>
         <View
           style={{

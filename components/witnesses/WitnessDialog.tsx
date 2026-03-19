@@ -5,7 +5,7 @@ import { useWitnessFormStore } from "@/store/witnessFormStore";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 import CustomMaskedInput from "../misc/CustomMaskedInput";
 import ErrorBox from "../misc/ErrorBox";
@@ -28,6 +28,8 @@ const WitnessDialog = () => {
   const [formErrors, setFormErrors] = useState<WitnessFormErrors>({});
 
   const { addWitness, updateWitness } = useCollisionFormStore();
+
+  const theme = useTheme();
 
   const onClose = () => {
     setDialogVisible(false);
@@ -67,8 +69,8 @@ const WitnessDialog = () => {
         <View
           style={{
             paddingTop: 10,
-            backgroundColor: "white",
             borderRadius: 10,
+            backgroundColor: theme.colors.background,
           }}
         >
           <Text
@@ -96,7 +98,7 @@ const WitnessDialog = () => {
                   name: undefined,
                 });
               }}
-              mode="outlined"
+              mode="flat"
               error={!!formErrors.name}
             />
             <ErrorBox errors={formErrors.name} />
@@ -126,7 +128,7 @@ const WitnessDialog = () => {
                   address: undefined,
                 });
               }}
-              mode="outlined"
+              mode="flat"
               error={!!formErrors.address}
             />
             <ErrorBox errors={formErrors.address} />
@@ -142,7 +144,7 @@ const WitnessDialog = () => {
           >
             <Button
               onPress={onClose}
-              mode="outlined"
+              mode="contained"
               style={{ marginRight: 5 }}
             >
               Cancel

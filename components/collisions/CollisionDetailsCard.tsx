@@ -12,12 +12,7 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
 
   const newDate = new Date(date);
   return (
-    <Card
-      mode="contained"
-      style={{
-        margin: 10,
-      }}
-    >
+    <Card mode="contained">
       <Card.Content>
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Location: </Text>

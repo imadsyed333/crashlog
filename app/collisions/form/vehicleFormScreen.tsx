@@ -53,7 +53,6 @@ const VehicleFormScreen = () => {
       <View
         style={{
           flex: 1,
-          paddingHorizontal: 10,
         }}
       >
         <TextInput

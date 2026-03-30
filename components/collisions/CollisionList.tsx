@@ -37,7 +37,6 @@ export const CollisionList = () => {
           style={{
             display: "flex",
             width: "100%",
-            padding: 10,
           }}
           rightOpenValue={-75}
         />

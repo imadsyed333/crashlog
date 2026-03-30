@@ -32,6 +32,7 @@ const CollisionInfoView = ({
 
   return (
     <ScrollView style={{ flex: 1 }}>
+      {/* Collision Details */}
       <View>
         <View
           style={{
@@ -41,35 +42,35 @@ const CollisionInfoView = ({
             alignItems: "center",
           }}
         >
-          <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
-            Details
-          </Text>
+          <Text variant="titleLarge">Details</Text>
           {showActions && (
             <IconButton icon="pencil" onPress={handleEditDetails} />
           )}
         </View>
-        <Divider bold style={{ marginHorizontal: 10 }} />
-        <CollisionDetailsCard collision={collision} />
+        <Divider bold />
+        <View style={{ marginTop: 10 }}>
+          <CollisionDetailsCard collision={collision} />
+        </View>
       </View>
+
+      {/* Media */}
       <View>
-        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+        <Text variant="titleLarge" style={{ marginTop: 10 }}>
           Media
         </Text>
-        <Divider bold style={{ marginHorizontal: 10 }} />
-        <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+        <Divider bold />
+        <View style={{ marginTop: 10 }}>
           <MediaList media={media} />
         </View>
       </View>
+
+      {/* Vehicles */}
       <View>
-        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+        <Text variant="titleLarge" style={{ marginTop: 10 }}>
           Vehicles
         </Text>
-        <Divider bold style={{ marginHorizontal: 10, marginBottom: 10 }} />
-        <View
-          style={{
-            marginHorizontal: 10,
-          }}
-        >
+        <Divider bold style={{ marginBottom: 10 }} />
+        <View>
           {vehicles.map((vehicle, index) => (
             <VehicleCard
               vehicle={vehicle}
@@ -80,16 +81,14 @@ const CollisionInfoView = ({
           ))}
         </View>
       </View>
+
+      {/* Witnesses */}
       <View>
-        <Text variant="titleLarge" style={{ marginLeft: 10, marginTop: 10 }}>
+        <Text variant="titleLarge" style={{ marginTop: 10 }}>
           Witnesses
         </Text>
-        <Divider bold style={{ marginHorizontal: 10, marginBottom: 10 }} />
-        <View
-          style={{
-            marginHorizontal: 10,
-          }}
-        >
+        <Divider bold style={{ marginBottom: 10 }} />
+        <View>
           {witnesses.map((witness, index) => (
             <WitnessCard
               witness={witness}

@@ -2,6 +2,7 @@ import { Stack, useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { IconButton, Text, useTheme } from "react-native-paper";
+import ThemeToggle from "./ThemeToggle";
 
 type ScreenContainerProps = {
   children: React.ReactNode;
@@ -36,7 +37,7 @@ const ScreenContainer = ({
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
-          marginVertical: 10,
+          marginTop: 10,
           marginHorizontal: backButton ? 0 : 10,
         }}
       >
@@ -53,8 +54,11 @@ const ScreenContainer = ({
         >
           {title}
         </Text>
+        <View style={{ marginLeft: "auto" }}>
+          <ThemeToggle />
+        </View>
       </View>
-      {children}
+      <View style={{ flex: 1, margin: 10 }}>{children}</View>
     </View>
   );
 };

@@ -1,5 +1,6 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import ScreenContainer from "@/components/misc/ScreenContainer";
+import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -35,7 +36,7 @@ const viewCollisionScreen = () => {
       {collision && (
         <Button
           mode="contained"
-          style={{ marginTop: 20 }}
+          style={styles.button}
           onPress={handlePress}
           icon={"pencil"}
         >

@@ -5,11 +5,13 @@ import RNDateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { Platform, View } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
+import { Button, Card, Text, useTheme } from "react-native-paper";
 
 const CustomDTPicker = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
   const { date } = collision;
+
+  const paperTheme = useTheme();
 
   const newDate = new Date(date);
 
@@ -48,6 +50,7 @@ const CustomDTPicker = () => {
           onChange={(e, date) => setDate(e, date!)}
           mode="datetime"
           style={styles.datetimepicker}
+          themeVariant={paperTheme.dark ? "dark" : "light"}
         />
       </Card.Content>
     </Card>

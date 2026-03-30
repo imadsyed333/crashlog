@@ -5,21 +5,16 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   button: {
-    margin: 10,
+    marginVertical: 10,
   },
   datetimepicker: {
     marginTop: 5,
   },
   fab: {
     position: "absolute",
-    marginRight: 15,
     right: 0,
     bottom: 0,
     borderRadius: 100,
-  },
-  errorbox: {
-    color: "red",
-    marginHorizontal: 10,
   },
   boldText: {
     fontWeight: "bold",

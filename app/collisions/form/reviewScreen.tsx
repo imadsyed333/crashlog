@@ -9,7 +9,7 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { Button } from "react-native-paper";
 
-const submitScreen = () => {
+const reviewScreen = () => {
   const { collision, isEdit } = useCollisionFormStore();
   const { addCollision, updateCollision } = useCollisionStore();
   const router = useRouter();
@@ -41,4 +41,4 @@ const submitScreen = () => {
     </ScreenContainer>
   );
 };
-export default submitScreen;
+export default reviewScreen;

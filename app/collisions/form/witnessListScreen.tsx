@@ -28,7 +28,7 @@ const witnessListScreen = () => {
         <WitnessList />
         <CustomFAB icon="plus" label="Add Witness" handlePress={handlePress} />
       </View>
-      <NextButton href={"/collisions/form/submitScreen"} />
+      <NextButton href={"/collisions/form/reviewScreen"} />
       <WitnessDialog />
     </ScreenContainer>
   );

@@ -24,6 +24,7 @@ const reviewScreen = () => {
   return (
     <ScreenContainer
       title={isEdit ? "Edit Collision" : "Submit Collision"}
+      description={"Review information, make sure it's all correct!"}
       backButton
     >
       <ScrollView>

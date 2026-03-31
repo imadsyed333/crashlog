@@ -40,7 +40,11 @@ const collisionDetailsFormScreen = () => {
   };
 
   return (
-    <ScreenContainer title="Details" backButton>
+    <ScreenContainer
+      title="Details"
+      description="Provide as much detail as possible about the collision."
+      backButton
+    >
       <View
         style={{
           flex: 1,
@@ -48,7 +52,7 @@ const collisionDetailsFormScreen = () => {
       >
         <TextInput
           error={!!formErrors.location}
-          label={"Location"}
+          label={"Where are you?"}
           value={location}
           onChangeText={(text) => {
             updateCollisionField("location", text);
@@ -63,7 +67,7 @@ const collisionDetailsFormScreen = () => {
         <ErrorBox errors={formErrors.location} />
         <TextInput
           error={!!formErrors.description}
-          label={"Description"}
+          label={"What happened?"}
           multiline={true}
           value={description}
           onChangeText={(text) => {

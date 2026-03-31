@@ -17,7 +17,11 @@ const witnessListScreen = () => {
   };
 
   return (
-    <ScreenContainer title="Witnesses" backButton>
+    <ScreenContainer
+      title="Witnesses"
+      description="Add witnesses present at the collision."
+      backButton
+    >
       <View
         style={{
           flex: 1,

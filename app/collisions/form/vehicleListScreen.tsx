@@ -17,7 +17,11 @@ const VehicleListScreen = () => {
     router.navigate("/collisions/form/vehicleFormScreen");
   };
   return (
-    <ScreenContainer title="Vehicles" backButton>
+    <ScreenContainer
+      title="Vehicles"
+      description="Add vehicles involved in the collision."
+      backButton
+    >
       <View
         style={{
           flex: 1,

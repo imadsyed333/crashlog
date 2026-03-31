@@ -45,6 +45,16 @@ const CustomDTPicker = () => {
           alignItems: "center",
         }}
       >
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+          }}
+        >
+          <Text variant="bodySmall">When did the collision happen?</Text>
+        </View>
         <RNDateTimePicker
           value={new Date(date)}
           onChange={(e, date) => setDate(e, date!)}

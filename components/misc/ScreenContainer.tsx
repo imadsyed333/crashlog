@@ -8,6 +8,7 @@ type ScreenContainerProps = {
   children: React.ReactNode;
   gestureEnabled?: boolean;
   title: string;
+  description?: string;
   backButton?: boolean;
 };
 
@@ -15,6 +16,7 @@ const ScreenContainer = ({
   children,
   gestureEnabled = true,
   title,
+  description,
   backButton = true,
 }: ScreenContainerProps) => {
   const theme = useTheme();
@@ -44,16 +46,28 @@ const ScreenContainer = ({
         {backButton && (
           <IconButton icon="arrow-left" onPress={() => router.back()} />
         )}
-        <Text
-          variant="headlineLarge"
-          style={{
-            textAlign: "left",
-            fontWeight: 600,
-            fontFamily: "Inter_600SemiBold",
-          }}
-        >
-          {title}
-        </Text>
+        <View style={{ flexShrink: 1 }}>
+          <Text
+            variant="headlineLarge"
+            style={{
+              textAlign: "left",
+              fontWeight: 600,
+              fontFamily: "Inter_600SemiBold",
+            }}
+          >
+            {title}
+          </Text>
+          {description && (
+            <Text
+              variant="bodyMedium"
+              style={{
+                color: theme.colors.onSurfaceVariant,
+              }}
+            >
+              {description}
+            </Text>
+          )}
+        </View>
         <View style={{ marginLeft: "auto" }}>
           <ThemeToggle />
         </View>

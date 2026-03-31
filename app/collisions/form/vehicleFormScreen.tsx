@@ -49,7 +49,13 @@ const VehicleFormScreen = () => {
     }
   };
   return (
-    <ScreenContainer title={isEdit ? "Edit Vehicle" : "Add Vehicle"} backButton>
+    <ScreenContainer
+      title={isEdit ? "Edit Vehicle" : "Add Vehicle"}
+      description={
+        "Provide as much detail as possible about the vehicle involved."
+      }
+      backButton
+    >
       <View
         style={{
           flex: 1,

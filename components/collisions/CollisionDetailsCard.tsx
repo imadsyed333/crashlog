@@ -18,11 +18,11 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
           <Text style={styles.boldText}>Location: </Text>
           {location}
         </Text>
-        <Text variant="bodyLarge">
+        <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
           <Text style={styles.boldText}>Description: </Text>
           {description}
         </Text>
-        <Text variant="bodyLarge">
+        <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
           <Text style={styles.boldText}>Date: </Text>
           {newDate.toDateString()}
         </Text>

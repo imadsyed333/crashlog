@@ -1,9 +1,11 @@
-import { styles } from "@/lib/themes";
 import React from "react";
-import { Text } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 
 const ErrorBox = ({ errors }: { errors: String[] | undefined }) => {
-  return <>{errors && <Text style={styles.errorbox}>{errors?.at(0)}</Text>}</>;
+  const paperTheme = useTheme();
+  return <>{errors && <Text style={{
+    color: paperTheme.colors.error,
+  }}>{errors?.at(0)}</Text>}</>;
 };
 
 export default ErrorBox;

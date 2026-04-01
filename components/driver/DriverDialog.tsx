@@ -5,7 +5,7 @@ import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import React, { useState } from "react";
 import { View } from "react-native";
 import Modal from "react-native-modal";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 import CustomMaskedInput from "../misc/CustomMaskedInput";
 import ErrorBox from "../misc/ErrorBox";
@@ -29,6 +29,8 @@ const DriverDialog = () => {
       license: "",
     },
   );
+
+  const theme = useTheme();
 
   const { updateVehicleField } = useVehicleFormStore();
 
@@ -73,9 +75,9 @@ const DriverDialog = () => {
         <View
           style={{
             paddingTop: 10,
-            backgroundColor: "white",
             borderRadius: 10,
             paddingHorizontal: 10,
+            backgroundColor: theme.colors.background,
           }}
         >
           <Text
@@ -93,7 +95,7 @@ const DriverDialog = () => {
             onChangeText={(text) => setDriver({ ...driver, name: text })}
             error={!!formErrors.name}
             style={styles.input}
-            mode="outlined"
+            mode="flat"
           />
           <ErrorBox errors={formErrors.name} />
 
@@ -120,7 +122,7 @@ const DriverDialog = () => {
             onChangeText={(text) => setDriver({ ...driver, address: text })}
             error={!!formErrors.address}
             style={styles.input}
-            mode="outlined"
+            mode="flat"
           />
           <ErrorBox errors={formErrors.address} />
           <View
@@ -132,7 +134,7 @@ const DriverDialog = () => {
           >
             <Button
               onPress={onClose}
-              mode="outlined"
+              mode="contained"
               style={{ marginRight: 5 }}
             >
               Cancel

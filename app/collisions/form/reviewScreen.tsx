@@ -1,18 +1,17 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
+import ScreenContainer from "@/components/misc/ScreenContainer";
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import { Button } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const submitScreen = () => {
+const reviewScreen = () => {
   const { collision, isEdit } = useCollisionFormStore();
   const { addCollision, updateCollision } = useCollisionStore();
-  const insets = useSafeAreaInsets();
   const router = useRouter();
   const handleSubmit = () => {
     if (isEdit) {
@@ -23,24 +22,24 @@ const submitScreen = () => {
     router.replace("/");
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        marginBottom: insets.bottom,
-        justifyContent: "space-between",
-      }}
+    <ScreenContainer
+      title={isEdit ? "Edit Collision" : "Submit Collision"}
+      description={"Make sure all your information is correct!"}
+      backButton
     >
-      <Stack.Screen
-        options={{ title: isEdit ? "Update Collision" : "Submit Collision" }}
-      />
       <ScrollView>
         <CollisionInfoView collision={collision} showActions />
       </ScrollView>
-      <Button mode="contained" onPress={handleSubmit} style={styles.button}>
-        {isEdit ? "Update Collision" : "Add Collision"}
+      <Button
+        mode="contained"
+        onPress={handleSubmit}
+        style={styles.button}
+        icon={isEdit ? "content-save" : "plus"}
+      >
+        {isEdit ? "Save Collision" : "Add Collision"}
       </Button>
       <WitnessDialog />
-    </View>
+    </ScreenContainer>
   );
 };
-export default submitScreen;
+export default reviewScreen;

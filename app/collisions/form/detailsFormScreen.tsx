@@ -1,14 +1,14 @@
 import CustomDTPicker from "@/components/datetime/CustomDTPicker";
 import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
+import ScreenContainer from "@/components/misc/ScreenContainer";
 import { detailsSchema } from "@/lib/schemas";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import z from "zod";
 
 type FormErrors = {
@@ -17,8 +17,6 @@ type FormErrors = {
 };
 
 const collisionDetailsFormScreen = () => {
-  const insets = useSafeAreaInsets();
-
   const { collision, updateCollisionField } = useCollisionFormStore();
 
   const { location, description } = collision;
@@ -42,26 +40,19 @@ const collisionDetailsFormScreen = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingBottom: insets.bottom,
-      }}
+    <ScreenContainer
+      title="Details"
+      description="Provide as much detail as possible about the collision."
+      backButton
     >
-      <Stack.Screen
-        options={{
-          title: "Details",
-        }}
-      />
       <View
         style={{
           flex: 1,
-          paddingHorizontal: 10,
         }}
       >
         <TextInput
           error={!!formErrors.location}
-          label={"Location"}
+          label={"Where are you?"}
           value={location}
           onChangeText={(text) => {
             updateCollisionField("location", text);
@@ -71,12 +62,12 @@ const collisionDetailsFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.location} />
         <TextInput
           error={!!formErrors.description}
-          label={"Description"}
+          label={"What happened?"}
           multiline={true}
           value={description}
           onChangeText={(text) => {
@@ -87,7 +78,7 @@ const collisionDetailsFormScreen = () => {
             });
           }}
           style={{ ...styles.input, minHeight: 100 }}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.description} />
         <View
@@ -116,7 +107,7 @@ const collisionDetailsFormScreen = () => {
       >
         {mode === "edit" ? "Save Changes" : "Next"}
       </Button>
-    </View>
+    </ScreenContainer>
   );
 };
 

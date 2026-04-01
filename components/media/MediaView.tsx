@@ -50,7 +50,7 @@ const MediaView = () => {
   };
 
   return (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content>
         <View
           style={{
@@ -58,7 +58,7 @@ const MediaView = () => {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            margin: 10,
+            marginBottom: 10,
           }}
         >
           <Button

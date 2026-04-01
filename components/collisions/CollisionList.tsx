@@ -21,7 +21,6 @@ export const CollisionList = () => {
               style={{
                 display: "flex",
                 height: "100%",
-                width: "100%",
                 justifyContent: "center",
                 alignItems: "flex-end",
               }}
@@ -38,7 +37,6 @@ export const CollisionList = () => {
           style={{
             display: "flex",
             width: "100%",
-            padding: 10,
           }}
           rightOpenValue={-75}
         />

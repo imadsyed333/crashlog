@@ -1,3 +1,4 @@
+import { styles } from "@/lib/themes";
 import React from "react";
 import { KeyboardTypeOptions } from "react-native";
 import { MaskedTextInput } from "react-native-mask-text";
@@ -25,7 +26,8 @@ const CustomMaskedInput = ({
       label={label}
       error={error}
       value={value}
-      mode="outlined"
+      mode="flat"
+      style={styles.input}
       onChangeText={onChangeText}
       render={(props) => (
         <MaskedTextInput

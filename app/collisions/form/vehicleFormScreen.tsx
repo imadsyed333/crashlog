@@ -1,15 +1,15 @@
 import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/misc/ErrorBox";
+import ScreenContainer from "@/components/misc/ScreenContainer";
 import { styles } from "@/lib/themes";
 import { validateVehicle } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
-import { router, Stack } from "expo-router";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type VehicleFormErrors = {
   make?: String[];
@@ -21,8 +21,6 @@ type VehicleFormErrors = {
 };
 
 const VehicleFormScreen = () => {
-  const insets = useSafeAreaInsets();
-
   const { vehicle, updateVehicleField, isEdit } = useVehicleFormStore();
   const { updateVehicle } = useCollisionFormStore();
   const {
@@ -51,19 +49,13 @@ const VehicleFormScreen = () => {
     }
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingBottom: insets.bottom,
-        justifyContent: "space-between",
-        paddingHorizontal: 10,
-      }}
+    <ScreenContainer
+      title={isEdit ? "Edit Vehicle" : "Add Vehicle"}
+      description={
+        "Provide as much detail as possible about the vehicle involved."
+      }
+      backButton
     >
-      <Stack.Screen
-        options={{
-          title: isEdit ? "Edit Vehicle" : "Add Vehicle",
-        }}
-      />
       <View
         style={{
           flex: 1,
@@ -81,7 +73,7 @@ const VehicleFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.make} />
         <TextInput
@@ -96,7 +88,7 @@ const VehicleFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.model} />
         <TextInput
@@ -111,7 +103,7 @@ const VehicleFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.color} />
         <TextInput
@@ -126,7 +118,7 @@ const VehicleFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.licensePlate} />
         <TextInput
@@ -141,7 +133,7 @@ const VehicleFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.insuranceCompany} />
         <TextInput
@@ -156,7 +148,7 @@ const VehicleFormScreen = () => {
             });
           }}
           style={styles.input}
-          mode="outlined"
+          mode="flat"
         />
         <ErrorBox errors={formErrors.policyNumber} />
         <View
@@ -171,7 +163,7 @@ const VehicleFormScreen = () => {
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>
         Save Vehicle
       </Button>
-    </View>
+    </ScreenContainer>
   );
 };
 

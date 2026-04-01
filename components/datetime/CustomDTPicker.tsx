@@ -5,11 +5,13 @@ import RNDateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { Platform, View } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
+import { Button, Card, Text, useTheme } from "react-native-paper";
 
 const CustomDTPicker = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
   const { date } = collision;
+
+  const paperTheme = useTheme();
 
   const newDate = new Date(date);
 
@@ -35,7 +37,7 @@ const CustomDTPicker = () => {
   };
 
   return Platform.OS === "ios" ? (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content
         style={{
           display: "flex",
@@ -43,18 +45,27 @@ const CustomDTPicker = () => {
           alignItems: "center",
         }}
       >
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+          }}
+        >
+          <Text variant="bodyMedium">When did the collision happen?</Text>
+        </View>
         <RNDateTimePicker
           value={new Date(date)}
           onChange={(e, date) => setDate(e, date!)}
           mode="datetime"
-          textColor="black"
           style={styles.datetimepicker}
-          themeVariant="light"
+          themeVariant={paperTheme.dark ? "dark" : "light"}
         />
       </Card.Content>
     </Card>
   ) : (
-    <Card mode="outlined">
+    <Card mode="contained">
       <Card.Content
         style={{
           display: "flex",
@@ -71,7 +82,7 @@ const CustomDTPicker = () => {
             alignItems: "center",
           }}
         >
-          <Text>
+          <Text variant="bodyMedium">
             {newDate.toLocaleDateString([], {
               weekday: "short",
               year: "numeric",
@@ -95,7 +106,7 @@ const CustomDTPicker = () => {
             alignItems: "center",
           }}
         >
-          <Text>
+          <Text variant="bodyMedium">
             {newDate.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",

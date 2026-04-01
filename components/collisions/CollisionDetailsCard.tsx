@@ -12,22 +12,17 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
 
   const newDate = new Date(date);
   return (
-    <Card
-      mode="outlined"
-      style={{
-        margin: 10,
-      }}
-    >
+    <Card mode="contained">
       <Card.Content>
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Location: </Text>
           {location}
         </Text>
-        <Text variant="bodyLarge">
+        <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
           <Text style={styles.boldText}>Description: </Text>
           {description}
         </Text>
-        <Text variant="bodyLarge">
+        <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
           <Text style={styles.boldText}>Date: </Text>
           {newDate.toDateString()}
         </Text>

@@ -53,7 +53,7 @@ const CustomDTPicker = () => {
             alignItems: "flex-start",
           }}
         >
-          <Text variant="bodySmall">When did the collision happen?</Text>
+          <Text variant="bodyMedium">When did the collision happen?</Text>
         </View>
         <RNDateTimePicker
           value={new Date(date)}
@@ -82,7 +82,7 @@ const CustomDTPicker = () => {
             alignItems: "center",
           }}
         >
-          <Text>
+          <Text variant="bodyMedium">
             {newDate.toLocaleDateString([], {
               weekday: "short",
               year: "numeric",
@@ -106,7 +106,7 @@ const CustomDTPicker = () => {
             alignItems: "center",
           }}
         >
-          <Text>
+          <Text variant="bodyMedium">
             {newDate.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",

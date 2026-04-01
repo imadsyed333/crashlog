@@ -1,14 +1,15 @@
-import { theme } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import React from "react";
 import { View } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { IconButton, Text, useTheme } from "react-native-paper";
 import { SwipeListView } from "react-native-swipe-list-view";
 import WitnessCard from "./WitnessCard";
 
 const WitnessList = () => {
   const { collision, deleteWitness } = useCollisionFormStore();
   const { witnesses } = collision;
+  const theme = useTheme();
+
   return (
     <>
       {witnesses.length > 0 && (

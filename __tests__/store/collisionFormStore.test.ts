@@ -1,5 +1,5 @@
-import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { Vehicle, Witness } from "@/lib/types";
+import { useCollisionFormStore } from "@/store/collisionFormStore";
 
 jest.mock("react-native-get-random-values");
 
@@ -27,13 +27,23 @@ beforeEach(() => {
 
 describe("collisionFormStore – updateCollisionField", () => {
   it("updates the location field", () => {
-    useCollisionFormStore.getState().updateCollisionField("location", "Oak Street");
-    expect(useCollisionFormStore.getState().collision.location).toBe("Oak Street");
+    useCollisionFormStore.getState().updateCollisionField("location", {
+      description: "Oak Street",
+      coordinates: null,
+    });
+    expect(useCollisionFormStore.getState().collision.location).toEqual({
+      description: "Oak Street",
+      coordinates: null,
+    });
   });
 
   it("updates the description field", () => {
-    useCollisionFormStore.getState().updateCollisionField("description", "Side swipe");
-    expect(useCollisionFormStore.getState().collision.description).toBe("Side swipe");
+    useCollisionFormStore
+      .getState()
+      .updateCollisionField("description", "Side swipe");
+    expect(useCollisionFormStore.getState().collision.description).toBe(
+      "Side swipe",
+    );
   });
 });
 
@@ -42,7 +52,9 @@ describe("collisionFormStore – vehicle CRUD", () => {
     const vehicle = makeVehicle("v1");
     useCollisionFormStore.getState().addVehicle(vehicle);
     expect(useCollisionFormStore.getState().collision.vehicles).toHaveLength(1);
-    expect(useCollisionFormStore.getState().collision.vehicles[0]).toEqual(vehicle);
+    expect(useCollisionFormStore.getState().collision.vehicles[0]).toEqual(
+      vehicle,
+    );
   });
 
   it("updates an existing vehicle in the collision", () => {
@@ -50,7 +62,9 @@ describe("collisionFormStore – vehicle CRUD", () => {
     useCollisionFormStore.getState().addVehicle(vehicle);
     const updated: Vehicle = { ...vehicle, color: "White" };
     useCollisionFormStore.getState().updateVehicle(updated);
-    expect(useCollisionFormStore.getState().collision.vehicles[0].color).toBe("White");
+    expect(useCollisionFormStore.getState().collision.vehicles[0].color).toBe(
+      "White",
+    );
   });
 
   it("does not change the number of vehicles when updating", () => {
@@ -76,8 +90,12 @@ describe("collisionFormStore – witness CRUD", () => {
   it("adds a witness to the collision", () => {
     const witness = makeWitness("w1");
     useCollisionFormStore.getState().addWitness(witness);
-    expect(useCollisionFormStore.getState().collision.witnesses).toHaveLength(1);
-    expect(useCollisionFormStore.getState().collision.witnesses[0]).toEqual(witness);
+    expect(useCollisionFormStore.getState().collision.witnesses).toHaveLength(
+      1,
+    );
+    expect(useCollisionFormStore.getState().collision.witnesses[0]).toEqual(
+      witness,
+    );
   });
 
   it("updates an existing witness in the collision", () => {
@@ -86,7 +104,7 @@ describe("collisionFormStore – witness CRUD", () => {
     const updated: Witness = { ...witness, name: "Updated Name" };
     useCollisionFormStore.getState().updateWitness(updated);
     expect(useCollisionFormStore.getState().collision.witnesses[0].name).toBe(
-      "Updated Name"
+      "Updated Name",
     );
   });
 
@@ -105,7 +123,7 @@ describe("collisionFormStore – media CRUD", () => {
     useCollisionFormStore.getState().addMedia("file://photo1.jpg");
     expect(useCollisionFormStore.getState().collision.media).toHaveLength(1);
     expect(useCollisionFormStore.getState().collision.media[0].uri).toBe(
-      "file://photo1.jpg"
+      "file://photo1.jpg",
     );
   });
 
@@ -113,7 +131,7 @@ describe("collisionFormStore – media CRUD", () => {
     useCollisionFormStore.getState().addMedia("file://photo1.jpg");
     useCollisionFormStore.getState().addMedia("file://photo2.jpg");
     expect(useCollisionFormStore.getState().collision.media[0].uri).toBe(
-      "file://photo2.jpg"
+      "file://photo2.jpg",
     );
   });
 
@@ -131,7 +149,7 @@ describe("collisionFormStore – setForm and isEdit", () => {
     useCollisionFormStore.getState().setForm({
       id: "custom-id",
       date: new Date("2024-06-01"),
-      location: "Broadway",
+      location: { description: "Broadway", coordinates: null },
       description: "T-bone",
       vehicles: [],
       media: [],
@@ -151,10 +169,16 @@ describe("collisionFormStore – setForm and isEdit", () => {
 
 describe("collisionFormStore – resetForm", () => {
   it("resets the form to a fresh collision", () => {
-    useCollisionFormStore.getState().updateCollisionField("location", "Some Location");
+    useCollisionFormStore.getState().updateCollisionField("location", {
+      description: "Some Location",
+      coordinates: null,
+    });
     useCollisionFormStore.getState().setEdit(true);
     useCollisionFormStore.getState().resetForm();
-    expect(useCollisionFormStore.getState().collision.location).toBe("");
+    expect(useCollisionFormStore.getState().collision.location).toEqual({
+      description: "",
+      coordinates: null,
+    });
     expect(useCollisionFormStore.getState().isEdit).toBe(false);
   });
 

@@ -1,12 +1,12 @@
-import { useCollisionStore } from "@/store/collisionStore";
 import { Collision } from "@/lib/types";
+import { useCollisionStore } from "@/store/collisionStore";
 
 jest.mock("expo-secure-store");
 
 const makeCollision = (id: string): Collision => ({
   id,
   date: new Date("2024-01-15T10:00:00Z"),
-  location: "5th Ave & Broadway",
+  location: { description: "5th Ave & Broadway", coordinates: null },
   description: "Minor fender-bender",
   vehicles: [],
   media: [],
@@ -54,11 +54,14 @@ describe("collisionStore – updateCollision", () => {
     const original = makeCollision("c1");
     useCollisionStore.getState().addCollision(original);
 
-    const updated: Collision = { ...original, location: "Updated Location" };
+    const updated: Collision = {
+      ...original,
+      location: { description: "Updated Location", coordinates: null },
+    };
     useCollisionStore.getState().updateCollision(updated);
 
     const stored = useCollisionStore.getState().getCollision("c1");
-    expect(stored?.location).toBe("Updated Location");
+    expect(stored?.location.description).toBe("Updated Location");
   });
 
   it("does not change the number of stored collisions", () => {
@@ -67,7 +70,9 @@ describe("collisionStore – updateCollision", () => {
     useCollisionStore.getState().addCollision(c1);
     useCollisionStore.getState().addCollision(c2);
 
-    useCollisionStore.getState().updateCollision({ ...c1, description: "Updated" });
+    useCollisionStore
+      .getState()
+      .updateCollision({ ...c1, description: "Updated" });
     expect(useCollisionStore.getState().collisions).toHaveLength(2);
   });
 
@@ -77,7 +82,9 @@ describe("collisionStore – updateCollision", () => {
     useCollisionStore.getState().addCollision(c1);
     useCollisionStore.getState().addCollision(c2);
 
-    useCollisionStore.getState().updateCollision({ ...c1, description: "Changed" });
+    useCollisionStore
+      .getState()
+      .updateCollision({ ...c1, description: "Changed" });
     expect(useCollisionStore.getState().getCollision("c2")).toEqual(c2);
   });
 });

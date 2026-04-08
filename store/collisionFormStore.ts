@@ -23,11 +23,16 @@ interface CollisionFormStore {
   resetForm: () => void;
 }
 
+const newLocation = () => ({
+  description: "",
+  coordinates: null,
+});
+
 const newCollision = () => {
   return {
     id: "" + uuidv4(),
     date: new Date(),
-    location: "",
+    location: newLocation(),
     description: "",
     vehicles: [],
     witnesses: [],

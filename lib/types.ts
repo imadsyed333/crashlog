@@ -1,7 +1,7 @@
 export interface Collision {
   id: string;
   date: Date;
-  location: string;
+  location: Location;
   description: string;
   vehicles: Vehicle[];
   media: Media[];
@@ -42,4 +42,14 @@ export interface Media {
 export interface Officer {
   name: string;
   badgeNumber: string;
+}
+
+export interface Location {
+  description: string;
+  coordinates: Coordinates | null;
+}
+
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
 }

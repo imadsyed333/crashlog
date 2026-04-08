@@ -56,7 +56,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
         >
           <View style={{ flex: 1 }}>
             <Text variant="titleLarge" style={{ fontWeight: 600 }}>
-              {location}
+              {location.description || "No location provided"}
             </Text>
             <Text
               variant="bodyLarge"

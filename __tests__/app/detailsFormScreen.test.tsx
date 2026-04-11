@@ -5,13 +5,6 @@ import React from "react";
 
 import { renderWithProviders } from "../testUtils/renderWithProviders";
 
-jest.mock("@/components/media/MediaView", () => {
-  const React = require("react");
-  const { Text } = require("react-native");
-
-  return () => React.createElement(Text, null, "Media View");
-});
-
 jest.mock("@/components/datetime/CustomDTPicker", () => {
   const React = require("react");
   const { Text } = require("react-native");
@@ -38,7 +31,7 @@ describe("details form screen", () => {
     expect(expoRouter.__mockRouter.navigate).not.toHaveBeenCalled();
   });
 
-  it("updates the form and navigates to the vehicle list in create mode", () => {
+  it("updates the form and navigates to the media list in create mode", () => {
     renderWithProviders(<DetailsFormScreen />);
 
     const inputs = screen.getAllByTestId("text-input-flat");
@@ -55,7 +48,7 @@ describe("details form screen", () => {
       "Rear-end collision at a red light",
     );
     expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith(
-      "/collisions/form/vehicleListScreen",
+      "/collisions/form/mediaListScreen",
     );
   });
 

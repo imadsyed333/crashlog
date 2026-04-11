@@ -55,9 +55,31 @@ const CollisionInfoView = ({
 
       {/* Media */}
       <View>
-        <Text variant="titleLarge" style={{ marginTop: 10 }}>
-          Media
-        </Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text variant="titleLarge" style={{ marginTop: 10 }}>
+            Media
+          </Text>
+          {showActions && (
+            <IconButton
+              icon="pencil"
+              onPress={() => {
+                router.navigate({
+                  pathname: "/collisions/form/mediaListScreen",
+                  params: {
+                    mode: "edit",
+                  },
+                });
+              }}
+            />
+          )}
+        </View>
         <Divider bold />
         <View style={{ marginTop: 10 }}>
           <MediaList media={media} />

@@ -1,5 +1,4 @@
 import CustomDTPicker from "@/components/datetime/CustomDTPicker";
-import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { detailsSchema } from "@/lib/schemas";
@@ -18,7 +17,7 @@ type FormErrors = {
   description?: String[];
 };
 
-const collisionDetailsFormScreen = () => {
+const DetailsFormScreen = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
 
   const { location, description } = collision;
@@ -36,7 +35,7 @@ const collisionDetailsFormScreen = () => {
       if (mode === "edit") {
         router.back();
       } else {
-        router.navigate("/collisions/form/vehicleListScreen");
+        router.navigate("/collisions/form/mediaListScreen");
       }
     }
   };
@@ -122,13 +121,6 @@ const collisionDetailsFormScreen = () => {
             marginTop: 10,
           }}
         >
-          <MediaView />
-        </View>
-        <View
-          style={{
-            marginTop: 10,
-          }}
-        >
           <CustomDTPicker />
         </View>
       </View>
@@ -147,4 +139,4 @@ const collisionDetailsFormScreen = () => {
   );
 };
 
-export default collisionDetailsFormScreen;
+export default DetailsFormScreen;

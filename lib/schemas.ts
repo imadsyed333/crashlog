@@ -1,8 +1,18 @@
 import validator from "validator";
 import z from "zod";
 
+export const locationSchema = z.object({
+  description: z.string().min(1, { error: "Location must not be empty" }),
+  coordinates: z
+    .object({
+      latitude: z.number(),
+      longitude: z.number(),
+    })
+    .nullable(),
+});
+
 export const detailsSchema = z.object({
-  location: z.string().min(1, { error: "Location must not be empty" }),
+  location: locationSchema,
   description: z.string().min(1, { error: "Description must not be empty" }),
 });
 

@@ -47,9 +47,10 @@ describe("details form screen", () => {
     fireEvent.changeText(inputs[1], "Rear-end collision at a red light");
     fireEvent.press(screen.getByText("Next"));
 
-    expect(useCollisionFormStore.getState().collision.location).toBe(
-      "Elm Street",
-    );
+    expect(useCollisionFormStore.getState().collision.location).toEqual({
+      description: "Elm Street",
+      coordinates: null,
+    });
     expect(useCollisionFormStore.getState().collision.description).toBe(
       "Rear-end collision at a red light",
     );
@@ -60,9 +61,10 @@ describe("details form screen", () => {
 
   it("returns to the previous screen when saving valid edits", () => {
     expoRouter.__mockUseLocalSearchParams.mockReturnValue({ mode: "edit" });
-    useCollisionFormStore
-      .getState()
-      .updateCollisionField("location", "Oak Ave");
+    useCollisionFormStore.getState().updateCollisionField("location", {
+      description: "Oak Ave",
+      coordinates: null,
+    });
     useCollisionFormStore
       .getState()
       .updateCollisionField("description", "Side-swipe while merging");

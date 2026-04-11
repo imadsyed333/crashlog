@@ -28,7 +28,7 @@ describe("CollisionCard", () => {
 
     renderWithProviders(<CollisionCard collision={collision} />);
 
-    fireEvent.press(screen.getByText(collision.location));
+    fireEvent.press(screen.getByText(collision.location.description));
 
     expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith(
       "/collisions/c42",

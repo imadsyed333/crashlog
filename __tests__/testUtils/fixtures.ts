@@ -21,7 +21,7 @@ export const makeWitness = (id = "witness-1"): Witness => ({
 export const makeCollision = (id = "collision-1"): Collision => ({
   id,
   date: new Date("2024-01-15T10:00:00Z"),
-  location: "5th Ave & Broadway",
+  location: { description: "5th Ave & Broadway", coordinates: null },
   description: "Minor fender-bender",
   vehicles: [makeVehicle()],
   media: [{ id: "media-1", uri: "file://photo-1.jpg" }],

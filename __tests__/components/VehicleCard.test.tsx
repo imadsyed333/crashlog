@@ -24,7 +24,9 @@ describe("VehicleCard", () => {
   it("loads the vehicle into the form and navigates to edit it", () => {
     const vehicle = makeVehicle("v42");
 
-    renderWithProviders(<VehicleCard vehicle={vehicle} index={0} />);
+    renderWithProviders(
+      <VehicleCard vehicle={vehicle} index={0} showActions />,
+    );
 
     fireEvent.press(screen.UNSAFE_getByProps({ icon: "pencil" }));
 

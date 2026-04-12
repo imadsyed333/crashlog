@@ -20,7 +20,9 @@ describe("WitnessCard", () => {
   it("loads the witness into the dialog form and enters edit mode", () => {
     const witness = makeWitness("w42");
 
-    renderWithProviders(<WitnessCard witness={witness} index={0} />);
+    renderWithProviders(
+      <WitnessCard witness={witness} index={0} showActions />,
+    );
 
     fireEvent.press(screen.UNSAFE_getByProps({ icon: "pencil" }));
 

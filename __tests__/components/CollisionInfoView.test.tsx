@@ -50,4 +50,34 @@ describe("CollisionInfoView", () => {
       },
     });
   });
+
+  it("navigates to edit vehicles when actions are enabled", () => {
+    renderWithProviders(
+      <CollisionInfoView collision={makeCollision("c1")} showActions />,
+    );
+
+    fireEvent.press(screen.UNSAFE_getAllByProps({ icon: "pencil" })[2]);
+
+    expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith({
+      pathname: "/collisions/form/vehicleListScreen",
+      params: {
+        mode: "edit",
+      },
+    });
+  });
+
+  it("navigates to edit witnesses when actions are enabled", () => {
+    renderWithProviders(
+      <CollisionInfoView collision={makeCollision("c1")} showActions />,
+    );
+
+    fireEvent.press(screen.UNSAFE_getAllByProps({ icon: "pencil" })[3]);
+
+    expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith({
+      pathname: "/collisions/form/witnessListScreen",
+      params: {
+        mode: "edit",
+      },
+    });
+  });
 });

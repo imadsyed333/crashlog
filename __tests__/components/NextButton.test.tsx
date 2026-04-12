@@ -7,6 +7,7 @@ import { renderWithProviders } from "../testUtils/renderWithProviders";
 const expoRouter = jest.requireMock("expo-router") as {
   __mockRouter: {
     navigate: jest.Mock;
+    back: jest.Mock;
   };
 };
 
@@ -19,5 +20,16 @@ describe("NextButton", () => {
     expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith(
       "/collisions/form/reviewScreen",
     );
+  });
+
+  it("goes back and shows save label when in edit mode", () => {
+    renderWithProviders(
+      <NextButton href="/collisions/form/reviewScreen" mode="edit" />,
+    );
+
+    fireEvent.press(screen.getByText("Save Changes"));
+
+    expect(expoRouter.__mockRouter.back).toHaveBeenCalled();
+    expect(expoRouter.__mockRouter.navigate).not.toHaveBeenCalled();
   });
 });

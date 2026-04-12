@@ -4,11 +4,14 @@ import ScreenContainer from "@/components/misc/ScreenContainer";
 import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import WitnessList from "@/components/witnesses/WitnessList";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
-const witnessListScreen = () => {
+const WitnessListScreen = () => {
   const { resetForm, setDialogVisible, setEdit } = useWitnessFormStore();
+
+  const { mode } = useLocalSearchParams<{ mode?: string }>();
 
   const handlePress = () => {
     resetForm();
@@ -32,10 +35,13 @@ const witnessListScreen = () => {
         <WitnessList />
         <CustomFAB icon="plus" label="Add Witness" handlePress={handlePress} />
       </View>
-      <NextButton href={"/collisions/form/reviewScreen"} />
+      <NextButton
+        href={"/collisions/form/reviewScreen"}
+        mode={mode as "edit" | "create"}
+      />
       <WitnessDialog />
     </ScreenContainer>
   );
 };
 
-export default witnessListScreen;
+export default WitnessListScreen;

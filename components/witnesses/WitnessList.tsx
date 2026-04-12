@@ -16,7 +16,7 @@ const WitnessList = () => {
         <SwipeListView
           data={witnesses}
           renderItem={({ item, index }) => (
-            <WitnessCard witness={item} index={index} />
+            <WitnessCard witness={item} index={index} showActions />
           )}
           renderHiddenItem={({ item }) => (
             <View

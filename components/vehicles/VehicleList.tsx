@@ -16,7 +16,7 @@ const VehicleList = () => {
         <SwipeListView
           data={vehicles}
           renderItem={({ item, index }) => (
-            <VehicleCard vehicle={item} index={index} />
+            <VehicleCard vehicle={item} index={index} showActions />
           )}
           renderHiddenItem={({ item }) => (
             <View

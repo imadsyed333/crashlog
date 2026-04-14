@@ -1,5 +1,4 @@
 import CustomDTPicker from "@/components/datetime/CustomDTPicker";
-import MediaView from "@/components/media/MediaView";
 import ErrorBox from "@/components/misc/ErrorBox";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { detailsSchema } from "@/lib/schemas";
@@ -7,16 +6,18 @@ import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import z from "zod";
+
+import * as Location from "expo-location";
 
 type FormErrors = {
   location?: String[];
   description?: String[];
 };
 
-const collisionDetailsFormScreen = () => {
+const DetailsFormScreen = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
 
   const { location, description } = collision;
@@ -34,8 +35,38 @@ const collisionDetailsFormScreen = () => {
       if (mode === "edit") {
         router.back();
       } else {
-        router.navigate("/collisions/form/vehicleListScreen");
+        router.navigate("/collisions/form/mediaListScreen");
       }
+    }
+  };
+
+  const fetchLocation = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+        Alert.alert(
+          "Permission required",
+          "Permission to access location is required.",
+        );
+        return;
+      }
+
+      const locationData = await Location.getCurrentPositionAsync({});
+
+      const geocode = await Location.reverseGeocodeAsync(locationData.coords);
+
+      updateCollisionField("location", {
+        description: geocode[0]
+          ? `${geocode[0].name}, ${geocode[0].city}, ${geocode[0].region}`
+          : "",
+        coordinates: {
+          latitude: locationData.coords.latitude,
+          longitude: locationData.coords.longitude,
+        },
+      });
+    } catch (error) {
+      console.error("Error fetching location:", error);
     }
   };
 
@@ -53,9 +84,12 @@ const collisionDetailsFormScreen = () => {
         <TextInput
           error={!!formErrors.location}
           label={"Where are you?"}
-          value={location}
+          value={location.description}
           onChangeText={(text) => {
-            updateCollisionField("location", text);
+            updateCollisionField("location", {
+              ...location,
+              description: text,
+            });
             setFormErrors({
               ...formErrors,
               location: undefined,
@@ -63,6 +97,7 @@ const collisionDetailsFormScreen = () => {
           }}
           style={styles.input}
           mode="flat"
+          right={<TextInput.Icon icon="map-marker" onPress={fetchLocation} />}
         />
         <ErrorBox errors={formErrors.location} />
         <TextInput
@@ -86,13 +121,6 @@ const collisionDetailsFormScreen = () => {
             marginTop: 10,
           }}
         >
-          <MediaView />
-        </View>
-        <View
-          style={{
-            marginTop: 10,
-          }}
-        >
           <CustomDTPicker />
         </View>
       </View>
@@ -111,4 +139,4 @@ const collisionDetailsFormScreen = () => {
   );
 };
 
-export default collisionDetailsFormScreen;
+export default DetailsFormScreen;

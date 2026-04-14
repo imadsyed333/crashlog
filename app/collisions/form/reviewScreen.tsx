@@ -1,6 +1,5 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import ScreenContainer from "@/components/misc/ScreenContainer";
-import WitnessDialog from "@/components/witnesses/WitnessDialog";
 import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
@@ -38,7 +37,6 @@ const reviewScreen = () => {
       >
         {isEdit ? "Save Collision" : "Add Collision"}
       </Button>
-      <WitnessDialog />
     </ScreenContainer>
   );
 };

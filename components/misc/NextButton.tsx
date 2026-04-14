@@ -5,21 +5,30 @@ import { Button } from "react-native-paper";
 
 type NextButtonProps = {
   href: Href;
+  mode?: "edit" | "create";
 };
 
-const NextButton = ({ href }: NextButtonProps) => {
+const NextButton = ({ href, mode }: NextButtonProps) => {
   const router = useRouter();
+
+  const handlePress = () => {
+    if (mode === "edit") {
+      router.back();
+      return;
+    }
+    router.navigate(href);
+  };
   return (
     <Button
       mode="contained"
       style={styles.button}
-      onPress={() => router.navigate(href)}
-      icon={"arrow-right"}
+      onPress={handlePress}
+      icon={mode === "edit" ? "content-save" : "arrow-right"}
       contentStyle={{
-        flexDirection: "row-reverse",
+        flexDirection: mode === "edit" ? "row" : "row-reverse",
       }}
     >
-      Next
+      {mode === "edit" ? "Save Changes" : "Next"}
     </Button>
   );
 };

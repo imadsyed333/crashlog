@@ -31,7 +31,7 @@ describe("review screen", () => {
     const originalCollision = makeCollision("c1");
     const editedCollision = {
       ...originalCollision,
-      location: "Updated Location",
+      location: { description: "Updated Location", coordinates: null },
     };
 
     useCollisionStore.setState({ collisions: [originalCollision] });
@@ -44,9 +44,9 @@ describe("review screen", () => {
 
     fireEvent.press(screen.getByText("Save Collision"));
 
-    expect(useCollisionStore.getState().collisions[0].location).toBe(
-      "Updated Location",
-    );
+    expect(
+      useCollisionStore.getState().collisions[0].location.description,
+    ).toBe("Updated Location");
     expect(expoRouter.__mockRouter.replace).toHaveBeenCalledWith("/");
   });
 });

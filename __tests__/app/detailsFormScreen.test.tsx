@@ -5,13 +5,6 @@ import React from "react";
 
 import { renderWithProviders } from "../testUtils/renderWithProviders";
 
-jest.mock("@/components/media/MediaView", () => {
-  const React = require("react");
-  const { Text } = require("react-native");
-
-  return () => React.createElement(Text, null, "Media View");
-});
-
 jest.mock("@/components/datetime/CustomDTPicker", () => {
   const React = require("react");
   const { Text } = require("react-native");
@@ -38,7 +31,7 @@ describe("details form screen", () => {
     expect(expoRouter.__mockRouter.navigate).not.toHaveBeenCalled();
   });
 
-  it("updates the form and navigates to the vehicle list in create mode", () => {
+  it("updates the form and navigates to the media list in create mode", () => {
     renderWithProviders(<DetailsFormScreen />);
 
     const inputs = screen.getAllByTestId("text-input-flat");
@@ -47,22 +40,24 @@ describe("details form screen", () => {
     fireEvent.changeText(inputs[1], "Rear-end collision at a red light");
     fireEvent.press(screen.getByText("Next"));
 
-    expect(useCollisionFormStore.getState().collision.location).toBe(
-      "Elm Street",
-    );
+    expect(useCollisionFormStore.getState().collision.location).toEqual({
+      description: "Elm Street",
+      coordinates: null,
+    });
     expect(useCollisionFormStore.getState().collision.description).toBe(
       "Rear-end collision at a red light",
     );
     expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith(
-      "/collisions/form/vehicleListScreen",
+      "/collisions/form/mediaListScreen",
     );
   });
 
   it("returns to the previous screen when saving valid edits", () => {
     expoRouter.__mockUseLocalSearchParams.mockReturnValue({ mode: "edit" });
-    useCollisionFormStore
-      .getState()
-      .updateCollisionField("location", "Oak Ave");
+    useCollisionFormStore.getState().updateCollisionField("location", {
+      description: "Oak Ave",
+      coordinates: null,
+    });
     useCollisionFormStore
       .getState()
       .updateCollisionField("description", "Side-swipe while merging");

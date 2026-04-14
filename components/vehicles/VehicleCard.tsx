@@ -16,7 +16,7 @@ type VehicleCardProps = {
 const VehicleCard = ({
   vehicle,
   index,
-  showActions = true,
+  showActions = false,
 }: VehicleCardProps) => {
   const {
     make,

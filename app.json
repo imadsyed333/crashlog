@@ -51,6 +51,12 @@
           "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos."
         }
       ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to access your location while you are using the app."
+        }
+      ],
       "expo-web-browser"
     ],
     "experiments": {

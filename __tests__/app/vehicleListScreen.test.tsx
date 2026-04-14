@@ -8,7 +8,9 @@ import { renderWithProviders } from "../testUtils/renderWithProviders";
 const expoRouter = jest.requireMock("expo-router") as {
   __mockRouter: {
     navigate: jest.Mock;
+    back: jest.Mock;
   };
+  __mockUseLocalSearchParams: jest.Mock;
 };
 
 describe("vehicle list screen", () => {
@@ -35,5 +37,16 @@ describe("vehicle list screen", () => {
     expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith(
       "/collisions/form/witnessListScreen",
     );
+  });
+
+  it("goes back when saving in edit mode", () => {
+    expoRouter.__mockUseLocalSearchParams.mockReturnValue({ mode: "edit" });
+
+    renderWithProviders(<VehicleListScreen />);
+
+    fireEvent.press(screen.getByText("Save Changes"));
+
+    expect(expoRouter.__mockRouter.back).toHaveBeenCalled();
+    expect(expoRouter.__mockRouter.navigate).not.toHaveBeenCalled();
   });
 });

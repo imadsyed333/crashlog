@@ -16,7 +16,7 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
       <Card.Content>
         <Text variant="bodyLarge">
           <Text style={styles.boldText}>Location: </Text>
-          {location}
+          {location.description}
         </Text>
         <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
           <Text style={styles.boldText}>Description: </Text>

@@ -13,7 +13,7 @@ type WitnessCardProps = {
 const WitnessCard = ({
   witness,
   index,
-  showActions = true,
+  showActions = false,
 }: WitnessCardProps) => {
   const { name, phoneNumber, address } = witness;
   const { setForm, setEdit, setDialogVisible } = useWitnessFormStore();

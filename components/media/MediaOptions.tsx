@@ -3,10 +3,8 @@ import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Alert, View } from "react-native";
 import { Button, Card } from "react-native-paper";
-import MediaList from "./MediaList";
-const MediaView = () => {
-  const { addMedia, collision } = useCollisionFormStore();
-  const { media } = collision;
+const MediaOptions = () => {
+  const { addMedia } = useCollisionFormStore();
 
   const useCamera = async () => {
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
@@ -58,7 +56,6 @@ const MediaView = () => {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            marginBottom: 10,
           }}
         >
           <Button
@@ -78,10 +75,9 @@ const MediaView = () => {
             Photo Library
           </Button>
         </View>
-        <MediaList showActions={true} media={media} />
       </Card.Content>
     </Card>
   );
 };
 
-export default MediaView;
+export default MediaOptions;

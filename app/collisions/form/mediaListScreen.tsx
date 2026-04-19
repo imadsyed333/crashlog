@@ -20,7 +20,7 @@ const MediaListScreen = () => {
   return (
     <ScreenContainer
       title="Media"
-      description="Provide as many photos and videos as you can of the collision."
+      description="Provide as many photos as you can of the collision."
     >
       <View style={{ flex: 1 }}>
         <MediaView />

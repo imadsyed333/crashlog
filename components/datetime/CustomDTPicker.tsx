@@ -14,6 +14,15 @@ const CustomDTPicker = () => {
   const paperTheme = useTheme();
 
   const newDate = new Date(date);
+  const dateButtonLabel = newDate.toLocaleDateString([], {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const timeButtonLabel = newDate.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  });
 
   const setDate = (event: DateTimePickerEvent, date: Date | undefined) => {
     updateCollisionField("date", date || new Date());
@@ -69,8 +78,7 @@ const CustomDTPicker = () => {
       <Card.Content
         style={{
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "center",
           alignItems: "center",
         }}
       >
@@ -78,47 +86,58 @@ const CustomDTPicker = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
-            alignItems: "center",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
           }}
         >
-          <Text variant="bodyMedium">
-            {newDate.toLocaleDateString([], {
-              weekday: "short",
-              year: "numeric",
-              month: "short",
-              day: "2-digit",
-            })}
-          </Text>
-          <Button
-            onPress={showDatePicker}
-            mode="contained"
-            style={styles.button}
-          >
-            Pick Date
-          </Button>
+          <Text variant="bodyMedium">When did the collision happen?</Text>
         </View>
         <View
           style={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text variant="bodyMedium">
-            {newDate.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </Text>
-          <Button
-            onPress={showTimePicker}
-            mode="contained"
-            style={styles.button}
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              marginHorizontal: 4,
+            }}
           >
-            Pick Time
-          </Button>
+            <Button
+              onPress={showDatePicker}
+              mode="contained"
+              style={styles.button}
+              buttonColor={paperTheme.colors.elevation.level2}
+              textColor={paperTheme.colors.onSurface}
+            >
+              {dateButtonLabel}
+            </Button>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              marginHorizontal: 4,
+            }}
+          >
+            <Button
+              onPress={showTimePicker}
+              mode="contained"
+              style={styles.button}
+              buttonColor={paperTheme.colors.elevation.level2}
+              textColor={paperTheme.colors.onSurface}
+            >
+              {timeButtonLabel}
+            </Button>
+          </View>
         </View>
       </Card.Content>
     </Card>

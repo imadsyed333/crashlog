@@ -4,11 +4,11 @@ import React from "react";
 
 import { renderWithProviders } from "../testUtils/renderWithProviders";
 
-jest.mock("@/components/media/MediaView", () => {
+jest.mock("@/components/media/MediaOptions", () => {
   const React = require("react");
   const { Text } = require("react-native");
 
-  return () => React.createElement(Text, null, "Media View");
+  return () => React.createElement(Text, null, "Media Options");
 });
 
 const expoRouter = jest.requireMock("expo-router") as {

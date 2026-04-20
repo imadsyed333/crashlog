@@ -1,4 +1,4 @@
-import MediaView from "@/components/media/MediaView";
+import MediaOptions from "@/components/media/MediaOptions";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { fireEvent, screen, waitFor } from "@testing-library/react-native";
 import React from "react";
@@ -20,14 +20,14 @@ const imagePicker = jest.requireMock("expo-image-picker") as {
   launchImageLibraryAsync: jest.Mock;
 };
 
-describe("MediaView", () => {
+describe("MediaOptions", () => {
   it("shows an alert when camera permission is denied", async () => {
     const alertSpy = jest.spyOn(Alert, "alert").mockImplementation(jest.fn());
     imagePicker.requestCameraPermissionsAsync.mockResolvedValue({
       granted: false,
     });
 
-    renderWithProviders(<MediaView />);
+    renderWithProviders(<MediaOptions />);
 
     fireEvent.press(screen.getByText("Camera"));
 
@@ -50,7 +50,7 @@ describe("MediaView", () => {
       assets: [{ uri: "file://library-photo.jpg" }],
     });
 
-    renderWithProviders(<MediaView />);
+    renderWithProviders(<MediaOptions />);
 
     fireEvent.press(screen.getByText("Photo Library"));
 

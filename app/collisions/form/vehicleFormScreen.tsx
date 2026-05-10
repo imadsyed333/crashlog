@@ -1,5 +1,4 @@
-import DriverCard from "@/components/driver/DriverCard";
-import DriverDialog from "@/components/driver/DriverDialog";
+import DriverForm from "@/components/driver/DriverForm";
 import ErrorBox from "@/components/misc/ErrorBox";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { styles } from "@/lib/themes";
@@ -8,7 +7,7 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
 type VehicleFormErrors = {
@@ -23,15 +22,8 @@ type VehicleFormErrors = {
 const VehicleFormScreen = () => {
   const { vehicle, updateVehicleField, isEdit } = useVehicleFormStore();
   const { updateVehicle } = useCollisionFormStore();
-  const {
-    make,
-    model,
-    color,
-    licensePlate,
-    insuranceCompany,
-    policyNumber,
-    driver,
-  } = vehicle;
+  const { make, model, color, licensePlate, insuranceCompany, policyNumber } =
+    vehicle;
   const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
   const { addVehicle } = useCollisionFormStore();
 
@@ -56,7 +48,7 @@ const VehicleFormScreen = () => {
       }
       backButton
     >
-      <View
+      <ScrollView
         style={{
           flex: 1,
         }}
@@ -156,10 +148,9 @@ const VehicleFormScreen = () => {
             marginTop: 10,
           }}
         >
-          <DriverCard driver={driver} showActions />
+          <DriverForm />
         </View>
-        <DriverDialog />
-      </View>
+      </ScrollView>
       <Button mode="contained" style={styles.button} onPress={handleSubmit}>
         Save Vehicle
       </Button>

@@ -6,7 +6,6 @@ export interface Collision {
   vehicles: Vehicle[];
   media: Media[];
   witnesses: Witness[];
-  officer: Officer | null;
 }
 
 export interface Vehicle {
@@ -17,7 +16,7 @@ export interface Vehicle {
   licensePlate: string;
   insuranceCompany: string;
   policyNumber: string;
-  driver: Driver | null;
+  driver: Driver;
 }
 
 export interface Person {

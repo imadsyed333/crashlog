@@ -11,11 +11,20 @@ interface VehicleFormStore {
   setEdit: (value: boolean) => void;
   updateVehicleField: <K extends keyof Vehicle>(
     key: K,
-    value: Vehicle[K]
+    value: Vehicle[K],
   ) => void;
   setForm: (vehicle: Vehicle) => void;
   resetForm: () => void;
 }
+
+const newDriver = () => {
+  return {
+    name: "",
+    address: "",
+    phoneNumber: "",
+    license: "",
+  };
+};
 
 const newVehicle = () => {
   return {
@@ -26,7 +35,7 @@ const newVehicle = () => {
     licensePlate: "",
     insuranceCompany: "",
     policyNumber: "",
-    driver: null,
+    driver: newDriver(),
   };
 };
 

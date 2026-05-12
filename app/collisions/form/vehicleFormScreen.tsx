@@ -8,7 +8,7 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
 type VehicleFormErrors = {
@@ -56,113 +56,130 @@ const VehicleFormScreen = () => {
       }
       backButton
     >
-      <View
+      <KeyboardAvoidingView
         style={{
           flex: 1,
         }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={0}
       >
-        <TextInput
-          error={!!formErrors.make}
-          label={"Make (e.g., Toyota)"}
-          value={make}
-          onChangeText={(text) => {
-            updateVehicleField("make", text);
-            setFormErrors({
-              ...formErrors,
-              make: undefined,
-            });
-          }}
-          style={styles.input}
-          mode="flat"
-        />
-        <ErrorBox errors={formErrors.make} />
-        <TextInput
-          error={!!formErrors.model}
-          label={"Model (e.g., Camry)"}
-          value={model}
-          onChangeText={(text) => {
-            updateVehicleField("model", text);
-            setFormErrors({
-              ...formErrors,
-              model: undefined,
-            });
-          }}
-          style={styles.input}
-          mode="flat"
-        />
-        <ErrorBox errors={formErrors.model} />
-        <TextInput
-          error={!!formErrors.color}
-          label={"Color (e.g., Red)"}
-          value={color}
-          onChangeText={(text) => {
-            updateVehicleField("color", text);
-            setFormErrors({
-              ...formErrors,
-              color: undefined,
-            });
-          }}
-          style={styles.input}
-          mode="flat"
-        />
-        <ErrorBox errors={formErrors.color} />
-        <TextInput
-          error={!!formErrors.licensePlate}
-          label={"License Plate"}
-          value={licensePlate}
-          onChangeText={(text) => {
-            updateVehicleField("licensePlate", text);
-            setFormErrors({
-              ...formErrors,
-              licensePlate: undefined,
-            });
-          }}
-          style={styles.input}
-          mode="flat"
-        />
-        <ErrorBox errors={formErrors.licensePlate} />
-        <TextInput
-          error={!!formErrors.insuranceCompany}
-          label={"Insurance Company"}
-          value={insuranceCompany}
-          onChangeText={(text) => {
-            updateVehicleField("insuranceCompany", text);
-            setFormErrors({
-              ...formErrors,
-              insuranceCompany: undefined,
-            });
-          }}
-          style={styles.input}
-          mode="flat"
-        />
-        <ErrorBox errors={formErrors.insuranceCompany} />
-        <TextInput
-          error={!!formErrors.policyNumber}
-          label={"Policy Number"}
-          value={policyNumber}
-          onChangeText={(text) => {
-            updateVehicleField("policyNumber", text);
-            setFormErrors({
-              ...formErrors,
-              policyNumber: undefined,
-            });
-          }}
-          style={styles.input}
-          mode="flat"
-        />
-        <ErrorBox errors={formErrors.policyNumber} />
-        <View
-          style={{
-            marginTop: 10,
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            flexGrow: 1,
+            paddingBottom: 12,
           }}
         >
-          <DriverCard driver={driver} showActions />
-        </View>
-        <DriverDialog />
-      </View>
-      <Button mode="contained" style={styles.button} onPress={handleSubmit}>
-        Save Vehicle
-      </Button>
+          <View
+            style={{
+              flex: 1,
+            }}
+          >
+            <TextInput
+              error={!!formErrors.make}
+              label={"Make (e.g., Toyota)"}
+              value={make}
+              onChangeText={(text) => {
+                updateVehicleField("make", text);
+                setFormErrors({
+                  ...formErrors,
+                  make: undefined,
+                });
+              }}
+              style={styles.input}
+              mode="flat"
+            />
+            <ErrorBox errors={formErrors.make} />
+            <TextInput
+              error={!!formErrors.model}
+              label={"Model (e.g., Camry)"}
+              value={model}
+              onChangeText={(text) => {
+                updateVehicleField("model", text);
+                setFormErrors({
+                  ...formErrors,
+                  model: undefined,
+                });
+              }}
+              style={styles.input}
+              mode="flat"
+            />
+            <ErrorBox errors={formErrors.model} />
+            <TextInput
+              error={!!formErrors.color}
+              label={"Color (e.g., Red)"}
+              value={color}
+              onChangeText={(text) => {
+                updateVehicleField("color", text);
+                setFormErrors({
+                  ...formErrors,
+                  color: undefined,
+                });
+              }}
+              style={styles.input}
+              mode="flat"
+            />
+            <ErrorBox errors={formErrors.color} />
+            <TextInput
+              error={!!formErrors.licensePlate}
+              label={"License Plate"}
+              value={licensePlate}
+              onChangeText={(text) => {
+                updateVehicleField("licensePlate", text);
+                setFormErrors({
+                  ...formErrors,
+                  licensePlate: undefined,
+                });
+              }}
+              style={styles.input}
+              mode="flat"
+            />
+            <ErrorBox errors={formErrors.licensePlate} />
+            <TextInput
+              error={!!formErrors.insuranceCompany}
+              label={"Insurance Company"}
+              value={insuranceCompany}
+              onChangeText={(text) => {
+                updateVehicleField("insuranceCompany", text);
+                setFormErrors({
+                  ...formErrors,
+                  insuranceCompany: undefined,
+                });
+              }}
+              style={styles.input}
+              mode="flat"
+            />
+            <ErrorBox errors={formErrors.insuranceCompany} />
+            <TextInput
+              error={!!formErrors.policyNumber}
+              label={"Policy Number"}
+              value={policyNumber}
+              onChangeText={(text) => {
+                updateVehicleField("policyNumber", text);
+                setFormErrors({
+                  ...formErrors,
+                  policyNumber: undefined,
+                });
+              }}
+              style={styles.input}
+              mode="flat"
+            />
+            <ErrorBox errors={formErrors.policyNumber} />
+            <View
+              style={{
+                marginTop: 10,
+              }}
+            >
+              <DriverCard driver={driver} showActions />
+            </View>
+            <DriverDialog />
+          </View>
+        </ScrollView>
+        <Button mode="contained" style={styles.button} onPress={handleSubmit}>
+          Save Vehicle
+        </Button>
+      </KeyboardAvoidingView>
     </ScreenContainer>
   );
 };

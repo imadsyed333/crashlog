@@ -58,7 +58,7 @@ const DetailsFormScreen = () => {
 
       updateCollisionField("location", {
         description: geocode[0]
-          ? `${geocode[0].name}, ${geocode[0].city}, ${geocode[0].region}`
+          ? `${geocode[0].streetNumber} ${geocode[0].street}, ${geocode[0].city}`
           : "",
         coordinates: {
           latitude: locationData.coords.latitude,

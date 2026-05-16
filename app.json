@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "crashlog",
+    "name": "CrashLog",
     "slug": "crashlog",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,7 +10,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to take photos and videos of collision events."
+        "NSCameraUsageDescription": "This app uses the camera to take photos of collision events."
       }
     },
     "android": {
@@ -40,7 +40,7 @@
         "expo-secure-store",
         {
           "configureAndroidBackup": true,
-          "faceIDPermission": "Allow CrashLog to access your Face ID biometric data."
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
         }
       ],
       [

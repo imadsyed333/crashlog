@@ -83,7 +83,7 @@ const DetailsFormScreen = () => {
       >
         <TextInput
           error={!!formErrors.location}
-          label={"Where are you?"}
+          label={'Where are you? (Ex. "near Jane and Finch")'}
           value={location.description}
           onChangeText={(text) => {
             updateCollisionField("location", {
@@ -102,7 +102,7 @@ const DetailsFormScreen = () => {
         <ErrorBox errors={formErrors.location} />
         <TextInput
           error={!!formErrors.description}
-          label={"What happened?"}
+          label={"What happened? (Ex. 'A car ran a red light and hit me')"}
           multiline={true}
           value={description}
           onChangeText={(text) => {

@@ -6,7 +6,7 @@ import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Alert, View } from "react-native";
+import { ActivityIndicator, Alert, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import z from "zod";
 
@@ -22,6 +22,7 @@ const DetailsFormScreen = () => {
 
   const { location, description } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [isFetchingLocation, setIsFetchingLocation] = useState(false);
   const router = useRouter();
 
   const { mode } = useLocalSearchParams<{ mode?: string }>();
@@ -41,6 +42,9 @@ const DetailsFormScreen = () => {
   };
 
   const fetchLocation = async () => {
+    if (isFetchingLocation) return;
+
+    setIsFetchingLocation(true);
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -67,6 +71,8 @@ const DetailsFormScreen = () => {
       });
     } catch (error) {
       console.error("Error fetching location:", error);
+    } finally {
+      setIsFetchingLocation(false);
     }
   };
 
@@ -97,7 +103,28 @@ const DetailsFormScreen = () => {
           }}
           style={styles.input}
           mode="flat"
-          right={<TextInput.Icon icon="map-marker" onPress={fetchLocation} />}
+          right={
+            isFetchingLocation ? (
+              <TextInput.Icon
+                icon={() => (
+                  <ActivityIndicator
+                    size="small"
+                    accessibilityLabel="Fetching current location"
+                    testID="location-loading-indicator"
+                  />
+                )}
+                accessibilityLabel="Fetching current location"
+                disabled
+              />
+            ) : (
+              <TextInput.Icon
+                icon="map-marker"
+                onPress={fetchLocation}
+                accessibilityLabel="Use current location"
+                testID="location-fetch-icon"
+              />
+            )
+          }
         />
         <ErrorBox errors={formErrors.location} />
         <TextInput

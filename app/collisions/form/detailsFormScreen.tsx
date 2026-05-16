@@ -7,7 +7,7 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { ActivityIndicator, Alert, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 
 import * as Location from "expo-location";
@@ -19,6 +19,7 @@ type FormErrors = {
 
 const DetailsFormScreen = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
+  const theme = useTheme();
 
   const { location, description } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
@@ -109,6 +110,7 @@ const DetailsFormScreen = () => {
                 icon={() => (
                   <ActivityIndicator
                     size="small"
+                    color={theme.colors.primary}
                     accessibilityLabel="Fetching current location"
                     testID="location-loading-indicator"
                   />

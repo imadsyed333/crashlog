@@ -10,8 +10,9 @@ export default function Index() {
 
   const handlePress = () => {
     resetForm();
-    router.navigate("/collisions/form/detailsFormScreen");
+    router.navigate("/collisions/form/safetyScreen");
   };
+
   return (
     <ScreenContainer
       gestureEnabled={false}

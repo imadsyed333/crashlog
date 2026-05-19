@@ -12,7 +12,7 @@ const expoRouter = jest.requireMock("expo-router") as {
 };
 
 describe("index screen", () => {
-  it("resets the form and navigates to the collision details flow", () => {
+  it("resets the form and navigates to the safety screen", () => {
     useCollisionFormStore.getState().updateCollisionField("location", {
       description: "Old value",
       coordinates: null,
@@ -29,7 +29,7 @@ describe("index screen", () => {
     });
     expect(useCollisionFormStore.getState().isEdit).toBe(false);
     expect(expoRouter.__mockRouter.navigate).toHaveBeenCalledWith(
-      "/collisions/form/detailsFormScreen",
+      "/collisions/form/safetyScreen",
     );
   });
 });

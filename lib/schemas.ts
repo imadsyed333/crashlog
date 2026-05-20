@@ -2,7 +2,7 @@ import validator from "validator";
 import z from "zod";
 
 export const locationSchema = z.object({
-  description: z.string().min(1, { error: "Location must not be empty" }),
+  description: z.string().min(1, { error: "Don't leave this empty!" }),
   coordinates: z
     .object({
       latitude: z.number(),
@@ -13,7 +13,7 @@ export const locationSchema = z.object({
 
 export const detailsSchema = z.object({
   location: locationSchema,
-  description: z.string().min(1, { error: "Description must not be empty" }),
+  description: z.string().min(1, { error: "Don't leave this empty!" }),
 });
 
 export const vehicleSchema = z.object({

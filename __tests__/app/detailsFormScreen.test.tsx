@@ -1,9 +1,15 @@
 import DetailsFormScreen from "@/app/collisions/form/detailsFormScreen";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { fireEvent, screen } from "@testing-library/react-native";
+import { fireEvent, screen, waitFor } from "@testing-library/react-native";
 import React from "react";
 
 import { renderWithProviders } from "../testUtils/renderWithProviders";
+
+jest.mock("expo-location", () => ({
+  requestForegroundPermissionsAsync: jest.fn(),
+  getCurrentPositionAsync: jest.fn(),
+  reverseGeocodeAsync: jest.fn(),
+}));
 
 jest.mock("@/components/datetime/CustomDTPicker", () => {
   const React = require("react");
@@ -20,14 +26,38 @@ const expoRouter = jest.requireMock("expo-router") as {
   __mockUseLocalSearchParams: jest.Mock;
 };
 
+const expoLocation = jest.requireMock("expo-location") as {
+  requestForegroundPermissionsAsync: jest.Mock;
+  getCurrentPositionAsync: jest.Mock;
+  reverseGeocodeAsync: jest.Mock;
+};
+
 describe("details form screen", () => {
+  beforeEach(() => {
+    expoLocation.requestForegroundPermissionsAsync.mockResolvedValue({
+      status: "granted",
+    });
+    expoLocation.getCurrentPositionAsync.mockResolvedValue({
+      coords: {
+        latitude: 43.6532,
+        longitude: -79.3832,
+      },
+    });
+    expoLocation.reverseGeocodeAsync.mockResolvedValue([
+      {
+        streetNumber: "123",
+        street: "Main St",
+        city: "Toronto",
+      },
+    ]);
+  });
+
   it("shows validation errors when required fields are empty", () => {
     renderWithProviders(<DetailsFormScreen />);
 
     fireEvent.press(screen.getByText("Next"));
 
-    expect(screen.getByText("Location must not be empty")).toBeTruthy();
-    expect(screen.getByText("Description must not be empty")).toBeTruthy();
+    expect(screen.getAllByText("Don't leave this empty!")).toHaveLength(2);
     expect(expoRouter.__mockRouter.navigate).not.toHaveBeenCalled();
   });
 
@@ -68,5 +98,28 @@ describe("details form screen", () => {
 
     expect(expoRouter.__mockRouter.back).toHaveBeenCalledTimes(1);
     expect(expoRouter.__mockRouter.navigate).not.toHaveBeenCalled();
+  });
+
+  it("shows a loading indicator while fetching location", async () => {
+    let resolvePermission: ((value: { status: string }) => void) | undefined;
+    expoLocation.requestForegroundPermissionsAsync.mockReturnValue(
+      new Promise((resolve) => {
+        resolvePermission = resolve;
+      }),
+    );
+
+    renderWithProviders(<DetailsFormScreen />);
+
+    fireEvent.press(screen.getByTestId("location-fetch-icon"));
+
+    expect(screen.getByTestId("location-loading-indicator")).toBeTruthy();
+
+    resolvePermission?.({ status: "granted" });
+
+    await waitFor(() => {
+      expect(screen.queryByTestId("location-loading-indicator")).toBeNull();
+    });
+
+    expect(screen.getByTestId("location-fetch-icon")).toBeTruthy();
   });
 });

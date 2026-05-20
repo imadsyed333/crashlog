@@ -6,8 +6,8 @@ import { styles } from "@/lib/themes";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Alert, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { ActivityIndicator, Alert, View } from "react-native";
+import { Button, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 
 import * as Location from "expo-location";
@@ -19,9 +19,11 @@ type FormErrors = {
 
 const DetailsFormScreen = () => {
   const { collision, updateCollisionField } = useCollisionFormStore();
+  const theme = useTheme();
 
   const { location, description } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [isFetchingLocation, setIsFetchingLocation] = useState(false);
   const router = useRouter();
 
   const { mode } = useLocalSearchParams<{ mode?: string }>();
@@ -41,6 +43,9 @@ const DetailsFormScreen = () => {
   };
 
   const fetchLocation = async () => {
+    if (isFetchingLocation) return;
+
+    setIsFetchingLocation(true);
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -58,7 +63,7 @@ const DetailsFormScreen = () => {
 
       updateCollisionField("location", {
         description: geocode[0]
-          ? `${geocode[0].name}, ${geocode[0].city}, ${geocode[0].region}`
+          ? `${geocode[0].streetNumber} ${geocode[0].street}, ${geocode[0].city}`
           : "",
         coordinates: {
           latitude: locationData.coords.latitude,
@@ -67,6 +72,8 @@ const DetailsFormScreen = () => {
       });
     } catch (error) {
       console.error("Error fetching location:", error);
+    } finally {
+      setIsFetchingLocation(false);
     }
   };
 
@@ -83,7 +90,7 @@ const DetailsFormScreen = () => {
       >
         <TextInput
           error={!!formErrors.location}
-          label={"Where are you?"}
+          label={'Where are you? (Ex. "near Jane and Finch")'}
           value={location.description}
           onChangeText={(text) => {
             updateCollisionField("location", {
@@ -97,12 +104,34 @@ const DetailsFormScreen = () => {
           }}
           style={styles.input}
           mode="flat"
-          right={<TextInput.Icon icon="map-marker" onPress={fetchLocation} />}
+          right={
+            isFetchingLocation ? (
+              <TextInput.Icon
+                icon={() => (
+                  <ActivityIndicator
+                    size="small"
+                    color={theme.colors.primary}
+                    accessibilityLabel="Fetching current location"
+                    testID="location-loading-indicator"
+                  />
+                )}
+                accessibilityLabel="Fetching current location"
+                disabled
+              />
+            ) : (
+              <TextInput.Icon
+                icon="map-marker"
+                onPress={fetchLocation}
+                accessibilityLabel="Use current location"
+                testID="location-fetch-icon"
+              />
+            )
+          }
         />
         <ErrorBox errors={formErrors.location} />
         <TextInput
           error={!!formErrors.description}
-          label={"What happened?"}
+          label={"What happened? (Ex. 'A car ran a red light and hit me')"}
           multiline={true}
           value={description}
           onChangeText={(text) => {

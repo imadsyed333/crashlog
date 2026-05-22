@@ -1,6 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, View } from "react-native";
-import Modal from "react-native-modal";
+import { KeyboardAvoidingView, Modal, Platform, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
 type CustomModalProps = {
@@ -13,14 +12,19 @@ const CustomModal = ({ isVisible, onClose, children }: CustomModalProps) => {
   const theme = useTheme();
   return (
     <Modal
-      isVisible={isVisible}
-      onBackdropPress={onClose}
-      animationIn={"fadeInUp"}
-      animationOut={"fadeOutDown"}
+      visible={isVisible}
+      onRequestClose={onClose}
+      animationType="fade"
+      transparent
     >
       <KeyboardAvoidingView
-        behavior="padding"
-        style={{ flex: 1, justifyContent: "center" }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          backgroundColor: theme.colors.backdrop,
+          padding: 10,
+        }}
       >
         <View
           style={{

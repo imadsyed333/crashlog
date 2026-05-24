@@ -55,16 +55,6 @@ jest.mock("react-native-mask-text", () => {
   };
 });
 
-jest.mock("react-native-modal", () => {
-  const React = require("react");
-
-  return {
-    __esModule: true,
-    default: ({ isVisible, children }: any) =>
-      isVisible ? React.createElement(React.Fragment, null, children) : null,
-  };
-});
-
 jest.mock("@expo/vector-icons", () => {
   const React = require("react");
   const { Text } = require("react-native");

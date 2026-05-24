@@ -1,6 +1,5 @@
 import React from "react";
-import { View } from "react-native";
-import Modal from "react-native-modal";
+import { Modal, View } from "react-native";
 import { Button } from "react-native-paper";
 
 type CustomAlertDialogProps = {
@@ -17,11 +16,11 @@ const CustomAlertDialog = ({
   onClose,
 }: CustomAlertDialogProps) => {
   return (
-    <Modal isVisible={isDialogVisible} onBackdropPress={onClose}>
+    <Modal visible={isDialogVisible} onRequestClose={onClose}>
       <View>{message}</View>
       <View>
-        <Button>No</Button>
-        <Button onPress={onSuccess}>yes</Button>
+        <Button onPress={onClose}>No</Button>
+        <Button onPress={onSuccess}>Yes</Button>
       </View>
     </Modal>
   );

@@ -1,5 +1,5 @@
-import * as SecureStore from "expo-secure-store";
 import { Appearance } from "react-native";
+import { createMMKV } from "react-native-mmkv";
 import { create } from "zustand";
 import { createJSONStorage, persist, StateStorage } from "zustand/middleware";
 
@@ -11,10 +11,14 @@ interface ThemeStore {
   toggleTheme: () => void;
 }
 
+const storage = createMMKV({
+  id: "crashlog-storage",
+});
+
 const secureStorage: StateStorage = {
-  getItem: async (key) => await SecureStore.getItemAsync(key),
-  setItem: async (key, value) => await SecureStore.setItemAsync(key, value),
-  removeItem: async (key) => await SecureStore.deleteItemAsync(key),
+  getItem: (key) => storage.getString(key) ?? null,
+  setItem: (key, value) => storage.set(key, value),
+  removeItem: (key) => storage.remove(key),
 };
 
 export const useThemeStore = create<ThemeStore>()(

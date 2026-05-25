@@ -13,6 +13,14 @@ const mockUseLocalSearchParams = jest.fn(() => ({}));
 
 jest.mock("react-native-get-random-values");
 
+jest.mock("react-native-mmkv");
+
+jest.mock("react-native/Libraries/Utilities/Appearance", () => ({
+  getColorScheme: jest.fn(() => "light"),
+  addChangeListener: jest.fn(),
+  removeChangeListener: jest.fn(),
+}));
+
 jest.mock("expo-font", () => ({
   isLoaded: jest.fn(() => true),
   loadAsync: jest.fn(() => Promise.resolve()),

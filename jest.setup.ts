@@ -13,6 +13,14 @@ const mockUseLocalSearchParams = jest.fn(() => ({}));
 
 jest.mock("react-native-get-random-values");
 
+jest.mock("react-native-mmkv");
+
+jest.mock("react-native/Libraries/Utilities/Appearance", () => ({
+  getColorScheme: jest.fn(() => "light"),
+  addChangeListener: jest.fn(),
+  removeChangeListener: jest.fn(),
+}));
+
 jest.mock("expo-font", () => ({
   isLoaded: jest.fn(() => true),
   loadAsync: jest.fn(() => Promise.resolve()),
@@ -52,16 +60,6 @@ jest.mock("react-native-mask-text", () => {
         value,
         onChangeText,
       }),
-  };
-});
-
-jest.mock("react-native-modal", () => {
-  const React = require("react");
-
-  return {
-    __esModule: true,
-    default: ({ isVisible, children }: any) =>
-      isVisible ? React.createElement(React.Fragment, null, children) : null,
   };
 });
 

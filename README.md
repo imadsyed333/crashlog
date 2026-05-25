@@ -30,6 +30,17 @@ Technologies
 </ul>
 
 <h2>The Vision</h2>
+<p>
 Being involved in a vehicle collision is stressful. It becomes hard to think clearly and log important information, especially if there is nobody there to guide you. Local police departments have rolled out online forms to help drivers log info, but they are cumbersome, and require online connections. 
 
 Crashlog is meant to be a simple and secure mobile app to guide drivers when logging critical details about their vehicle collisions. Every page, every step is broken down and displayed in a way that should be easy to understand and parse for the user, despite the chaos of their current situation.
+</p>
+
+<h2>Privacy Policy</h2>
+<p>
+All user-inputted form data in CrashLog is stored solely on the user's device using native secure storage.
+
+If the user wishes to add their precise location to a collision report, CrashLog will ask the user for permission before fetching the device's location through the device's GPS hardware and software. CrashLog does not use third-party software to access a user's location.
+
+If the user wishes to add photos to a collision report, CrashLog will ask the user for permission to access the device camera and/or photo library before opening the camera and / or accessing the photo library. Photos added to the collision report are saved securely to the device storage.
+</p>

@@ -15,7 +15,7 @@ const storage = createMMKV({
   id: "crashlog-storage",
 });
 
-const secureStorage: StateStorage = {
+const themeStorage: StateStorage = {
   getItem: (key) => storage.getString(key) ?? null,
   setItem: (key, value) => storage.set(key, value),
   removeItem: (key) => storage.remove(key),
@@ -33,7 +33,7 @@ export const useThemeStore = create<ThemeStore>()(
     }),
     {
       name: "theme-preference",
-      storage: createJSONStorage(() => secureStorage),
+      storage: createJSONStorage(() => themeStorage),
     },
   ),
 );

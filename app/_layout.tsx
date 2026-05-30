@@ -1,4 +1,8 @@
 import { theme } from "@/lib/themes";
+import {
+  initializeCollisionStore,
+  useCollisionStore,
+} from "@/store/collisionStore";
 import { useThemeStore } from "@/store/themeStore";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -9,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function RootLayout() {
   const { theme: appTheme } = useThemeStore();
   const [hydrated, setHydrated] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
     const unsub = useThemeStore.persist.onFinishHydration(() =>
@@ -17,6 +22,22 @@ export default function RootLayout() {
     if (useThemeStore.persist.hasHydrated()) setHydrated(true);
     return unsub;
   }, []);
+
+  useEffect(() => {
+    async function prepareStorage() {
+      try {
+        await initializeCollisionStore();
+        useCollisionStore.persist.rehydrate();
+      } catch (e) {
+        throw new Error("Failed to initialize collision store: " + e);
+      } finally {
+        setStorageReady(true);
+      }
+    }
+    prepareStorage();
+  }, []);
+
+  if (!storageReady) return null;
 
   if (!hydrated) return null;
 

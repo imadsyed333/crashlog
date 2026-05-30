@@ -57,7 +57,8 @@
           "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to access your location while you are using the app."
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -1,10 +1,16 @@
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import { useCollisionStore } from "@/store/collisionStore";
+import {
+  initializeCollisionStore,
+  useCollisionStore,
+} from "@/store/collisionStore";
 import { useThemeStore } from "@/store/themeStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { useWitnessFormStore } from "@/store/witnessFormStore";
 
-export const resetAllStores = () => {
+export const resetAllStores = async () => {
+  // Reinitialize collision store
+  await initializeCollisionStore();
+
   // Clear mock MMKV storage
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const mmkvMock = require("react-native-mmkv");

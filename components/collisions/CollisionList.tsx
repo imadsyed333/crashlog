@@ -1,5 +1,8 @@
-import { useCollisionStore } from "@/store/collisionStore";
-import React from "react";
+import {
+  initializeCollisionStore,
+  useCollisionStore,
+} from "@/store/collisionStore";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { IconButton, Text, useTheme } from "react-native-paper";
 import { SwipeListView } from "react-native-swipe-list-view";
@@ -9,6 +12,19 @@ export const CollisionList = () => {
   const { collisions, deleteCollision } = useCollisionStore();
 
   const theme = useTheme();
+
+  const [storageReady, setStorageReady] = useState(false);
+
+  useEffect(() => {
+    initializeCollisionStore()
+      .then(() => setStorageReady(true))
+      .catch((e) => {
+        throw new Error("Failed to initialize collision store: " + e);
+      });
+  }, []);
+
+  if (!storageReady)
+    return <Text variant="bodyMedium">Storage not ready...</Text>;
 
   return (
     <>

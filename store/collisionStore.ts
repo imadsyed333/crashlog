@@ -1,6 +1,6 @@
 import { Collision } from "@/lib/types";
-import { getItem, setItem } from "expo-secure-store";
-import { createMMKV } from "react-native-mmkv";
+import { getItemAsync, setItemAsync } from "expo-secure-store";
+import { createMMKV, MMKV } from "react-native-mmkv";
 import { v4 as uuidv4 } from "uuid";
 import { create, StateCreator } from "zustand";
 import {
@@ -18,17 +18,21 @@ interface CollisionStore {
   updateCollision: (collision: Collision) => void;
 }
 
-let key = getItem("collision-key");
-if (!key) {
-  key = uuidv4();
-  setItem("collision-key", key);
-}
+let storage: MMKV;
 
-const storage = createMMKV({
-  id: "crashlog-storage",
-  encryptionType: "AES-256",
-  encryptionKey: key,
-});
+export const initializeCollisionStore = async () => {
+  let key = await getItemAsync("collision-key");
+  if (!key) {
+    key = uuidv4();
+    await setItemAsync("collision-key", key);
+  }
+
+  storage = createMMKV({
+    id: "crashlog-storage",
+    encryptionType: "AES-256",
+    encryptionKey: key,
+  });
+};
 
 const secureStorage: StateStorage = {
   getItem: (key) => storage.getString(key) ?? null,

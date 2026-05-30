@@ -2,13 +2,8 @@ import { Collision } from "@/lib/types";
 import { getItemAsync, setItemAsync } from "expo-secure-store";
 import { createMMKV, MMKV } from "react-native-mmkv";
 import { v4 as uuidv4 } from "uuid";
-import { create, StateCreator } from "zustand";
-import {
-  createJSONStorage,
-  persist,
-  PersistOptions,
-  StateStorage,
-} from "zustand/middleware";
+import { create } from "zustand";
+import { createJSONStorage, persist, StateStorage } from "zustand/middleware";
 
 interface CollisionStore {
   collisions: Collision[];
@@ -22,6 +17,7 @@ let storage: MMKV;
 
 export const initializeCollisionStore = async () => {
   let key = await getItemAsync("collision-key");
+
   if (!key) {
     key = uuidv4();
     await setItemAsync("collision-key", key);
@@ -35,18 +31,22 @@ export const initializeCollisionStore = async () => {
 };
 
 const secureStorage: StateStorage = {
-  getItem: (key) => storage.getString(key) ?? null,
-  setItem: (key, value) => storage.set(key, value),
-  removeItem: (key) => storage.remove(key),
+  getItem: (key) => {
+    if (!storage) return null;
+    return storage.getString(key) ?? null;
+  },
+  setItem: (key, value) => {
+    if (!storage) return;
+    storage.set(key, value);
+  },
+  removeItem: (key) => {
+    if (!storage) return;
+    storage.remove(key);
+  },
 };
 
-type CollisionPersist = (
-  config: StateCreator<CollisionStore>,
-  options: PersistOptions<CollisionStore>,
-) => StateCreator<CollisionStore>;
-
-export const useCollisionStore = create<CollisionStore, []>(
-  (persist as CollisionPersist)(
+export const useCollisionStore = create<CollisionStore>()(
+  persist(
     (set, get): CollisionStore => ({
       collisions: [],
       getCollision: (id: string) =>
@@ -67,6 +67,7 @@ export const useCollisionStore = create<CollisionStore, []>(
     {
       name: "collision-storage",
       storage: createJSONStorage(() => secureStorage),
+      skipHydration: true,
     },
   ),
 );

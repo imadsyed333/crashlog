@@ -113,10 +113,10 @@ jest.mock("react-native-swipe-list-view", () => {
   };
 });
 
-afterEach(() => {
+afterEach(async () => {
   jest.clearAllMocks();
   mockUseLocalSearchParams.mockReturnValue({});
-  act(() => {
-    resetAllStores();
+  await act(async () => {
+    await resetAllStores();
   });
 });

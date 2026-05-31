@@ -1,8 +1,6 @@
 import { Collision } from "@/lib/types";
 import { useCollisionStore } from "@/store/collisionStore";
 
-jest.mock("expo-secure-store");
-
 const makeCollision = (id: string): Collision => ({
   id,
   date: new Date("2024-01-15T10:00:00Z"),

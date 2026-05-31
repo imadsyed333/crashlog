@@ -33,6 +33,7 @@ export const useCollisionStore = create<CollisionStore>()(
     {
       name: "collision-storage",
       storage: createJSONStorage(() => mmkvStorage),
+      skipHydration: true,
     },
   ),
 );

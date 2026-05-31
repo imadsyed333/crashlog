@@ -1,4 +1,4 @@
-import { afterEach, beforeAll, jest } from "@jest/globals";
+import { afterEach, jest } from "@jest/globals";
 import { act } from "@testing-library/react-native";
 
 import { resetAllStores } from "./__tests__/testUtils/resetStores";
@@ -111,11 +111,6 @@ jest.mock("react-native-swipe-list-view", () => {
         ),
       ),
   };
-});
-
-beforeAll(async () => {
-  const { initializeCollisionStore } = require("./store/collisionStore");
-  await initializeCollisionStore();
 });
 
 afterEach(async () => {

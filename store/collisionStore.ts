@@ -1,9 +1,7 @@
+import { mmkvStorage } from "@/lib/storage";
 import { Collision } from "@/lib/types";
-import { getItemAsync, setItemAsync } from "expo-secure-store";
-import { createMMKV, MMKV } from "react-native-mmkv";
-import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
-import { createJSONStorage, persist, StateStorage } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface CollisionStore {
   collisions: Collision[];
@@ -12,38 +10,6 @@ interface CollisionStore {
   deleteCollision: (id: string) => void;
   updateCollision: (collision: Collision) => void;
 }
-
-let storage: MMKV;
-
-export const initializeCollisionStore = async () => {
-  let key = await getItemAsync("collision-key");
-
-  if (!key) {
-    key = uuidv4();
-    await setItemAsync("collision-key", key);
-  }
-
-  storage = createMMKV({
-    id: "crashlog-storage",
-    encryptionType: "AES-256",
-    encryptionKey: key,
-  });
-};
-
-const secureStorage: StateStorage = {
-  getItem: (key) => {
-    if (!storage) return null;
-    return storage.getString(key) ?? null;
-  },
-  setItem: (key, value) => {
-    if (!storage) return;
-    storage.set(key, value);
-  },
-  removeItem: (key) => {
-    if (!storage) return;
-    storage.remove(key);
-  },
-};
 
 export const useCollisionStore = create<CollisionStore>()(
   persist(
@@ -66,8 +32,7 @@ export const useCollisionStore = create<CollisionStore>()(
     }),
     {
       name: "collision-storage",
-      storage: createJSONStorage(() => secureStorage),
-      skipHydration: true,
+      storage: createJSONStorage(() => mmkvStorage),
     },
   ),
 );

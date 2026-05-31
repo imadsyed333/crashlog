@@ -1,7 +1,7 @@
+import { mmkvStorage } from "@/lib/storage";
 import { Appearance } from "react-native";
-import { createMMKV } from "react-native-mmkv";
 import { create } from "zustand";
-import { createJSONStorage, persist, StateStorage } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type Theme = "light" | "dark";
 
@@ -10,16 +10,6 @@ interface ThemeStore {
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
 }
-
-const storage = createMMKV({
-  id: "crashlog-storage",
-});
-
-const themeStorage: StateStorage = {
-  getItem: (key) => storage.getString(key) ?? null,
-  setItem: (key, value) => storage.set(key, value),
-  removeItem: (key) => storage.remove(key),
-};
 
 export const useThemeStore = create<ThemeStore>()(
   persist(
@@ -33,7 +23,7 @@ export const useThemeStore = create<ThemeStore>()(
     }),
     {
       name: "theme-preference",
-      storage: createJSONStorage(() => themeStorage),
+      storage: createJSONStorage(() => mmkvStorage),
     },
   ),
 );

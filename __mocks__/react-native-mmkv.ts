@@ -1,7 +1,11 @@
 export const storage: Record<string, Record<string, string>> = {};
 
 export const createMMKV = jest.fn(
-  (config?: { id: string; encryptionKey?: string }) => {
+  (config?: {
+    id: string;
+    encryptionKey?: string;
+    encryptionType?: string;
+  }) => {
     const id = config?.id || "default";
 
     if (!storage[id]) {

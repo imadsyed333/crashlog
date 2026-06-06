@@ -1,4 +1,4 @@
-import { Collision } from "@/lib/types";
+import { Collision, DraftCollision } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -6,7 +6,13 @@ import { View } from "react-native";
 import { Card, Icon, Text, useTheme } from "react-native-paper";
 
 type CollisionCardProps = {
-  collision: Collision;
+  collision: Collision | DraftCollision;
+};
+
+const isDraftCollision = (
+  collision: Collision | DraftCollision,
+): collision is DraftCollision => {
+  return "savePoint" in collision;
 };
 
 export const CollisionCard = ({ collision }: CollisionCardProps) => {
@@ -40,7 +46,11 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
   ];
 
   const handlePress = () => {
-    router.navigate(`/collisions/${collision.id}`);
+    if (isDraftCollision(collision)) {
+      router.navigate(collision.savePoint as any);
+    } else {
+      router.navigate(`/collisions/${collision.id}`);
+    }
     setForm(collision);
   };
 
@@ -65,6 +75,34 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
               {formattedDate} at {formattedTime}
             </Text>
           </View>
+          {isDraftCollision(collision) && (
+            <View
+              style={{
+                paddingHorizontal: 10,
+                paddingVertical: 4,
+                backgroundColor: theme.colors.errorContainer,
+                borderRadius: 12,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              <Icon
+                source="pencil"
+                size={14}
+                color={theme.colors.onErrorContainer}
+              />
+              <Text
+                variant="labelMedium"
+                style={{
+                  color: theme.colors.onErrorContainer,
+                  fontWeight: 600,
+                }}
+              >
+                Draft
+              </Text>
+            </View>
+          )}
         </View>
         {!!description && (
           <Text

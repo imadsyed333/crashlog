@@ -10,6 +10,7 @@ import { ActivityIndicator, Alert, View } from "react-native";
 import { Button, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 
+import CollisionDraftButton from "@/components/collisions/CollisionDraftButton";
 import * as Location from "expo-location";
 
 type FormErrors = {
@@ -24,6 +25,7 @@ const DetailsFormScreen = () => {
   const { location, description } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
+
   const router = useRouter();
 
   const { mode } = useLocalSearchParams<{ mode?: string }>();
@@ -164,6 +166,7 @@ const DetailsFormScreen = () => {
       >
         {mode === "edit" ? "Save Changes" : "Next"}
       </Button>
+      {mode !== "edit" && <CollisionDraftButton />}
     </ScreenContainer>
   );
 };

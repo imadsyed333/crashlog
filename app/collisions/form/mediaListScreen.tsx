@@ -1,3 +1,4 @@
+import CollisionDraftButton from "@/components/collisions/CollisionDraftButton";
 import MediaGrid from "@/components/media/MediaGrid";
 import MediaOptions from "@/components/media/MediaOptions";
 import ScreenContainer from "@/components/misc/ScreenContainer";
@@ -44,6 +45,7 @@ const MediaListScreen = () => {
       >
         {mode === "edit" ? "Save Changes" : "Next"}
       </Button>
+      <CollisionDraftButton />
     </ScreenContainer>
   );
 };

@@ -1,3 +1,4 @@
+import CollisionDraftButton from "@/components/collisions/CollisionDraftButton";
 import CustomFAB from "@/components/misc/CustomFAB";
 import NextButton from "@/components/misc/NextButton";
 import ScreenContainer from "@/components/misc/ScreenContainer";
@@ -40,6 +41,7 @@ const WitnessListScreen = () => {
         mode={mode as "edit" | "create"}
       />
       <WitnessDialog />
+      <CollisionDraftButton />
     </ScreenContainer>
   );
 };

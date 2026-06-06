@@ -10,14 +10,10 @@ import { Button } from "react-native-paper";
 
 const reviewScreen = () => {
   const { collision, isEdit } = useCollisionFormStore();
-  const { addCollision, updateCollision } = useCollisionStore();
+  const { upsertCollision } = useCollisionStore();
   const router = useRouter();
   const handleSubmit = () => {
-    if (isEdit) {
-      updateCollision(collision);
-    } else {
-      addCollision(collision);
-    }
+    upsertCollision(collision);
     router.replace("/");
   };
   return (

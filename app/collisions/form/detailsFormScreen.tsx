@@ -51,7 +51,6 @@ const DetailsFormScreen = () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        console.log("Permission to access location was denied");
         Alert.alert(
           "Permission required",
           "Permission to access location is required.",

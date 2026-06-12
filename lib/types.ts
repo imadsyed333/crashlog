@@ -24,6 +24,10 @@ export interface Vehicle {
   driver: Driver | null;
 }
 
+export interface DraftVehicle extends Vehicle {
+  savePoint: string;
+}
+
 export interface Person {
   name: string;
   address: string;

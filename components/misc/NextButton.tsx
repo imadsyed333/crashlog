@@ -1,14 +1,16 @@
 import { styles } from "@/lib/themes";
 import { Href, useRouter } from "expo-router";
 import React from "react";
+import { StyleProp, ViewStyle } from "react-native";
 import { Button } from "react-native-paper";
 
 type NextButtonProps = {
   href: Href;
   mode?: "edit" | "create";
+  style?: StyleProp<ViewStyle>;
 };
 
-const NextButton = ({ href, mode }: NextButtonProps) => {
+const NextButton = ({ href, mode, style }: NextButtonProps) => {
   const router = useRouter();
 
   const handlePress = () => {
@@ -21,7 +23,7 @@ const NextButton = ({ href, mode }: NextButtonProps) => {
   return (
     <Button
       mode="contained"
-      style={styles.button}
+      style={style || styles.button}
       onPress={handlePress}
       icon={mode === "edit" ? "content-save" : "arrow-right"}
       contentStyle={{

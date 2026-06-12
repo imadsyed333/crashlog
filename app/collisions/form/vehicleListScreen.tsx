@@ -35,11 +35,31 @@ const VehicleListScreen = () => {
         <VehicleList />
         <CustomFAB icon="plus" label="Add Vehicle" handlePress={handlePress} />
       </View>
-      <NextButton
-        href={"/collisions/form/witnessListScreen"}
-        mode={mode as "edit" | "create"}
-      />
-      {mode !== "edit" && <CollisionDraftButton />}
+      {mode === "edit" ? (
+        <NextButton
+          href={"/collisions/form/witnessListScreen"}
+          mode={mode as "edit" | "create"}
+        />
+      ) : (
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 10,
+            marginVertical: 10,
+          }}
+        >
+          <CollisionDraftButton
+            mode="outlined"
+            style={{ flex: 1 }}
+            children="Save Draft"
+          />
+          <NextButton
+            href={"/collisions/form/witnessListScreen"}
+            mode={mode as "edit" | "create"}
+            style={{ flex: 2 }}
+          />
+        </View>
+      )}
     </ScreenContainer>
   );
 };

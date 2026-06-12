@@ -154,18 +154,41 @@ const DetailsFormScreen = () => {
           <CustomDTPicker />
         </View>
       </View>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={handlePress}
-        icon={mode === "edit" ? "content-save" : "arrow-right"}
-        contentStyle={{
-          flexDirection: mode === "edit" ? "row" : "row-reverse",
-        }}
-      >
-        {mode === "edit" ? "Save Changes" : "Next"}
-      </Button>
-      {mode !== "edit" && <CollisionDraftButton />}
+      {mode === "edit" ? (
+        <Button
+          mode="contained"
+          style={styles.button}
+          onPress={handlePress}
+          icon="content-save"
+        >
+          Save Changes
+        </Button>
+      ) : (
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 10,
+            marginVertical: 10,
+          }}
+        >
+          <CollisionDraftButton
+            mode="outlined"
+            style={{ flex: 1 }}
+            children="Save Draft"
+          />
+          <Button
+            mode="contained"
+            style={{ flex: 2 }}
+            onPress={handlePress}
+            icon="arrow-right"
+            contentStyle={{
+              flexDirection: "row-reverse",
+            }}
+          >
+            Next
+          </Button>
+        </View>
+      )}
     </ScreenContainer>
   );
 };

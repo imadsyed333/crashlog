@@ -176,10 +176,28 @@ const VehicleFormScreen = () => {
             <DriverDialog />
           </View>
         </ScrollView>
-        <Button mode="contained" style={styles.button} onPress={handleSubmit}>
-          Save Vehicle
-        </Button>
-        <VehicleDraftButton />
+        {isEdit ? (
+          <Button mode="contained" style={styles.button} onPress={handleSubmit}>
+            Save Vehicle
+          </Button>
+        ) : (
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 10,
+              marginVertical: 10,
+            }}
+          >
+            <VehicleDraftButton
+              mode="outlined"
+              style={{ flex: 1 }}
+              children="Save Draft"
+            />
+            <Button mode="contained" style={{ flex: 2 }} onPress={handleSubmit}>
+              Save Vehicle
+            </Button>
+          </View>
+        )}
       </KeyboardAvoidingView>
     </ScreenContainer>
   );

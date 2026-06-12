@@ -2,10 +2,22 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { usePathname, useRouter } from "expo-router";
 import React from "react";
-import { Alert } from "react-native";
+import { Alert, StyleProp, ViewStyle } from "react-native";
 import { Button } from "react-native-paper";
 
-const CollisionDraftButton = () => {
+type CollisionDraftButtonProps = {
+  mode?: "text" | "outlined" | "contained" | "elevated" | "contained-tonal";
+  style?: StyleProp<ViewStyle>;
+  compact?: boolean;
+  children?: string;
+};
+
+const CollisionDraftButton = ({
+  mode = "contained",
+  style,
+  compact = false,
+  children = "Save for Later",
+}: CollisionDraftButtonProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const { collision } = useCollisionFormStore();
@@ -26,13 +38,13 @@ const CollisionDraftButton = () => {
   };
   return (
     <Button
-      mode="contained"
+      mode={mode}
       onPress={saveForLater}
-      style={{
-        marginTop: 10,
-      }}
+      style={style || { marginTop: 10 }}
+      icon="content-save"
+      compact={compact}
     >
-      Save for Later
+      {children}
     </Button>
   );
 };

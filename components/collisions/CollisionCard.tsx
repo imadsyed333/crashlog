@@ -80,7 +80,7 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
               style={{
                 paddingHorizontal: 10,
                 paddingVertical: 4,
-                backgroundColor: theme.colors.errorContainer,
+                backgroundColor: (theme.colors as any).warningContainer,
                 borderRadius: 12,
                 flexDirection: "row",
                 alignItems: "center",
@@ -90,12 +90,12 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
               <Icon
                 source="pencil"
                 size={14}
-                color={theme.colors.onErrorContainer}
+                color={(theme.colors as any).onWarningContainer}
               />
               <Text
                 variant="labelMedium"
                 style={{
-                  color: theme.colors.onErrorContainer,
+                  color: (theme.colors as any).onWarningContainer,
                   fontWeight: 600,
                 }}
               >

@@ -49,6 +49,11 @@ export const theme = {
     errorContainer: "rgb(255, 218, 214)",
     onErrorContainer: "rgb(65, 0, 2)",
 
+    warning: "rgb(180, 100, 0)",
+    onWarning: "rgb(255, 255, 255)",
+    warningContainer: "rgb(255, 238, 210)",
+    onWarningContainer: "rgb(60, 30, 0)",
+
     background: "rgb(248, 250, 255)", // subtle cool tint
     onBackground: "rgb(20, 24, 30)",
 
@@ -102,6 +107,11 @@ export const theme = {
     onError: "rgb(105, 0, 5)",
     errorContainer: "rgb(147, 0, 10)",
     onErrorContainer: "rgb(255, 180, 171)",
+
+    warning: "rgb(255, 200, 100)",
+    onWarning: "rgb(70, 40, 0)",
+    warningContainer: "rgb(140, 85, 0)",
+    onWarningContainer: "rgb(255, 230, 180)",
 
     background: "rgb(18, 22, 28)", // slightly cooler dark
     onBackground: "rgb(225, 230, 240)",

@@ -41,7 +41,7 @@ const WitnessListScreen = () => {
         mode={mode as "edit" | "create"}
       />
       <WitnessDialog />
-      <CollisionDraftButton />
+      {mode !== "edit" && <CollisionDraftButton />}
     </ScreenContainer>
   );
 };

@@ -39,7 +39,7 @@ const VehicleListScreen = () => {
         href={"/collisions/form/witnessListScreen"}
         mode={mode as "edit" | "create"}
       />
-      <CollisionDraftButton />
+      {mode !== "edit" && <CollisionDraftButton />}
     </ScreenContainer>
   );
 };

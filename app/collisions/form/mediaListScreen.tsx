@@ -45,7 +45,7 @@ const MediaListScreen = () => {
       >
         {mode === "edit" ? "Save Changes" : "Next"}
       </Button>
-      <CollisionDraftButton />
+      {mode !== "edit" && <CollisionDraftButton />}
     </ScreenContainer>
   );
 };

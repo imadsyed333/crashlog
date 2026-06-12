@@ -29,8 +29,9 @@ export const useCollisionStore = create<CollisionStore>()(
             c.id === collision.id ? collision : c,
           );
         } else {
-          set({ collisions: [collision, ...oldCollisions] });
+          newCollisions = [collision, ...oldCollisions];
         }
+        set({ collisions: newCollisions });
       },
     }),
     {

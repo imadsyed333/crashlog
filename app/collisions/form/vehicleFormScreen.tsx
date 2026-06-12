@@ -4,6 +4,7 @@ import ErrorBox from "@/components/misc/ErrorBox";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import VehicleDraftButton from "@/components/vehicles/VehicleDraftButton";
 import { styles } from "@/lib/themes";
+import { Vehicle } from "@/lib/types";
 import { validateVehicle } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -40,7 +41,10 @@ const VehicleFormScreen = () => {
     if (Object.keys(parseErrors).length !== 0) {
       setFormErrors(parseErrors);
     } else {
-      upsertVehicle(vehicle);
+      if ("savePoint" in vehicle) {
+        delete vehicle.savePoint;
+      }
+      upsertVehicle(vehicle as Vehicle);
       router.back();
     }
   };

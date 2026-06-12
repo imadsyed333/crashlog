@@ -1,6 +1,7 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { styles } from "@/lib/themes";
+import { Collision } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useRouter } from "expo-router";
@@ -13,7 +14,10 @@ const reviewScreen = () => {
   const { upsertCollision } = useCollisionStore();
   const router = useRouter();
   const handleSubmit = () => {
-    upsertCollision(collision);
+    if ("savePoint" in collision) {
+      delete collision.savePoint;
+    }
+    upsertCollision(collision as Collision);
     router.replace("/");
   };
   return (

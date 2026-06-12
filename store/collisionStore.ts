@@ -21,15 +21,15 @@ export const useCollisionStore = create<CollisionStore>()(
           collisions: get().collisions.filter((c) => c.id !== id),
         }),
       upsertCollision: (collision: Collision) => {
-        const hasCollision = get().collisions.some((c) => c.id == collision.id);
+        const oldCollisions = get().collisions;
+        const hasCollision = oldCollisions.some((c) => c.id === collision.id);
+        let newCollisions: Collision[] = [];
         if (hasCollision) {
-          set({
-            collisions: get().collisions.map((c) =>
-              c.id === collision.id ? collision : c,
-            ),
-          });
+          newCollisions = oldCollisions.map((c) =>
+            c.id === collision.id ? collision : c,
+          );
         } else {
-          set({ collisions: [collision, ...get().collisions] });
+          set({ collisions: [collision, ...oldCollisions] });
         }
       },
     }),

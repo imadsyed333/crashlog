@@ -2,7 +2,9 @@ import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/misc/ErrorBox";
 import ScreenContainer from "@/components/misc/ScreenContainer";
+import VehicleDraftButton from "@/components/vehicles/VehicleDraftButton";
 import { styles } from "@/lib/themes";
+import { Vehicle } from "@/lib/types";
 import { validateVehicle } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
@@ -22,7 +24,7 @@ type VehicleFormErrors = {
 
 const VehicleFormScreen = () => {
   const { vehicle, updateVehicleField, isEdit } = useVehicleFormStore();
-  const { updateVehicle } = useCollisionFormStore();
+  const { upsertVehicle } = useCollisionFormStore();
   const {
     make,
     model,
@@ -33,18 +35,16 @@ const VehicleFormScreen = () => {
     driver,
   } = vehicle;
   const [formErrors, setFormErrors] = useState<VehicleFormErrors>({});
-  const { addVehicle } = useCollisionFormStore();
 
   const handleSubmit = () => {
     const parseErrors = validateVehicle(vehicle);
     if (Object.keys(parseErrors).length !== 0) {
       setFormErrors(parseErrors);
     } else {
-      if (isEdit) {
-        updateVehicle(vehicle);
-      } else {
-        addVehicle(vehicle);
+      if ("savePoint" in vehicle) {
+        delete vehicle.savePoint;
       }
+      upsertVehicle(vehicle as Vehicle);
       router.back();
     }
   };
@@ -176,9 +176,22 @@ const VehicleFormScreen = () => {
             <DriverDialog />
           </View>
         </ScrollView>
-        <Button mode="contained" style={styles.button} onPress={handleSubmit}>
-          Save Vehicle
-        </Button>
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 10,
+            marginVertical: 10,
+          }}
+        >
+          <VehicleDraftButton
+            mode="outlined"
+            style={{ flex: 1 }}
+            children="Save Draft"
+          />
+          <Button mode="contained" style={{ flex: 2 }} onPress={handleSubmit}>
+            Save Vehicle
+          </Button>
+        </View>
       </KeyboardAvoidingView>
     </ScreenContainer>
   );

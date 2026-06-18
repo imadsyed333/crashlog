@@ -1,3 +1,4 @@
+import CollisionDraftButton from "@/components/collisions/CollisionDraftButton";
 import CustomFAB from "@/components/misc/CustomFAB";
 import NextButton from "@/components/misc/NextButton";
 import ScreenContainer from "@/components/misc/ScreenContainer";
@@ -35,10 +36,31 @@ const WitnessListScreen = () => {
         <WitnessList />
         <CustomFAB icon="plus" label="Add Witness" handlePress={handlePress} />
       </View>
-      <NextButton
-        href={"/collisions/form/reviewScreen"}
-        mode={mode as "edit" | "create"}
-      />
+      {mode === "edit" ? (
+        <NextButton
+          href={"/collisions/form/reviewScreen"}
+          mode={mode as "edit" | "create"}
+        />
+      ) : (
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 10,
+            marginVertical: 10,
+          }}
+        >
+          <CollisionDraftButton
+            mode="outlined"
+            style={{ flex: 1 }}
+            children="Save Draft"
+          />
+          <NextButton
+            href={"/collisions/form/reviewScreen"}
+            mode={mode as "edit" | "create"}
+            style={{ flex: 2 }}
+          />
+        </View>
+      )}
       <WitnessDialog />
     </ScreenContainer>
   );

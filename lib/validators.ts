@@ -1,6 +1,6 @@
 import z from "zod";
 import { driverSchema, personSchema, vehicleSchema } from "./schemas";
-import { Driver, Vehicle, Witness } from "./types";
+import { Collision, Driver, Vehicle, Witness } from "./types";
 
 export const validateVehicle = (vehicle: Vehicle) => {
   const parse = vehicleSchema.safeParse(vehicle);
@@ -30,4 +30,8 @@ export const validateWitness = (witness: Witness) => {
   } else {
     return {};
   }
+};
+
+export const containsDraftVehicles = (collision: Collision) => {
+  return collision.vehicles.some((v) => "savePoint" in v);
 };

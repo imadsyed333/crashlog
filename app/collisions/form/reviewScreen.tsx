@@ -1,6 +1,8 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { styles } from "@/lib/themes";
+import { Collision } from "@/lib/types";
+import { containsDraftVehicles } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useRouter } from "expo-router";
@@ -10,14 +12,19 @@ import { Button } from "react-native-paper";
 
 const reviewScreen = () => {
   const { collision, isEdit } = useCollisionFormStore();
-  const { addCollision, updateCollision } = useCollisionStore();
+  const { upsertCollision } = useCollisionStore();
   const router = useRouter();
   const handleSubmit = () => {
-    if (isEdit) {
-      updateCollision(collision);
-    } else {
-      addCollision(collision);
+    if (containsDraftVehicles(collision)) {
+      alert(
+        "You have unsaved vehicles in your collision. Please save them before submitting.",
+      );
+      return;
     }
+    if ("savePoint" in collision) {
+      delete collision.savePoint;
+    }
+    upsertCollision(collision as Collision);
     router.replace("/");
   };
   return (

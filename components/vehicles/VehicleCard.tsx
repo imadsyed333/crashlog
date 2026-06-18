@@ -1,5 +1,5 @@
 import { styles } from "@/lib/themes";
-import { Vehicle } from "@/lib/types";
+import { DraftVehicle, Vehicle } from "@/lib/types";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { router } from "expo-router";
 import React from "react";
@@ -8,9 +8,15 @@ import { Card, Divider, IconButton, Text, useTheme } from "react-native-paper";
 import DriverContent from "../driver/DriverContent";
 
 type VehicleCardProps = {
-  vehicle: Vehicle;
+  vehicle: Vehicle | DraftVehicle;
   index: number;
   showActions?: boolean;
+};
+
+const isDraftVehicle = (
+  vehicle: Vehicle | DraftVehicle,
+): vehicle is DraftVehicle => {
+  return "savePoint" in vehicle;
 };
 
 const VehicleCard = ({
@@ -46,9 +52,37 @@ const VehicleCard = ({
           }}
         >
           <View style={{ flex: 1 }}>
-            <Text variant="titleLarge" style={{ fontWeight: 600 }}>
-              Vehicle {index + 1}
-            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <Text variant="titleLarge" style={{ fontWeight: 600 }}>
+                Vehicle {index + 1}
+              </Text>
+              {isDraftVehicle(vehicle) && (
+                <View
+                  style={{
+                    paddingHorizontal: 8,
+                    paddingVertical: 2,
+                    backgroundColor: (theme.colors as any).warningContainer,
+                    borderRadius: 8,
+                  }}
+                >
+                  <Text
+                    variant="labelSmall"
+                    style={{
+                      color: (theme.colors as any).onWarningContainer,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Draft
+                  </Text>
+                </View>
+              )}
+            </View>
             <Text
               variant="bodyLarge"
               style={{ color: theme.colors.onSurfaceVariant, marginTop: 4 }}

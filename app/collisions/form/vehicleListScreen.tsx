@@ -19,6 +19,7 @@ const VehicleListScreen = () => {
     setEdit(false);
     router.navigate("/collisions/form/vehicleFormScreen");
   };
+
   return (
     <ScreenContainer
       title="Vehicles"

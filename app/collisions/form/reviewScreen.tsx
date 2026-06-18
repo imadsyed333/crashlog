@@ -2,6 +2,7 @@ import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { styles } from "@/lib/themes";
 import { Collision } from "@/lib/types";
+import { containsDraftVehicles } from "@/lib/validators";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useRouter } from "expo-router";
@@ -14,6 +15,12 @@ const reviewScreen = () => {
   const { upsertCollision } = useCollisionStore();
   const router = useRouter();
   const handleSubmit = () => {
+    if (containsDraftVehicles(collision)) {
+      alert(
+        "You have unsaved vehicles in your collision. Please save them before submitting.",
+      );
+      return;
+    }
     if ("savePoint" in collision) {
       delete collision.savePoint;
     }

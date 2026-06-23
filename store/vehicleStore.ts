@@ -2,25 +2,24 @@ import { mmkvStorage } from "@/lib/storage";
 import { Vehicle } from "@/lib/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { useVehicleFormStore } from "./vehicleFormStore";
 
 interface VehicleStore {
   vehicle: Vehicle | null;
-  setVehicle: (v: Vehicle) => void;
-  getVehicle: () => Vehicle | null;
-  askedForVehicle: boolean;
-  setAskedForVehicle: (value: boolean) => void;
-  getAskedForVehicle: () => boolean;
+  setVehicle: (v: Vehicle | null) => void;
+  deleteVehicle: () => void;
 }
 
 export const useVehicleStore = create<VehicleStore>()(
   persist(
     (set, get): VehicleStore => ({
       vehicle: null,
-      askedForVehicle: false,
-      setVehicle: (v: Vehicle) => set({ vehicle: v }),
-      getVehicle: () => get().vehicle,
-      setAskedForVehicle: (value: boolean) => set({ askedForVehicle: value }),
-      getAskedForVehicle: () => get().askedForVehicle,
+      setVehicle: (v: Vehicle | null) => set({ vehicle: v }),
+      deleteVehicle: () => {
+        const { resetForm } = useVehicleFormStore.getState();
+        set({ vehicle: null });
+        resetForm();
+      },
     }),
     {
       name: "vehicle-storage",

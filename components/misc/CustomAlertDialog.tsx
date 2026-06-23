@@ -1,6 +1,7 @@
 import React from "react";
-import { Modal, View } from "react-native";
-import { Button } from "react-native-paper";
+import { View } from "react-native";
+import { Button, Text } from "react-native-paper";
+import CustomModal from "./CustomModal";
 
 type CustomAlertDialogProps = {
   message: string;
@@ -16,13 +17,31 @@ const CustomAlertDialog = ({
   onClose,
 }: CustomAlertDialogProps) => {
   return (
-    <Modal visible={isDialogVisible} onRequestClose={onClose}>
-      <View>{message}</View>
-      <View>
-        <Button onPress={onClose}>No</Button>
-        <Button onPress={onSuccess}>Yes</Button>
+    <CustomModal isVisible={isDialogVisible} onClose={onClose}>
+      <Text
+        variant="bodyLarge"
+        style={{
+          marginLeft: 10,
+          paddingTop: 5,
+        }}
+      >
+        {message}
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          marginVertical: 10,
+        }}
+      >
+        <Button onPress={onClose} mode="contained" style={{ marginRight: 5 }}>
+          No
+        </Button>
+        <Button onPress={onSuccess} mode="contained">
+          Yes
+        </Button>
       </View>
-    </Modal>
+    </CustomModal>
   );
 };
 

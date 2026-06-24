@@ -27,7 +27,7 @@ const UserVehicleView = () => {
           vehicle={vehicle}
           index={0}
           showActions
-          editRoute="/prefillVehicleScreen"
+          editRoute="/userVehicleScreen"
           onDelete={handleDelete}
         />
       ) : (
@@ -48,7 +48,7 @@ const UserVehicleView = () => {
             </Text>
             <Button
               mode="contained"
-              onPress={() => router.navigate("/prefillVehicleScreen")}
+              onPress={() => router.navigate("/userVehicleScreen")}
             >
               Add My Vehicle
             </Button>

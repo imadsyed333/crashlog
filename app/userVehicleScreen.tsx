@@ -21,7 +21,7 @@ type VehicleFormErrors = {
   policyNumber?: string[];
 };
 
-const prefillVehicleScreen = () => {
+const userVehicleScreen = () => {
   const { vehicle, updateVehicleField } = useVehicleFormStore();
   const { setVehicle } = useVehicleStore();
   const {
@@ -188,4 +188,4 @@ const prefillVehicleScreen = () => {
   );
 };
 
-export default prefillVehicleScreen;
+export default userVehicleScreen;

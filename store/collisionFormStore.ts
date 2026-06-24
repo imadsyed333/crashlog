@@ -2,6 +2,7 @@ import { Collision, Vehicle, Witness } from "@/lib/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
+import { useVehicleStore } from "./vehicleStore";
 
 interface CollisionFormStore {
   collision: Collision;
@@ -28,12 +29,13 @@ const newLocation = () => ({
 });
 
 const newCollision = () => {
+  const { vehicle } = useVehicleStore.getState();
   return {
     id: "" + uuidv4(),
     date: new Date(),
     location: newLocation(),
     description: "",
-    vehicles: [],
+    vehicles: vehicle ? [vehicle] : [],
     witnesses: [],
     media: [],
     officer: null,

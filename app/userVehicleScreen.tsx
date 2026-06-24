@@ -2,12 +2,11 @@ import DriverCard from "@/components/driver/DriverCard";
 import DriverDialog from "@/components/driver/DriverDialog";
 import ErrorBox from "@/components/misc/ErrorBox";
 import ScreenContainer from "@/components/misc/ScreenContainer";
-import VehicleDraftButton from "@/components/vehicles/VehicleDraftButton";
 import { styles } from "@/lib/themes";
 import { Vehicle } from "@/lib/types";
 import { validateVehicle } from "@/lib/validators";
-import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useVehicleFormStore } from "@/store/vehicleFormStore";
+import { useVehicleStore } from "@/store/vehicleStore";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
@@ -22,9 +21,9 @@ type VehicleFormErrors = {
   policyNumber?: string[];
 };
 
-const VehicleFormScreen = () => {
-  const { vehicle, updateVehicleField, isEdit } = useVehicleFormStore();
-  const { upsertVehicle } = useCollisionFormStore();
+const userVehicleScreen = () => {
+  const { vehicle, updateVehicleField } = useVehicleFormStore();
+  const { setVehicle } = useVehicleStore();
   const {
     make,
     model,
@@ -41,18 +40,15 @@ const VehicleFormScreen = () => {
     if (Object.keys(parseErrors).length !== 0) {
       setFormErrors(parseErrors);
     } else {
-      if ("savePoint" in vehicle) {
-        delete vehicle.savePoint;
-      }
-      upsertVehicle(vehicle as Vehicle);
+      setVehicle(vehicle as Vehicle);
       router.back();
     }
   };
   return (
     <ScreenContainer
-      title={isEdit ? "Edit Vehicle" : "Add Vehicle"}
+      title={"My Vehicle"}
       description={
-        "Provide as much detail as possible about the vehicle involved."
+        "Provide the following information about your vehicle and you as a driver"
       }
       backButton
     >
@@ -183,11 +179,6 @@ const VehicleFormScreen = () => {
             marginVertical: 10,
           }}
         >
-          <VehicleDraftButton
-            mode="outlined"
-            style={{ flex: 1 }}
-            children="Save Draft"
-          />
           <Button mode="contained" style={{ flex: 2 }} onPress={handleSubmit}>
             Save Vehicle
           </Button>
@@ -197,4 +188,4 @@ const VehicleFormScreen = () => {
   );
 };
 
-export default VehicleFormScreen;
+export default userVehicleScreen;

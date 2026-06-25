@@ -21,12 +21,6 @@ const isDraftVehicle = (
   return "savePoint" in vehicle;
 };
 
-const isDraftVehicle = (
-  vehicle: Vehicle | DraftVehicle,
-): vehicle is DraftVehicle => {
-  return "savePoint" in vehicle;
-};
-
 const VehicleCard = ({
   vehicle,
   index,

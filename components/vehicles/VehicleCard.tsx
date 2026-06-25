@@ -11,6 +11,14 @@ type VehicleCardProps = {
   vehicle: Vehicle | DraftVehicle;
   index: number;
   showActions?: boolean;
+  editRoute?: string;
+  onDelete?: () => void;
+};
+
+const isDraftVehicle = (
+  vehicle: Vehicle | DraftVehicle,
+): vehicle is DraftVehicle => {
+  return "savePoint" in vehicle;
 };
 
 const isDraftVehicle = (
@@ -23,6 +31,8 @@ const VehicleCard = ({
   vehicle,
   index,
   showActions = false,
+  editRoute,
+  onDelete,
 }: VehicleCardProps) => {
   const {
     make,
@@ -91,15 +101,27 @@ const VehicleCard = ({
             </Text>
           </View>
           {showActions && (
-            <IconButton
-              icon={"pencil"}
-              onPress={() => {
-                setForm(vehicle);
-                router.navigate("/collisions/form/vehicleFormScreen");
-                setEdit(true);
-              }}
-              style={{ margin: 0 }}
-            />
+            <View style={{ flexDirection: "row", gap: 4 }}>
+              <IconButton
+                icon={"pencil"}
+                onPress={() => {
+                  setForm(vehicle);
+                  router.navigate(
+                    (editRoute || "/collisions/form/vehicleFormScreen") as any,
+                  );
+                  setEdit(true);
+                }}
+                style={{ margin: 0 }}
+              />
+              {onDelete && (
+                <IconButton
+                  icon={"delete"}
+                  iconColor={theme.colors.error}
+                  onPress={onDelete}
+                  style={{ margin: 0 }}
+                />
+              )}
+            </View>
           )}
         </View>
         <Divider bold style={{ marginTop: 10, marginBottom: 10 }} />

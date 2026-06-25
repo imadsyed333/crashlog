@@ -7,6 +7,7 @@ import VehicleCard from "./VehicleCard";
 
 const VehicleList = () => {
   const { collision, deleteVehicle } = useCollisionFormStore();
+
   const { vehicles } = collision;
   const theme = useTheme();
 

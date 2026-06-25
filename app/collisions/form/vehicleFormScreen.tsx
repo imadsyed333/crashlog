@@ -41,10 +41,9 @@ const VehicleFormScreen = () => {
     if (Object.keys(parseErrors).length !== 0) {
       setFormErrors(parseErrors);
     } else {
-      if ("savePoint" in vehicle) {
-        delete vehicle.savePoint;
-      }
-      upsertVehicle(vehicle as Vehicle);
+      // Remove savePoint if it exists by creating a new object without it
+      const { savePoint, ...cleanVehicle } = vehicle as any;
+      upsertVehicle(cleanVehicle as Vehicle);
       router.back();
     }
   };

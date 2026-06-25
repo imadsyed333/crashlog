@@ -21,10 +21,8 @@ const reviewScreen = () => {
       );
       return;
     }
-    if ("savePoint" in collision) {
-      delete collision.savePoint;
-    }
-    upsertCollision(collision as Collision);
+    const { savePoint, ...cleanCollision } = collision as any;
+    upsertCollision(cleanCollision as Collision);
     router.replace("/");
   };
   return (

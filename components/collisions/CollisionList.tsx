@@ -1,7 +1,7 @@
 import { useCollisionStore } from "@/store/collisionStore";
 import React from "react";
 import { View } from "react-native";
-import { IconButton, Text, useTheme } from "react-native-paper";
+import { Card, Icon, IconButton, Text, useTheme } from "react-native-paper";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { CollisionCard } from "./CollisionCard";
 
@@ -42,7 +42,42 @@ export const CollisionList = () => {
         />
       )}
       {collisions.length === 0 && (
-        <Text variant="bodyMedium">Phew, no collisions yet!</Text>
+        <Card mode="contained" style={{ marginBottom: 10 }}>
+          <Card.Content style={{ alignItems: "center", padding: 24 }}>
+            <Icon
+              source="shield-check"
+              size={48}
+              color={theme.colors.primary}
+            />
+            <Text
+              variant="titleLarge"
+              style={{ marginTop: 16, marginBottom: 8, fontWeight: "600" }}
+            >
+              No collisions recorded
+            </Text>
+            <Text
+              variant="bodyMedium"
+              style={{
+                marginBottom: 8,
+                textAlign: "center",
+                opacity: 0.7,
+                lineHeight: 20,
+              }}
+            >
+              Great news! You haven't recorded any collisions yet.
+            </Text>
+            <Text
+              variant="bodySmall"
+              style={{
+                textAlign: "center",
+                opacity: 0.6,
+                fontStyle: "italic",
+              }}
+            >
+              When you do, tap the + button below to document the incident
+            </Text>
+          </Card.Content>
+        </Card>
       )}
     </>
   );

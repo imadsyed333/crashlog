@@ -1,6 +1,7 @@
 import CollisionInfoView from "@/components/collisions/CollisionInfoView";
 import ScreenContainer from "@/components/misc/ScreenContainer";
 import { styles } from "@/lib/themes";
+import { generateCollisionPDF } from "@/lib/utils";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -28,20 +29,29 @@ const viewCollisionScreen = () => {
       router.back();
     }
   };
+
+  const exportPDF = async () => {
+    if (collision) {
+      await generateCollisionPDF(collision);
+    }
+  };
   return (
     <ScreenContainer
       title={collision ? "View Collision" : "Collision Not Found"}
     >
       {collision && <CollisionInfoView collision={collision} />}
       {collision && (
-        <Button
-          mode="contained"
-          style={styles.button}
-          onPress={handlePress}
-          icon={"pencil"}
-        >
-          Edit
-        </Button>
+        <>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={handlePress}
+            icon={"pencil"}
+          >
+            Edit
+          </Button>
+          <Button onPress={exportPDF}>Export PDF</Button>
+        </>
       )}
     </ScreenContainer>
   );

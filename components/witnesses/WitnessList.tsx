@@ -1,7 +1,7 @@
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import React from "react";
 import { View } from "react-native";
-import { IconButton, Text, useTheme } from "react-native-paper";
+import { Card, Icon, IconButton, Text, useTheme } from "react-native-paper";
 import { SwipeListView } from "react-native-swipe-list-view";
 import WitnessCard from "./WitnessCard";
 
@@ -46,7 +46,42 @@ const WitnessList = () => {
         />
       )}
       {witnesses.length === 0 && (
-        <Text variant="titleLarge">Add a witness</Text>
+        <Card mode="contained" style={{ marginBottom: 10 }}>
+          <Card.Content style={{ alignItems: "center", padding: 24 }}>
+            <Icon
+              source="account-group"
+              size={48}
+              color={theme.colors.primary}
+            />
+            <Text
+              variant="titleLarge"
+              style={{ marginTop: 16, marginBottom: 8, fontWeight: "600" }}
+            >
+              No witnesses added
+            </Text>
+            <Text
+              variant="bodyMedium"
+              style={{
+                marginBottom: 8,
+                textAlign: "center",
+                opacity: 0.7,
+                lineHeight: 20,
+              }}
+            >
+              You haven't added any witnesses to this collision yet.
+            </Text>
+            <Text
+              variant="bodySmall"
+              style={{
+                textAlign: "center",
+                opacity: 0.6,
+                fontStyle: "italic",
+              }}
+            >
+              When needed, tap the + button below to add witness information
+            </Text>
+          </Card.Content>
+        </Card>
       )}
     </>
   );

@@ -38,7 +38,7 @@ export default function Index() {
         </Text>
         <CollisionList />
       </View>
-      <CustomFAB icon="plus" label="Add Collision" handlePress={addCollision} />
+      <CustomFAB icon="plus" label="" handlePress={addCollision} />
     </ScreenContainer>
   );
 }

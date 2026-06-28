@@ -34,7 +34,7 @@ const VehicleListScreen = () => {
         }}
       >
         <VehicleList />
-        <CustomFAB icon="plus" label="Add Vehicle" handlePress={handlePress} />
+        <CustomFAB icon="plus" label="" handlePress={handlePress} />
       </View>
       {mode === "edit" ? (
         <NextButton

@@ -9,11 +9,13 @@ type WitnessCardProps = {
   witness: Witness;
   index: number;
   showActions?: boolean;
+  onDelete?: () => void;
 };
 const WitnessCard = ({
   witness,
   index,
   showActions = false,
+  onDelete,
 }: WitnessCardProps) => {
   const { name, phoneNumber, address } = witness;
   const { setForm, setEdit, setDialogVisible } = useWitnessFormStore();
@@ -35,16 +37,29 @@ const WitnessCard = ({
             </Text>
           </View>
           {showActions && (
-            <IconButton
-              icon={"pencil"}
-              onPress={() => {
-                setForm(witness);
-                setDialogVisible(true);
-                setEdit(true);
-              }}
-              size={20}
-              style={{ margin: 0 }}
-            />
+            <View
+              style={{ flexDirection: "row", gap: 4, alignItems: "center" }}
+            >
+              <IconButton
+                icon={"pencil"}
+                onPress={() => {
+                  setForm(witness);
+                  setDialogVisible(true);
+                  setEdit(true);
+                }}
+                size={20}
+                style={{ margin: 0 }}
+              />
+              {onDelete && (
+                <IconButton
+                  icon={"delete"}
+                  iconColor={theme.colors.error}
+                  onPress={onDelete}
+                  size={20}
+                  style={{ margin: 0 }}
+                />
+              )}
+            </View>
           )}
         </View>
         <Divider bold style={{ marginTop: 8, marginBottom: 8 }} />

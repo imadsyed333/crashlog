@@ -1,44 +1,29 @@
 import { useCollisionStore } from "@/store/collisionStore";
-import React from "react";
-import { View } from "react-native";
-import { Card, Icon, IconButton, Text, useTheme } from "react-native-paper";
-import { SwipeListView } from "react-native-swipe-list-view";
+import React, { useState } from "react";
+import { FlatList } from "react-native";
+import { Card, Icon, Text, useTheme } from "react-native-paper";
+import CustomAlertDialog from "../misc/CustomAlertDialog";
 import { CollisionCard } from "./CollisionCard";
 
 export const CollisionList = () => {
   const { collisions, deleteCollision } = useCollisionStore();
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
 
   const theme = useTheme();
 
   return (
     <>
       {collisions.length > 0 && (
-        <SwipeListView
+        <FlatList
           data={collisions}
-          renderItem={({ item }) => <CollisionCard collision={item} />}
-          renderHiddenItem={({ item }) => (
-            <View
-              style={{
-                display: "flex",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "flex-end",
-              }}
-            >
-              <IconButton
-                icon={"delete"}
-                onPress={() => deleteCollision(item.id)}
-                mode="contained"
-                size={30}
-                iconColor={theme.colors.error}
-              />
-            </View>
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <CollisionCard
+              collision={item}
+              onDelete={() => setPendingDeleteId(item.id)}
+            />
           )}
-          style={{
-            display: "flex",
-            width: "100%",
-          }}
-          rightOpenValue={-75}
+          style={{ display: "flex", width: "100%" }}
         />
       )}
       {collisions.length === 0 && (
@@ -79,6 +64,15 @@ export const CollisionList = () => {
           </Card.Content>
         </Card>
       )}
+      <CustomAlertDialog
+        message="Are you sure you want to delete this collision?"
+        isDialogVisible={pendingDeleteId !== null}
+        onSuccess={() => {
+          if (pendingDeleteId) deleteCollision(pendingDeleteId);
+          setPendingDeleteId(null);
+        }}
+        onClose={() => setPendingDeleteId(null)}
+      />
     </>
   );
 };

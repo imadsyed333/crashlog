@@ -1,48 +1,31 @@
 import { useCollisionFormStore } from "@/store/collisionFormStore";
-import React from "react";
-import { View } from "react-native";
-import { Card, Icon, IconButton, Text, useTheme } from "react-native-paper";
-import { SwipeListView } from "react-native-swipe-list-view";
+import React, { useState } from "react";
+import { FlatList } from "react-native";
+import { Card, Icon, Text, useTheme } from "react-native-paper";
+import CustomAlertDialog from "../misc/CustomAlertDialog";
 import WitnessCard from "./WitnessCard";
 
 const WitnessList = () => {
   const { collision, deleteWitness } = useCollisionFormStore();
   const { witnesses } = collision;
   const theme = useTheme();
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
 
   return (
     <>
       {witnesses.length > 0 && (
-        <SwipeListView
+        <FlatList
           data={witnesses}
+          keyExtractor={(item) => item.id}
           renderItem={({ item, index }) => (
-            <WitnessCard witness={item} index={index} showActions />
+            <WitnessCard
+              witness={item}
+              index={index}
+              showActions
+              onDelete={() => setPendingDeleteId(item.id)}
+            />
           )}
-          renderHiddenItem={({ item }) => (
-            <View
-              style={{
-                display: "flex",
-                height: "100%",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "flex-end",
-              }}
-            >
-              <IconButton
-                icon={"delete"}
-                onPress={() => deleteWitness(item.id)}
-                mode="contained"
-                size={30}
-                iconColor={theme.colors.error}
-              />
-            </View>
-          )}
-          style={{
-            display: "flex",
-            width: "100%",
-            padding: 10,
-          }}
-          rightOpenValue={-75}
+          style={{ display: "flex", width: "100%" }}
         />
       )}
       {witnesses.length === 0 && (
@@ -83,6 +66,15 @@ const WitnessList = () => {
           </Card.Content>
         </Card>
       )}
+      <CustomAlertDialog
+        message="Are you sure you want to delete this witness?"
+        isDialogVisible={pendingDeleteId !== null}
+        onSuccess={() => {
+          if (pendingDeleteId) deleteWitness(pendingDeleteId);
+          setPendingDeleteId(null);
+        }}
+        onClose={() => setPendingDeleteId(null)}
+      />
     </>
   );
 };

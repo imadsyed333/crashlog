@@ -82,7 +82,13 @@ const CollisionInfoView = ({
         </View>
         <Divider bold />
         <View style={{ marginTop: 10 }}>
-          <MediaList media={media} />
+          {media.length === 0 ? (
+            <Text variant="bodyMedium" style={{ fontStyle: "italic" }}>
+              No media added.
+            </Text>
+          ) : (
+            <MediaList media={media} />
+          )}
         </View>
       </View>
 

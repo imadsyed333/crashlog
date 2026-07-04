@@ -74,7 +74,7 @@ export const useCollisionFormStore = create<CollisionFormStore>((set, get) => ({
     if (hasVehicle) {
       newVehicles = oldVehicles.map((v) => (v.id === vehicle.id ? vehicle : v));
     } else {
-      newVehicles = [vehicle, ...oldVehicles];
+      newVehicles = [...oldVehicles, vehicle];
     }
     get().updateCollisionField("vehicles", newVehicles);
   },

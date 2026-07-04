@@ -1,28 +1,41 @@
 import React from "react";
 import { View } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button, Divider, Text } from "react-native-paper";
 import CustomModal from "./CustomModal";
 
 type CustomAlertDialogProps = {
+  title: string;
   message: string;
   onSuccess: () => void;
-  onClose: () => void;
+  onCancel?: () => void;
   isDialogVisible: boolean;
+  isInfo?: boolean;
 };
 
 const CustomAlertDialog = ({
+  title,
   message,
   onSuccess,
   isDialogVisible,
-  onClose,
+  onCancel = () => {},
+  isInfo = false,
 }: CustomAlertDialogProps) => {
   return (
-    <CustomModal isVisible={isDialogVisible} onClose={onClose}>
+    <CustomModal isVisible={isDialogVisible} onClose={onCancel}>
       <Text
-        variant="bodyLarge"
+        variant="titleLarge"
+        style={{ fontWeight: "600", marginHorizontal: 6, marginBottom: 10 }}
+      >
+        {title}
+      </Text>
+      <Divider bold />
+      <Text
+        variant="bodyMedium"
         style={{
-          marginLeft: 10,
-          paddingTop: 5,
+          marginHorizontal: 6,
+          marginTop: 12,
+          lineHeight: 20,
+          opacity: 0.8,
         }}
       >
         {message}
@@ -31,14 +44,18 @@ const CustomAlertDialog = ({
         style={{
           flexDirection: "row",
           justifyContent: "flex-end",
-          marginVertical: 10,
+          gap: 8,
+          marginTop: 20,
+          marginBottom: 14,
         }}
       >
-        <Button onPress={onClose} mode="contained" style={{ marginRight: 5 }}>
-          No
-        </Button>
+        {!isInfo && (
+          <Button onPress={onCancel} mode="outlined">
+            No
+          </Button>
+        )}
         <Button onPress={onSuccess} mode="contained">
-          Yes
+          {isInfo ? "Ok" : "Yes"}
         </Button>
       </View>
     </CustomModal>

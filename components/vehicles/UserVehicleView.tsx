@@ -1,3 +1,4 @@
+import { useVehicleFormStore } from "@/store/vehicleFormStore";
 import { useVehicleStore } from "@/store/vehicleStore";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -8,6 +9,7 @@ import VehicleCard from "./VehicleCard";
 
 const UserVehicleView = () => {
   const { vehicle, deleteVehicle } = useVehicleStore();
+  const { resetForm } = useVehicleFormStore();
   const router = useRouter();
   const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
 
@@ -18,6 +20,11 @@ const UserVehicleView = () => {
   const handleConfirmDelete = () => {
     deleteVehicle();
     setIsDeleteDialogVisible(false);
+  };
+
+  const handleVehicleCreation = () => {
+    resetForm();
+    router.navigate("/userVehicleScreen");
   };
 
   return (
@@ -46,10 +53,7 @@ const UserVehicleView = () => {
             >
               Save your vehicle information to quickly fill collision reports
             </Text>
-            <Button
-              mode="contained"
-              onPress={() => router.navigate("/userVehicleScreen")}
-            >
+            <Button mode="contained" onPress={handleVehicleCreation}>
               Add My Vehicle
             </Button>
           </Card.Content>

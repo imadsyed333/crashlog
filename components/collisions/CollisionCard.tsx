@@ -76,43 +76,45 @@ export const CollisionCard = ({ collision, onDelete }: CollisionCardProps) => {
               {formattedDate} at {formattedTime}
             </Text>
           </View>
-          {onDelete && (
-            <IconButton
-              icon="delete"
-              size={20}
-              iconColor={theme.colors.error}
-              onPress={onDelete}
-              style={{ margin: 0 }}
-            />
-          )}
-          {isDraftCollision(collision) && (
-            <View
-              style={{
-                paddingHorizontal: 10,
-                paddingVertical: 4,
-                backgroundColor: (theme.colors as any).warningContainer,
-                borderRadius: 12,
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 4,
-              }}
-            >
-              <Icon
-                source="pencil"
-                size={14}
-                color={(theme.colors as any).onWarningContainer}
-              />
-              <Text
-                variant="labelMedium"
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            {isDraftCollision(collision) && (
+              <View
                 style={{
-                  color: (theme.colors as any).onWarningContainer,
-                  fontWeight: 600,
+                  paddingHorizontal: 10,
+                  paddingVertical: 4,
+                  backgroundColor: (theme.colors as any).warningContainer,
+                  borderRadius: 12,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 4,
                 }}
               >
-                Draft
-              </Text>
-            </View>
-          )}
+                <Icon
+                  source="pencil"
+                  size={14}
+                  color={(theme.colors as any).onWarningContainer}
+                />
+                <Text
+                  variant="labelMedium"
+                  style={{
+                    color: (theme.colors as any).onWarningContainer,
+                    fontWeight: 600,
+                  }}
+                >
+                  Draft
+                </Text>
+              </View>
+            )}
+            {onDelete && (
+              <IconButton
+                icon="delete"
+                size={20}
+                iconColor={theme.colors.error}
+                onPress={onDelete}
+                style={{ margin: 0 }}
+              />
+            )}
+          </View>
         </View>
         {!!description && (
           <Text

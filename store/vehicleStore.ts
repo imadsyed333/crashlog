@@ -24,6 +24,7 @@ export const useVehicleStore = create<VehicleStore>()(
     {
       name: "vehicle-storage",
       storage: createJSONStorage(() => mmkvStorage),
+      skipHydration: true,
     },
   ),
 );

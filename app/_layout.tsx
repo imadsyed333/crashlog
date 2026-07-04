@@ -1,4 +1,6 @@
+import { initializeSecureStorage } from "@/lib/storage";
 import { theme } from "@/lib/themes";
+import { useCollisionStore } from "@/store/collisionStore";
 import { useThemeStore } from "@/store/themeStore";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -8,17 +10,25 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   const { theme: appTheme } = useThemeStore();
-  const [hydrated, setHydrated] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
-    const unsub = useThemeStore.persist.onFinishHydration(() =>
-      setHydrated(true),
-    );
-    if (useThemeStore.persist.hasHydrated()) setHydrated(true);
-    return unsub;
+    const initializeStorage = async () => {
+      try {
+        await initializeSecureStorage();
+        await useCollisionStore.persist.rehydrate();
+        await useThemeStore.persist.rehydrate();
+        setStorageReady(true);
+      } catch (error) {
+        console.error("Error initializing secure storage:", error);
+      }
+    };
+    initializeStorage();
   }, []);
 
-  if (!hydrated) return null;
+  if (!storageReady) {
+    return null; // Or a loading indicator
+  }
 
   const paperTheme =
     appTheme === "dark"

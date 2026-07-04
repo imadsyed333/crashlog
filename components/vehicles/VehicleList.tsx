@@ -68,13 +68,14 @@ const VehicleList = () => {
         </Card>
       )}
       <CustomAlertDialog
+        title="Delete Vehicle"
         message="Are you sure you want to delete this vehicle?"
         isDialogVisible={pendingDeleteId !== null}
         onSuccess={() => {
           if (pendingDeleteId) deleteVehicle(pendingDeleteId);
           setPendingDeleteId(null);
         }}
-        onClose={() => setPendingDeleteId(null)}
+        onCancel={() => setPendingDeleteId(null)}
       />
     </>
   );

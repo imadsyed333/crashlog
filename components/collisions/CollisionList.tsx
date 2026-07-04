@@ -65,13 +65,14 @@ export const CollisionList = () => {
         </Card>
       )}
       <CustomAlertDialog
+        title="Delete Collision"
         message="Are you sure you want to delete this collision?"
         isDialogVisible={pendingDeleteId !== null}
         onSuccess={() => {
           if (pendingDeleteId) deleteCollision(pendingDeleteId);
           setPendingDeleteId(null);
         }}
-        onClose={() => setPendingDeleteId(null)}
+        onCancel={() => setPendingDeleteId(null)}
       />
     </>
   );

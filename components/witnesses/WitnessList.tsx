@@ -67,13 +67,14 @@ const WitnessList = () => {
         </Card>
       )}
       <CustomAlertDialog
+        title="Delete Witness"
         message="Are you sure you want to delete this witness?"
         isDialogVisible={pendingDeleteId !== null}
         onSuccess={() => {
           if (pendingDeleteId) deleteWitness(pendingDeleteId);
           setPendingDeleteId(null);
         }}
-        onClose={() => setPendingDeleteId(null)}
+        onCancel={() => setPendingDeleteId(null)}
       />
     </>
   );

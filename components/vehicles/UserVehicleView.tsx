@@ -56,9 +56,10 @@ const UserVehicleView = () => {
         </Card>
       )}
       <CustomAlertDialog
+        title="Delete Your Vehicle"
         message="Are you sure you want to delete your saved vehicle information? This action cannot be undone."
         onSuccess={handleConfirmDelete}
-        onClose={() => setIsDeleteDialogVisible(false)}
+        onCancel={() => setIsDeleteDialogVisible(false)}
         isDialogVisible={isDeleteDialogVisible}
       />
     </View>

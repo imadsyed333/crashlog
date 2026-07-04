@@ -2,6 +2,7 @@ import { initializeSecureStorage } from "@/lib/storage";
 import { theme } from "@/lib/themes";
 import { useCollisionStore } from "@/store/collisionStore";
 import { useThemeStore } from "@/store/themeStore";
+import { useVehicleStore } from "@/store/vehicleStore";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ export default function RootLayout() {
         await initializeSecureStorage();
         await useCollisionStore.persist.rehydrate();
         await useThemeStore.persist.rehydrate();
+        await useVehicleStore.persist.rehydrate();
         setStorageReady(true);
       } catch (error) {
         console.error("Error initializing secure storage:", error);

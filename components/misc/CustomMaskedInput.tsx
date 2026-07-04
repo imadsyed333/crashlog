@@ -11,6 +11,7 @@ type CustomMaskedInputProps = {
   onChangeText: (text: string) => void;
   mask: string;
   keyboardType?: KeyboardTypeOptions;
+  placeholder?: string;
 };
 
 const CustomMaskedInput = ({
@@ -20,6 +21,7 @@ const CustomMaskedInput = ({
   onChangeText,
   mask,
   keyboardType = "default",
+  placeholder,
 }: CustomMaskedInputProps) => {
   const renderInput = useCallback(
     (props: any) => (
@@ -36,6 +38,7 @@ const CustomMaskedInput = ({
       mode="flat"
       style={styles.input}
       onChangeText={onChangeText}
+      placeholder={placeholder}
       render={renderInput}
     />
   );

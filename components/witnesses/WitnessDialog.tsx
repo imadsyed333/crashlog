@@ -84,6 +84,7 @@ const WitnessDialog = () => {
           }}
           mode="flat"
           error={!!formErrors.name}
+          placeholder="e.g. Jane Smith"
         />
         <ErrorBox errors={formErrors.name} />
         <CustomMaskedInput
@@ -99,6 +100,7 @@ const WitnessDialog = () => {
           error={!!formErrors.phoneNumber}
           mask="(999) 999-9999"
           keyboardType="phone-pad"
+          placeholder="e.g. (555) 123-4567"
         />
         <ErrorBox errors={formErrors.phoneNumber} />
         <TextInput
@@ -114,6 +116,7 @@ const WitnessDialog = () => {
           }}
           mode="flat"
           error={!!formErrors.address}
+          placeholder="e.g. 123 Main St, Springfield"
         />
         <ErrorBox errors={formErrors.address} />
       </View>

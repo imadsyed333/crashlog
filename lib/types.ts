@@ -9,6 +9,10 @@ export interface Collision {
   officer: Officer | null;
 }
 
+export interface DraftCollision extends Collision {
+  savePoint: string;
+}
+
 export interface Vehicle {
   id: string;
   make: string;
@@ -18,6 +22,10 @@ export interface Vehicle {
   insuranceCompany: string;
   policyNumber: string;
   driver: Driver | null;
+}
+
+export interface DraftVehicle extends Vehicle {
+  savePoint: string;
 }
 
 export interface Person {

@@ -1,15 +1,22 @@
-import { Collision } from "@/lib/types";
+import { Collision, DraftCollision } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Card, Icon, Text, useTheme } from "react-native-paper";
+import { Card, Icon, IconButton, Text, useTheme } from "react-native-paper";
 
 type CollisionCardProps = {
-  collision: Collision;
+  collision: Collision | DraftCollision;
+  onDelete?: () => void;
 };
 
-export const CollisionCard = ({ collision }: CollisionCardProps) => {
+const isDraftCollision = (
+  collision: Collision | DraftCollision,
+): collision is DraftCollision => {
+  return "savePoint" in collision;
+};
+
+export const CollisionCard = ({ collision, onDelete }: CollisionCardProps) => {
   const { location, date, description, vehicles, witnesses, media } = collision;
   const { setForm } = useCollisionFormStore();
   const router = useRouter();
@@ -40,7 +47,11 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
   ];
 
   const handlePress = () => {
-    router.navigate(`/collisions/${collision.id}`);
+    if (isDraftCollision(collision)) {
+      router.navigate(collision.savePoint as any);
+    } else {
+      router.navigate(`/collisions/${collision.id}`);
+    }
     setForm(collision);
   };
 
@@ -64,6 +75,45 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
             >
               {formattedDate} at {formattedTime}
             </Text>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            {isDraftCollision(collision) && (
+              <View
+                style={{
+                  paddingHorizontal: 10,
+                  paddingVertical: 4,
+                  backgroundColor: (theme.colors as any).warningContainer,
+                  borderRadius: 12,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                <Icon
+                  source="pencil"
+                  size={14}
+                  color={(theme.colors as any).onWarningContainer}
+                />
+                <Text
+                  variant="labelMedium"
+                  style={{
+                    color: (theme.colors as any).onWarningContainer,
+                    fontWeight: 600,
+                  }}
+                >
+                  Draft
+                </Text>
+              </View>
+            )}
+            {onDelete && (
+              <IconButton
+                icon="delete"
+                size={20}
+                iconColor={theme.colors.error}
+                onPress={onDelete}
+                style={{ margin: 0 }}
+              />
+            )}
           </View>
         </View>
         {!!description && (

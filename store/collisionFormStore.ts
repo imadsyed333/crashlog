@@ -2,6 +2,7 @@ import { Collision, Vehicle, Witness } from "@/lib/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
+import { useVehicleStore } from "./vehicleStore";
 
 interface CollisionFormStore {
   collision: Collision;
@@ -12,8 +13,7 @@ interface CollisionFormStore {
     value: Collision[K],
   ) => void;
   setForm: (collision: Collision) => void;
-  addVehicle: (vehicle: Vehicle) => void;
-  updateVehicle: (vehicle: Vehicle) => void;
+  upsertVehicle: (vehicle: Vehicle) => void;
   deleteVehicle: (id: string) => void;
   addWitness: (witness: Witness) => void;
   updateWitness: (witness: Witness) => void;
@@ -29,19 +29,20 @@ const newLocation = () => ({
 });
 
 const newCollision = () => {
+  const { vehicle } = useVehicleStore.getState();
   return {
     id: "" + uuidv4(),
     date: new Date(),
     location: newLocation(),
     description: "",
-    vehicles: [],
+    vehicles: vehicle ? [vehicle] : [],
     witnesses: [],
     media: [],
     officer: null,
   };
 };
 
-export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
+export const useCollisionFormStore = create<CollisionFormStore>((set, get) => ({
   collision: newCollision(),
   isEdit: false,
   setEdit: (value) =>
@@ -59,13 +60,6 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
     set({
       collision: collision,
     }),
-  addVehicle: (vehicle) =>
-    set((state) => ({
-      collision: {
-        ...state.collision,
-        vehicles: [...state.collision.vehicles, vehicle],
-      },
-    })),
   deleteVehicle: (id: string) =>
     set((state) => ({
       collision: {
@@ -73,15 +67,17 @@ export const useCollisionFormStore = create<CollisionFormStore>((set) => ({
         vehicles: state.collision.vehicles.filter((v) => v.id !== id),
       },
     })),
-  updateVehicle: (vehicle: Vehicle) =>
-    set((state) => ({
-      collision: {
-        ...state.collision,
-        vehicles: state.collision.vehicles.map((v) =>
-          v.id === vehicle.id ? vehicle : v,
-        ),
-      },
-    })),
+  upsertVehicle: (vehicle: Vehicle) => {
+    const oldVehicles = get().collision.vehicles;
+    const hasVehicle = oldVehicles.some((v) => v.id === vehicle.id);
+    let newVehicles: Vehicle[] = [];
+    if (hasVehicle) {
+      newVehicles = oldVehicles.map((v) => (v.id === vehicle.id ? vehicle : v));
+    } else {
+      newVehicles = [...oldVehicles, vehicle];
+    }
+    get().updateCollisionField("vehicles", newVehicles);
+  },
   addWitness: (witness) =>
     set((state) => ({
       collision: {

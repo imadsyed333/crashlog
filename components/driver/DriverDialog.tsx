@@ -77,6 +77,7 @@ const DriverDialog = () => {
         error={!!formErrors.name}
         style={styles.input}
         mode="flat"
+        placeholder="e.g. John Doe"
       />
       <ErrorBox errors={formErrors.name} />
 
@@ -86,6 +87,7 @@ const DriverDialog = () => {
         onChangeText={(text) => setDriver({ ...driver, license: text })}
         error={!!formErrors.license}
         mask="A9999-99999-99999"
+        placeholder="e.g. A1234-56789-01234"
       />
       <ErrorBox errors={formErrors.license} />
       <CustomMaskedInput
@@ -95,6 +97,7 @@ const DriverDialog = () => {
         onChangeText={(text) => setDriver({ ...driver, phoneNumber: text })}
         mask="(999) 999-9999"
         keyboardType="phone-pad"
+        placeholder="e.g. (555) 123-4567"
       />
       <ErrorBox errors={formErrors.phoneNumber} />
       <TextInput
@@ -104,6 +107,7 @@ const DriverDialog = () => {
         error={!!formErrors.address}
         style={styles.input}
         mode="flat"
+        placeholder="e.g. 123 Main St, Springfield"
       />
       <ErrorBox errors={formErrors.address} />
       <View

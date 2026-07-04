@@ -10,6 +10,7 @@ import { ActivityIndicator, Alert, View } from "react-native";
 import { Button, TextInput, useTheme } from "react-native-paper";
 import z from "zod";
 
+import CollisionDraftButton from "@/components/collisions/CollisionDraftButton";
 import * as Location from "expo-location";
 
 type FormErrors = {
@@ -24,6 +25,7 @@ const DetailsFormScreen = () => {
   const { location, description } = collision;
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
+
   const router = useRouter();
 
   const { mode } = useLocalSearchParams<{ mode?: string }>();
@@ -49,7 +51,6 @@ const DetailsFormScreen = () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        console.log("Permission to access location was denied");
         Alert.alert(
           "Permission required",
           "Permission to access location is required.",
@@ -153,17 +154,41 @@ const DetailsFormScreen = () => {
           <CustomDTPicker />
         </View>
       </View>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={handlePress}
-        icon={mode === "edit" ? "content-save" : "arrow-right"}
-        contentStyle={{
-          flexDirection: mode === "edit" ? "row" : "row-reverse",
-        }}
-      >
-        {mode === "edit" ? "Save Changes" : "Next"}
-      </Button>
+      {mode === "edit" ? (
+        <Button
+          mode="contained"
+          style={styles.button}
+          onPress={handlePress}
+          icon="content-save"
+        >
+          Save Changes
+        </Button>
+      ) : (
+        <View
+          style={{
+            flexDirection: "row",
+            gap: 10,
+            marginVertical: 10,
+          }}
+        >
+          <CollisionDraftButton
+            mode="outlined"
+            style={{ flex: 1 }}
+            children="Save Draft"
+          />
+          <Button
+            mode="contained"
+            style={{ flex: 2 }}
+            onPress={handlePress}
+            icon="arrow-right"
+            contentStyle={{
+              flexDirection: "row-reverse",
+            }}
+          >
+            Next
+          </Button>
+        </View>
+      )}
     </ScreenContainer>
   );
 };

@@ -1,5 +1,5 @@
 import { styles } from "@/lib/themes";
-import React from "react";
+import React, { useCallback } from "react";
 import { KeyboardTypeOptions } from "react-native";
 import { MaskedTextInput } from "react-native-mask-text";
 import { TextInput } from "react-native-paper";
@@ -21,6 +21,13 @@ const CustomMaskedInput = ({
   mask,
   keyboardType = "default",
 }: CustomMaskedInputProps) => {
+  const renderInput = useCallback(
+    (props: any) => (
+      <MaskedTextInput {...props} mask={mask} keyboardType={keyboardType} />
+    ),
+    [mask, keyboardType],
+  );
+
   return (
     <TextInput
       label={label}
@@ -29,15 +36,7 @@ const CustomMaskedInput = ({
       mode="flat"
       style={styles.input}
       onChangeText={onChangeText}
-      render={(props) => (
-        <MaskedTextInput
-          {...props}
-          mask={mask}
-          value={value}
-          onChangeText={onChangeText}
-          keyboardType={keyboardType}
-        />
-      )}
+      render={renderInput}
     />
   );
 };

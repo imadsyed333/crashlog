@@ -14,19 +14,19 @@ const CollisionDetailsCard = ({ collision }: CollisionDetailsCardProps) => {
   return (
     <Card mode="contained">
       <Card.Content>
-        <Text variant="bodyLarge">
+        <Text variant="bodyMedium" style={{ marginBottom: 4 }}>
           <Text style={styles.boldText}>Location: </Text>
           {location.description}
         </Text>
-        <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
+        <Text variant="bodyMedium" style={{ marginBottom: 4 }}>
           <Text style={styles.boldText}>Description: </Text>
           {description}
         </Text>
-        <Text variant="bodyLarge" style={{ marginBottom: 6 }}>
+        <Text variant="bodyMedium" style={{ marginBottom: 4 }}>
           <Text style={styles.boldText}>Date: </Text>
           {newDate.toDateString()}
         </Text>
-        <Text variant="bodyLarge">
+        <Text variant="bodyMedium">
           <Text style={styles.boldText}>Time: </Text>
           {newDate.toLocaleTimeString([], {
             hour: "2-digit",

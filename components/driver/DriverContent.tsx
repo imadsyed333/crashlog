@@ -12,15 +12,15 @@ const DriverContent = ({ driver }: DriverContentProps) => {
   const { name, license, phoneNumber, address } = driver;
   return (
     <View>
-      <Text variant="bodyMedium">
+      <Text variant="bodyMedium" style={{ marginBottom: 4 }}>
         <Text style={styles.boldText}>Full Name: </Text>
         {name}
       </Text>
-      <Text variant="bodyMedium">
+      <Text variant="bodyMedium" style={{ marginBottom: 4 }}>
         <Text style={styles.boldText}>Driver License: </Text>
         {license}
       </Text>
-      <Text variant="bodyMedium">
+      <Text variant="bodyMedium" style={{ marginBottom: 4 }}>
         <Text style={styles.boldText}>Phone Number: </Text>
         {phoneNumber}
       </Text>

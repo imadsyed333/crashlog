@@ -17,28 +17,28 @@ export default function Index() {
   };
   return (
     <ScreenContainer gestureEnabled={false} title="CrashLog" backButton={false}>
-      <View style={{ marginBottom: 24 }}>
+      <View style={{ marginBottom: 20 }}>
         <Text
-          variant="titleMedium"
-          style={{ marginBottom: 12, fontWeight: "600" }}
+          variant="titleSmall"
+          style={{ marginBottom: 10, fontWeight: "600", opacity: 0.7 }}
         >
           My Vehicle
         </Text>
         <UserVehicleView />
       </View>
 
-      <Divider bold style={{ marginBottom: 24 }} />
+      <Divider style={{ marginBottom: 20 }} />
 
       <View style={{ flex: 1 }}>
         <Text
-          variant="titleMedium"
-          style={{ marginBottom: 12, fontWeight: "600" }}
+          variant="titleLarge"
+          style={{ marginBottom: 16, fontWeight: "700" }}
         >
           My Collisions
         </Text>
         <CollisionList />
       </View>
-      <CustomFAB icon="plus" label="Add Collision" handlePress={addCollision} />
+      <CustomFAB icon="plus" label="" handlePress={addCollision} />
     </ScreenContainer>
   );
 }

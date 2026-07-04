@@ -34,7 +34,7 @@ const WitnessListScreen = () => {
         }}
       >
         <WitnessList />
-        <CustomFAB icon="plus" label="Add Witness" handlePress={handlePress} />
+        <CustomFAB icon="plus" label="" handlePress={handlePress} />
       </View>
       {mode === "edit" ? (
         <NextButton

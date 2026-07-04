@@ -3,10 +3,11 @@ import { useCollisionFormStore } from "@/store/collisionFormStore";
 import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { Card, Icon, Text, useTheme } from "react-native-paper";
+import { Card, Icon, IconButton, Text, useTheme } from "react-native-paper";
 
 type CollisionCardProps = {
   collision: Collision | DraftCollision;
+  onDelete?: () => void;
 };
 
 const isDraftCollision = (
@@ -15,7 +16,7 @@ const isDraftCollision = (
   return "savePoint" in collision;
 };
 
-export const CollisionCard = ({ collision }: CollisionCardProps) => {
+export const CollisionCard = ({ collision, onDelete }: CollisionCardProps) => {
   const { location, date, description, vehicles, witnesses, media } = collision;
   const { setForm } = useCollisionFormStore();
   const router = useRouter();
@@ -75,6 +76,15 @@ export const CollisionCard = ({ collision }: CollisionCardProps) => {
               {formattedDate} at {formattedTime}
             </Text>
           </View>
+          {onDelete && (
+            <IconButton
+              icon="delete"
+              size={20}
+              iconColor={theme.colors.error}
+              onPress={onDelete}
+              style={{ margin: 0 }}
+            />
+          )}
           {isDraftCollision(collision) && (
             <View
               style={{

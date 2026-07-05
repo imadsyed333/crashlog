@@ -93,7 +93,6 @@ const VehicleCard = ({
                     );
                     setEdit(true);
                   }}
-                  size={20}
                   style={{ margin: 0 }}
                 />
                 {onDelete && (
@@ -101,7 +100,6 @@ const VehicleCard = ({
                     icon={"delete"}
                     iconColor={theme.colors.error}
                     onPress={onDelete}
-                    size={20}
                     style={{ margin: 0 }}
                   />
                 )}

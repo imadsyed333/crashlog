@@ -108,7 +108,6 @@ export const CollisionCard = ({ collision, onDelete }: CollisionCardProps) => {
             {onDelete && (
               <IconButton
                 icon="delete"
-                size={20}
                 iconColor={theme.colors.error}
                 onPress={onDelete}
                 style={{ margin: 0 }}

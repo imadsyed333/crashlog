@@ -47,7 +47,6 @@ const WitnessCard = ({
                   setDialogVisible(true);
                   setEdit(true);
                 }}
-                size={20}
                 style={{ margin: 0 }}
               />
               {onDelete && (
@@ -55,7 +54,6 @@ const WitnessCard = ({
                   icon={"delete"}
                   iconColor={theme.colors.error}
                   onPress={onDelete}
-                  size={20}
                   style={{ margin: 0 }}
                 />
               )}

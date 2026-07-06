@@ -10,6 +10,7 @@ type ScreenContainerProps = {
   title: string;
   description?: string;
   backButton?: boolean;
+  backHref?: string;
 };
 
 const ScreenContainer = ({
@@ -18,9 +19,17 @@ const ScreenContainer = ({
   title,
   description,
   backButton = true,
+  backHref,
 }: ScreenContainerProps) => {
   const theme = useTheme();
   const router = useRouter();
+  const handleBack = () => {
+    if (backHref) {
+      router.navigate(backHref as any);
+    } else {
+      router.back();
+    }
+  };
   return (
     <View
       style={{
@@ -44,7 +53,7 @@ const ScreenContainer = ({
         }}
       >
         {backButton && (
-          <IconButton icon="arrow-left" onPress={() => router.back()} />
+          <IconButton icon="arrow-left" onPress={handleBack} />
         )}
         <View style={{ flexShrink: 1 }}>
           <Text

@@ -83,6 +83,7 @@ const DetailsFormScreen = () => {
       title="Details"
       description="Provide as much detail as possible about the collision."
       backButton
+      backHref={mode !== "edit" ? "/collisions/form/safetyScreen" : undefined}
     >
       <View
         style={{

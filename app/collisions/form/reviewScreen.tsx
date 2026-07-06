@@ -35,6 +35,7 @@ const reviewScreen = () => {
       title={isEdit ? "Edit Collision" : "Submit Collision"}
       description={"Make sure all your information is correct!"}
       backButton
+      backHref={!isEdit ? "/collisions/form/witnessListScreen" : undefined}
     >
       <ScrollView>
         <CollisionInfoView collision={collision} showActions />

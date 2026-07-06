@@ -25,6 +25,7 @@ const WitnessListScreen = () => {
       title="Witnesses"
       description="Add witnesses present at the collision."
       backButton
+      backHref={mode !== "edit" ? "/collisions/form/vehicleListScreen" : undefined}
     >
       <View
         style={{

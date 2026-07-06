@@ -25,6 +25,7 @@ const VehicleListScreen = () => {
       title="Vehicles"
       description="Add vehicles involved in the collision."
       backButton
+      backHref={mode !== "edit" ? "/collisions/form/mediaListScreen" : undefined}
     >
       <View
         style={{

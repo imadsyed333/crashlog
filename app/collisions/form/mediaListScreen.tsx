@@ -27,6 +27,7 @@ const MediaListScreen = () => {
     <ScreenContainer
       title="Media"
       description="Provide as many photos as you can of the collision."
+      backHref={mode !== "edit" ? "/collisions/form/detailsFormScreen" : undefined}
     >
       <View style={{ flex: 1 }}>
         <MediaOptions />

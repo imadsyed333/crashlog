@@ -25,7 +25,7 @@ const ScreenContainer = ({
   const router = useRouter();
   const handleBack = () => {
     if (backHref) {
-      router.navigate(backHref as any);
+      router.dismissTo(backHref as any);
     } else {
       router.back();
     }

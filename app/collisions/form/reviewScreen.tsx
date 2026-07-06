@@ -27,7 +27,7 @@ const reviewScreen = () => {
   };
 
   const goToVehicles = () => {
-    router.replace("/collisions/form/vehicleListScreen");
+    router.dismissTo("/collisions/form/vehicleListScreen");
     setAlertVisible(false);
   };
   return (

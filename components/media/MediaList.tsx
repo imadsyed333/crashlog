@@ -28,7 +28,7 @@ const MediaList = ({ media, showActions = false }: MediaListProps) => {
             minHeight: 200,
           }}
         >
-          <Text variant="bodyLarge">Add Images</Text>
+          <Text variant="bodyLarge">Add photos or videos</Text>
         </View>
       )}
     </>

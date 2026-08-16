@@ -42,9 +42,14 @@ export interface Witness extends Person {
   id: string;
 }
 
+export type MediaType = "image" | "video";
+
 export interface Media {
   id: string;
   uri: string;
+  type: MediaType;
+  /** Still frame for videos; cards use this like an image uri */
+  thumbnailUri?: string;
 }
 
 export interface Officer {

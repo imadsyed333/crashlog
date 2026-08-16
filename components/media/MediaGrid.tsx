@@ -25,7 +25,7 @@ const MediaGrid = ({ media, showActions = false }: MediaGridProps) => {
             variant="titleLarge"
             style={{ marginTop: 16, marginBottom: 8, fontWeight: "600" }}
           >
-            No images added
+            No media added
           </Text>
           <Text
             variant="bodyMedium"
@@ -36,7 +36,7 @@ const MediaGrid = ({ media, showActions = false }: MediaGridProps) => {
               lineHeight: 20,
             }}
           >
-            No photos or media have been attached to this collision yet.
+            No photos or videos have been attached to this collision yet.
           </Text>
           <Text
             variant="bodySmall"
@@ -46,7 +46,7 @@ const MediaGrid = ({ media, showActions = false }: MediaGridProps) => {
               fontStyle: "italic",
             }}
           >
-            Use the Camera or the Photo Library to add images or media
+            Use Camera or Library to add photos or videos
           </Text>
         </Card.Content>
       </Card>

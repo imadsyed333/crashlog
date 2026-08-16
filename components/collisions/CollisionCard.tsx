@@ -42,7 +42,7 @@ export const CollisionCard = ({ collision, onDelete }: CollisionCardProps) => {
     },
     {
       icon: "camera",
-      label: `${media.length} photo${media.length === 1 ? "" : "s"}`,
+      label: `${media.length} media`,
     },
   ];
 

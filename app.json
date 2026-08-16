@@ -10,7 +10,8 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to take photos of collision events."
+        "NSCameraUsageDescription": "This app uses the camera to take photos and videos of collision events.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone when recording videos of collision events."
       },
       "bundleIdentifier": "com.crashlog"
     },
@@ -46,8 +47,9 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos",
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos and videos",
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone for video recording",
           "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos."
         }
       ],
@@ -58,7 +60,8 @@
         }
       ],
       "expo-web-browser",
-      "expo-font"
+      "expo-font",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true,

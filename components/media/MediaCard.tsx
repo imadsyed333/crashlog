@@ -1,3 +1,4 @@
+import { getMediaType } from "@/lib/media";
 import { styles } from "@/lib/themes";
 import { Media } from "@/lib/types";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
@@ -10,7 +11,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { IconButton, useTheme } from "react-native-paper";
+import { Icon, IconButton, useTheme } from "react-native-paper";
 import ImageViewerModal from "./ImageViewerModal";
 
 type MediaCardProps = {
@@ -28,15 +29,54 @@ const MediaCard = ({
 }: MediaCardProps) => {
   const { deleteMedia } = useCollisionFormStore();
   const [enlarged, setEnlarged] = useState(false);
-
   const theme = useTheme();
+
+  const mediaType = getMediaType(media);
+  const isVideo = mediaType === "video";
+  const previewUri = isVideo ? media.thumbnailUri : media.uri;
+
   return (
     <View style={containerStyle}>
       <Pressable onPress={() => setEnlarged(true)}>
-        <Image source={{ uri: media.uri }} style={[styles.image, imageStyle]} />
+        {previewUri ? (
+          <Image
+            source={{ uri: previewUri }}
+            style={[styles.image, imageStyle]}
+          />
+        ) : (
+          <View
+            style={[
+              styles.image,
+              imageStyle,
+              {
+                backgroundColor: theme.colors.surfaceVariant,
+                justifyContent: "center",
+                alignItems: "center",
+              },
+            ]}
+          >
+            <Icon source="play-circle" size={40} color={theme.colors.onSurfaceVariant} />
+          </View>
+        )}
+        {isVideo && previewUri && (
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            pointerEvents="none"
+          >
+            <Icon source="play-circle" size={40} color="rgba(255,255,255,0.9)" />
+          </View>
+        )}
         {!showActions && (
           <IconButton
-            icon="magnify"
+            icon={isVideo ? "play" : "magnify"}
             size={16}
             style={{
               position: "absolute",
@@ -64,6 +104,7 @@ const MediaCard = ({
       )}
       <ImageViewerModal
         uri={media.uri}
+        type={mediaType}
         visible={enlarged}
         onClose={() => setEnlarged(false)}
       />

@@ -1,10 +1,17 @@
+import { createMediaFromAsset } from "@/lib/media";
 import { useCollisionFormStore } from "@/store/collisionFormStore";
 import * as ImagePicker from "expo-image-picker";
 import React from "react";
 import { Alert, View } from "react-native";
 import { Button, Card } from "react-native-paper";
+
 const MediaOptions = () => {
   const { addMedia } = useCollisionFormStore();
+
+  const attachAsset = async (asset: ImagePicker.ImagePickerAsset) => {
+    const media = await createMediaFromAsset(asset);
+    addMedia(media);
+  };
 
   const useCamera = async () => {
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
@@ -18,11 +25,11 @@ const MediaOptions = () => {
     }
 
     let result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ["images"],
+      mediaTypes: ["images", "videos"],
     });
 
     if (!result.canceled) {
-      addMedia(result.assets[0].uri);
+      await attachAsset(result.assets[0]);
     }
   };
 
@@ -39,11 +46,11 @@ const MediaOptions = () => {
     }
 
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
+      mediaTypes: ["images", "videos"],
     });
 
     if (!result.canceled) {
-      addMedia(result.assets[0].uri);
+      await attachAsset(result.assets[0]);
     }
   };
 
@@ -72,7 +79,7 @@ const MediaOptions = () => {
             style={{ flex: 1 }}
             icon={"image-multiple"}
           >
-            Photo Library
+            Library
           </Button>
         </View>
       </Card.Content>

@@ -1,5 +1,5 @@
-import { Stack, useRouter } from "expo-router";
-import React from "react";
+import { Stack, useNavigation, useRouter, type Href } from "expo-router";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { IconButton, Text, useTheme } from "react-native-paper";
 import ThemeToggle from "./ThemeToggle";
@@ -10,6 +10,7 @@ type ScreenContainerProps = {
   title: string;
   description?: string;
   backButton?: boolean;
+  backHref?: Href;
 };
 
 const ScreenContainer = ({
@@ -18,9 +19,35 @@ const ScreenContainer = ({
   title,
   description,
   backButton = true,
+  backHref,
 }: ScreenContainerProps) => {
   const theme = useTheme();
   const router = useRouter();
+  const navigation = useNavigation();
+
+  const handleBack = () => {
+    if (backHref) {
+      router.dismissTo(backHref);
+    } else {
+      router.back();
+    }
+  };
+
+  // Align hardware back with header dismissTo when backHref is set (draft stacks
+  // often only contain home + the saved step, so a default pop would go home).
+  useEffect(() => {
+    if (!backHref) return;
+
+    return navigation.addListener("beforeRemove", (e) => {
+      const type = e.data.action.type;
+      if (type !== "GO_BACK" && type !== "POP") {
+        return;
+      }
+      e.preventDefault();
+      router.dismissTo(backHref);
+    });
+  }, [backHref, navigation, router]);
+
   return (
     <View
       style={{
@@ -30,7 +57,8 @@ const ScreenContainer = ({
     >
       <Stack.Screen
         options={{
-          gestureEnabled: gestureEnabled,
+          // Avoid native-stack swipe desync with beforeRemove; use header/hardware back.
+          gestureEnabled: backHref ? false : gestureEnabled,
         }}
       />
       <View
@@ -44,7 +72,7 @@ const ScreenContainer = ({
         }}
       >
         {backButton && (
-          <IconButton icon="arrow-left" onPress={() => router.back()} />
+          <IconButton icon="arrow-left" onPress={handleBack} />
         )}
         <View style={{ flexShrink: 1 }}>
           <Text

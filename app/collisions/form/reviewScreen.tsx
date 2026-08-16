@@ -27,14 +27,22 @@ const reviewScreen = () => {
   };
 
   const goToVehicles = () => {
-    router.replace("/collisions/form/vehicleListScreen");
     setAlertVisible(false);
+    if (isEdit) {
+      router.navigate({
+        pathname: "/collisions/form/vehicleListScreen",
+        params: { mode: "edit" },
+      });
+      return;
+    }
+    router.dismissTo("/collisions/form/vehicleListScreen");
   };
   return (
     <ScreenContainer
       title={isEdit ? "Edit Collision" : "Submit Collision"}
       description={"Make sure all your information is correct!"}
       backButton
+      backHref={!isEdit ? "/collisions/form/witnessListScreen" : undefined}
     >
       <ScrollView>
         <CollisionInfoView collision={collision} showActions />

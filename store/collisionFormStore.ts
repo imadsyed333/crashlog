@@ -1,4 +1,4 @@
-import { Collision, Vehicle, Witness } from "@/lib/types";
+import { Collision, Media, Vehicle, Witness } from "@/lib/types";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
@@ -18,7 +18,7 @@ interface CollisionFormStore {
   addWitness: (witness: Witness) => void;
   updateWitness: (witness: Witness) => void;
   deleteWitness: (id: string) => void;
-  addMedia: (uri: string) => void;
+  addMedia: (media: Omit<Media, "id">) => void;
   deleteMedia: (id: string) => void;
   resetForm: () => void;
 }
@@ -101,14 +101,14 @@ export const useCollisionFormStore = create<CollisionFormStore>((set, get) => ({
         witnesses: state.collision.witnesses.filter((w) => w.id !== id),
       },
     })),
-  addMedia: (uri: string) =>
+  addMedia: (media) =>
     set((state) => ({
       collision: {
         ...state.collision,
         media: [
           {
             id: "" + uuidv4(),
-            uri,
+            ...media,
           },
           ...state.collision.media,
         ],

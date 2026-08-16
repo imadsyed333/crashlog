@@ -52,7 +52,7 @@ const CollisionDraftButton = ({
         isDialogVisible={dialogVisible}
         onSuccess={() => {
           setDialogVisible(false);
-          router.replace("/");
+          router.dismissTo("/");
         }}
       />
     </>

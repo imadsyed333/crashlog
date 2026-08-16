@@ -27,8 +27,15 @@ const reviewScreen = () => {
   };
 
   const goToVehicles = () => {
-    router.dismissTo("/collisions/form/vehicleListScreen");
     setAlertVisible(false);
+    if (isEdit) {
+      router.navigate({
+        pathname: "/collisions/form/vehicleListScreen",
+        params: { mode: "edit" },
+      });
+      return;
+    }
+    router.dismissTo("/collisions/form/vehicleListScreen");
   };
   return (
     <ScreenContainer

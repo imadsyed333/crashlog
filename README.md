@@ -1,7 +1,7 @@
 <h1>
 CrashLog
 </h1>
-A cross-platform mobile app to make it easier for drivers to log critical information after a vehicle collision.
+A cross-platform mobile app helping drivers organize critical information after a vehicle collision.
 
 The goal is to increase the accuracy of self-reported data, driving (pun intended) more informed efforts to reduce vehicle collisions.
 

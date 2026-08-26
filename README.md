@@ -1,9 +1,12 @@
 <h1>
 CrashLog
 </h1>
-A cross-platform mobile app helping drivers organize critical information after a vehicle collision.
+A cross-platform mobile app helping drivers organize critical information after a vehicle collision. The goal is to increase the accuracy of self-reported data, driving (pun intended) more informed efforts to reduce vehicle collisions.
+<br></br>
+<img height="600" alt="home screen" src="https://github.com/user-attachments/assets/fe7cd31e-5daa-42c9-8039-daada1dab24f" />
+<img height="600" alt="Screenshot_1779598446" src="https://github.com/user-attachments/assets/6e8d435f-95d4-409e-8070-6b6436b889ca" />
+<img height="600" alt="Screenshot_1779598241" src="https://github.com/user-attachments/assets/61e35a4e-8f78-4b50-87ec-232a99cd3c44" />
 
-The goal is to increase the accuracy of self-reported data, driving (pun intended) more informed efforts to reduce vehicle collisions.
 
 <h2>
 Technologies

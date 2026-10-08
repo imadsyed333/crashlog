@@ -1,4 +1,4 @@
-import { mmkvStorage } from "@/lib/storage";
+import { secureStorage } from "@/lib/storage";
 import { Appearance } from "react-native";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -23,7 +23,7 @@ export const useThemeStore = create<ThemeStore>()(
     }),
     {
       name: "theme-preference",
-      storage: createJSONStorage(() => mmkvStorage),
+      storage: createJSONStorage(() => secureStorage),
       skipHydration: true,
     },
   ),

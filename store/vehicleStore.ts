@@ -1,4 +1,4 @@
-import { mmkvStorage } from "@/lib/storage";
+import { secureStorage } from "@/lib/storage";
 import { Vehicle } from "@/lib/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -23,7 +23,7 @@ export const useVehicleStore = create<VehicleStore>()(
     }),
     {
       name: "vehicle-storage",
-      storage: createJSONStorage(() => mmkvStorage),
+      storage: createJSONStorage(() => secureStorage),
       skipHydration: true,
     },
   ),

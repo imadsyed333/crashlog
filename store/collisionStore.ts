@@ -1,4 +1,4 @@
-import { mmkvStorage } from "@/lib/storage";
+import { secureStorage } from "@/lib/storage";
 import { Collision } from "@/lib/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -36,7 +36,7 @@ export const useCollisionStore = create<CollisionStore>()(
     }),
     {
       name: "collision-storage",
-      storage: createJSONStorage(() => mmkvStorage),
+      storage: createJSONStorage(() => secureStorage),
       skipHydration: true,
     },
   ),

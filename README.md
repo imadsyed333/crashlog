@@ -41,7 +41,7 @@ Crashlog is meant to be a simple and secure mobile app to guide drivers when log
 
 <h2>Privacy Policy</h2>
 <p>
-All user-inputted form data in CrashLog is stored solely on the user's device using native secure storage.
+All user-inputted form data in CrashLog is encrypted on the device. The encryption key lives in the platform secure store.
 
 If the user wishes to add their precise location to a collision report, CrashLog will ask the user for permission before fetching the device's location through the device's GPS hardware and software. CrashLog does not use third-party software to access a user's location.
 
